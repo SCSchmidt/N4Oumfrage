@@ -7,6 +7,8 @@ Highlights:
 
 <!-- The following code chunk defines some general settings how code chunks should behave. -->
 
+    ## Warning: package 'kableExtra' was built under R version 4.0.2
+
 Datengrundlage
 ==============
 
@@ -22,11 +24,11 @@ Alter und Beschäftigungsverhältnis
 
 Zuerst einige allgemeine Statistiken zu der Teilnehmergruppe:
 
-![](../figures/unnamed-chunk-2-1.png) Wir haben knapp 50 20-29jährige,
-der Großteil der befragten ist zwischen 30 udn 60 Jahre alt und arbeitet
-an einer Hochschule, in der Forschung, im Museum oder in einer
-Denkmalbehörde (man beachte die über 80jährige Person, die nicht mehr
-arbeitet…). Seltener kommen Grabungsfirmen und Archive vor.
+![](../figures/fig_alter_einrichtung-1.png) Wir haben knapp 50
+20-29jährige, der Großteil der befragten ist zwischen 30 udn 60 Jahre
+alt und arbeitet an einer Hochschule, in der Forschung, im Museum oder
+in einer Denkmalbehörde (man beachte die über 80jährige Person, die
+nicht mehr arbeitet…). Seltener kommen Grabungsfirmen und Archive vor.
 
 Alter und Gruppe
 ----------------
@@ -34,7 +36,7 @@ Alter und Gruppe
 Innerhalb der Altersstufen teilen sich die Menschen auf folgende Gruppen
 auf:
 
-![](../figures/unnamed-chunk-3-1.png) Das Gros besteht aus
+![](../figures/fig_einrichtung_gruppe-1.png) Das Gros besteht aus
 wissenschaftlichen Mitarbeiterinnen an der Hochschule und in
 Forschungseinrichtungen.
 
@@ -45,7 +47,7 @@ Gibt es einen Zusammenhang zwischen dem Alter der Teilnehmenden Person,
 der Erfahrung die sie in digitalen Forschungsdatenmanagement hat und dem
 Gewicht, dass sie dem sie ihm zuweist?
 
-![](../figures/unnamed-chunk-4-1.png) Alle Altersgruppen haben sehr
+![](../figures/fig_erfahrung_gruppe-1.png) Alle Altersgruppen haben sehr
 gemischt Erfahrungen und Wissensstände mit digitalem Datenmanagement.
 Bei den Senioren (70-79) lassen sich zwei Gruppen differenzieren (viel
 Ahnung - wenig Ahnung), sie halten digitales Forschungsdatenmanagement
@@ -98,31 +100,277 @@ Der Chi-Quadrat-Test darf eigentlich für diese Daten nicht angewendet
 werden, da die Erwartungswerte zu gering werden (Anzahl der Teilnehmer
 muss auf zu viele Subgruppen aufgeteilt werden). Anhang der Residuen
 lassen sich trotzdem Erkenntnisse erarbeiten:
-
-    #>               age_group[, 7]
-    #> age_group[, 1]           0           1           2           3           4
-    #>          20-29  3.78037151  0.71632797  0.71618591 -0.55873770  0.51366887
-    #>          30-39 -1.43572821 -2.03436124 -0.92463709 -0.41778759 -2.11440429
-    #>          40-49 -0.98551875 -0.21634759  0.99269261  0.03204506  0.77354509
-    #>          50-59  0.92900386  1.10154466 -1.31194466 -0.68883014  1.21180188
-    #>          60-69 -0.32686023  1.95685903  1.07641703  1.63596430  0.51084486
-    #>          70-79 -0.39223227 -0.41602515  2.05497797  2.42438082 -0.66506217
-    #>               age_group[, 7]
-    #> age_group[, 1]           5           6           7           8           9
-    #>          20-29  1.83449846 -0.81322300 -0.09464900 -1.40801899 -1.51197903
-    #>          30-39  0.23609608  0.08759594  1.80625803  1.65101601 -1.09917878
-    #>          40-49 -1.89930415  2.33560712 -1.56846874 -0.39036707  1.59411609
-    #>          50-59  0.53624892 -1.64944305 -0.41881213 -0.04001503  0.65351728
-    #>          60-69  0.57781270 -0.25292394  0.01669451 -1.08407273 -0.96210240
-    #>          70-79 -1.10940039 -0.92507796 -0.28380674 -0.53218116  1.87356783
-    #>               age_group[, 7]
-    #> age_group[, 1]          10
-    #>          20-29 -0.60235670
-    #>          30-39  0.02208477
-    #>          40-49  0.35484035
-    #>          50-59  0.94291664
-    #>          60-69 -1.47838058
-    #>          70-79 -0.77831178
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+0
+</th>
+<th style="text-align:right;">
+1
+</th>
+<th style="text-align:right;">
+2
+</th>
+<th style="text-align:right;">
+3
+</th>
+<th style="text-align:right;">
+4
+</th>
+<th style="text-align:right;">
+5
+</th>
+<th style="text-align:right;">
+6
+</th>
+<th style="text-align:right;">
+7
+</th>
+<th style="text-align:right;">
+8
+</th>
+<th style="text-align:right;">
+9
+</th>
+<th style="text-align:right;">
+10
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:right;">
+3.7803715
+</td>
+<td style="text-align:right;">
+0.7163280
+</td>
+<td style="text-align:right;">
+0.7161859
+</td>
+<td style="text-align:right;">
+-0.5587377
+</td>
+<td style="text-align:right;">
+0.5136689
+</td>
+<td style="text-align:right;">
+1.8344985
+</td>
+<td style="text-align:right;">
+-0.8132230
+</td>
+<td style="text-align:right;">
+-0.0946490
+</td>
+<td style="text-align:right;">
+-1.4080190
+</td>
+<td style="text-align:right;">
+-1.5119790
+</td>
+<td style="text-align:right;">
+-0.6023567
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:right;">
+-1.4357282
+</td>
+<td style="text-align:right;">
+-2.0343612
+</td>
+<td style="text-align:right;">
+-0.9246371
+</td>
+<td style="text-align:right;">
+-0.4177876
+</td>
+<td style="text-align:right;">
+-2.1144043
+</td>
+<td style="text-align:right;">
+0.2360961
+</td>
+<td style="text-align:right;">
+0.0875959
+</td>
+<td style="text-align:right;">
+1.8062580
+</td>
+<td style="text-align:right;">
+1.6510160
+</td>
+<td style="text-align:right;">
+-1.0991788
+</td>
+<td style="text-align:right;">
+0.0220848
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+40-49
+</td>
+<td style="text-align:right;">
+-0.9855187
+</td>
+<td style="text-align:right;">
+-0.2163476
+</td>
+<td style="text-align:right;">
+0.9926926
+</td>
+<td style="text-align:right;">
+0.0320451
+</td>
+<td style="text-align:right;">
+0.7735451
+</td>
+<td style="text-align:right;">
+-1.8993041
+</td>
+<td style="text-align:right;">
+2.3356071
+</td>
+<td style="text-align:right;">
+-1.5684687
+</td>
+<td style="text-align:right;">
+-0.3903671
+</td>
+<td style="text-align:right;">
+1.5941161
+</td>
+<td style="text-align:right;">
+0.3548404
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:right;">
+0.9290039
+</td>
+<td style="text-align:right;">
+1.1015447
+</td>
+<td style="text-align:right;">
+-1.3119447
+</td>
+<td style="text-align:right;">
+-0.6888301
+</td>
+<td style="text-align:right;">
+1.2118019
+</td>
+<td style="text-align:right;">
+0.5362489
+</td>
+<td style="text-align:right;">
+-1.6494430
+</td>
+<td style="text-align:right;">
+-0.4188121
+</td>
+<td style="text-align:right;">
+-0.0400150
+</td>
+<td style="text-align:right;">
+0.6535173
+</td>
+<td style="text-align:right;">
+0.9429166
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+60-69
+</td>
+<td style="text-align:right;">
+-0.3268602
+</td>
+<td style="text-align:right;">
+1.9568590
+</td>
+<td style="text-align:right;">
+1.0764170
+</td>
+<td style="text-align:right;">
+1.6359643
+</td>
+<td style="text-align:right;">
+0.5108449
+</td>
+<td style="text-align:right;">
+0.5778127
+</td>
+<td style="text-align:right;">
+-0.2529239
+</td>
+<td style="text-align:right;">
+0.0166945
+</td>
+<td style="text-align:right;">
+-1.0840727
+</td>
+<td style="text-align:right;">
+-0.9621024
+</td>
+<td style="text-align:right;">
+-1.4783806
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+70-79
+</td>
+<td style="text-align:right;">
+-0.3922323
+</td>
+<td style="text-align:right;">
+-0.4160251
+</td>
+<td style="text-align:right;">
+2.0549780
+</td>
+<td style="text-align:right;">
+2.4243808
+</td>
+<td style="text-align:right;">
+-0.6650622
+</td>
+<td style="text-align:right;">
+-1.1094004
+</td>
+<td style="text-align:right;">
+-0.9250780
+</td>
+<td style="text-align:right;">
+-0.2838067
+</td>
+<td style="text-align:right;">
+-0.5321812
+</td>
+<td style="text-align:right;">
+1.8735678
+</td>
+<td style="text-align:right;">
+-0.7783118
+</td>
+</tr>
+</tbody>
+</table>
 
 die größten Abweichungen gibt es bei der Altersgruppe der 20-29jährigen
 im Bereich “Erfahrung = 0”, dort sind sie überrepräsentiert, ebenso wie
@@ -209,30 +457,30 @@ Einfärbungen werden nun getestet:
 
 ### Gruppenzugehörigkeit
 
-![](../figures/unnamed-chunk-12-1.png) m. E. lässt sich kein
-Zusammenhang zwischen der Zugehörigkeit zu einer Gruppe und der Wichtung
-/ Erfahrung im digitalen FDM finden.
+![](../figures/fig_gruppe-1.png) m. E. lässt sich kein Zusammenhang
+zwischen der Zugehörigkeit zu einer Gruppe und der Wichtung / Erfahrung
+im digitalen FDM finden.
 
 Auffällig ist der/die einsame Studierende oben links in der Ecke,
 der/die die Bedeutung von FDM sehr hoch einschätzt, aber selber
 überhaupt keine Erfahrung hat. Kann dieser Person jemand bitte ganz
 schnell einen Datenbankenkurs anbieten?
 
-Der Bereich “hat selber wenig Erfahrung, schätzt aber die Bedeutung hoch
-ein” (also Einschätzung Bedeutung FDM 6-10 und Einschätzung eigene
-Erfahrung FDM 0-4) ist eine Zielgruppe für uns: Das sind die Personen,
-die wissen, dass sie sich fortbilden müssen, denen aber evtl einfach das
-Angebot fehlt. Es sind darin alle Gruppen vertreten, außer Daten und
-IT-Beautragte.
+Der Bereich “hat selber wenig Erfahrung, schätzt aber die Bedeutung für
+die eigene Arbeit hoch ein” (also Einschätzung Bedeutung FDM 6-10 und
+Einschätzung eigene Erfahrung FDM 0-4) ist eine Zielgruppe für uns: Das
+sind die Personen, die wissen, dass sie sich fortbilden müssen, denen
+aber evtl einfach das Angebot fehlt. Es sind darin alle Gruppen
+vertreten, außer Daten- und IT-Beautragte.
 
 ### Blickwinkel der Antwortenden
 
-![](../figures/unnamed-chunk-13-1.png) Institutionen und Individuen
+![](../figures/fig_blickwinkel-1.png) Institutionen und Individuen
 zeigen keine Musterungen.
 
 ### Einrichtungen
 
-![](../figures/unnamed-chunk-14-1.png) Eventuell zeigen sich
+![](../figures/fig_einrichtungen-1.png) Eventuell zeigen sich
 Grabungsfirmen insbesondere in dem höherschätzenden Bereich. Es zeigt
 sich bei allen Einrichtungen eine große Heterogenität.
 
@@ -264,7 +512,7 @@ Stellenwert der dem digitalen FDM zugeschrieben wird.
 ### Gibt es eine Trennung zwischen Menschen mit viel und wenig Ahnung?
 
 Hier ist es sinnvoll, sich einfach die Verteilung anzuschauen. Ist sie
-normalverteilt? ![](../figures/unnamed-chunk-16-1.png)
+normalverteilt? ![](../figures/fig_verteilung_erfahrung-1.png)
 
 Die Erfahrung mit digitalem Datenmanagement in unserer Umfrage ist
 nicht-normalverteilt, sondern nach rechts verschoben:
@@ -281,45 +529,275 @@ Gruppen unterscheiden.
 Welche Arbeitgeber haben ein Richtlinienkatalog?
 ================================================
 
-    #>                                          
-    #>                                           ja nein weiß nicht
-    #>   Archiv                                   4    1          2
-    #>   Außeruniversitäre Forschungseinrichtung 66   36         24
-    #>   Denkmalbehörde                          24   23         18
-    #>   Forschungsverbund                        3    5          2
-    #>   Grabungsfirma                           15    1          1
-    #>   keiner                                   1    3         10
-    #>   Museum                                  24   67         32
-    #>   Sonstiges                                7    7         12
-    #>   Universität/Hochschule                  60   53         55
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+ja
+</th>
+<th style="text-align:right;">
+nein
+</th>
+<th style="text-align:right;">
+weiß nicht
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Archiv
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Außeruniversitäre Forschungseinrichtung
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Denkmalbehörde
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Forschungsverbund
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grabungsfirma
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+keiner
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Museum
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sonstiges
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Universität/Hochschule
+</td>
+<td style="text-align:right;">
+60
+</td>
+<td style="text-align:right;">
+53
+</td>
+<td style="text-align:right;">
+55
+</td>
+</tr>
+</tbody>
+</table>
 
 Für die Analyse, ob es hier nennenswerte Unterschiede gibt, entfernen
 wir die Angaben “weiß nicht”:
 
-    #>                                          
-    #>                                                     ja         nein
-    #>   Archiv                                   0.908025222 -0.926371019
-    #>   Außeruniversitäre Forschungseinrichtung  1.938304471 -1.977466093
-    #>   Denkmalbehörde                           0.006127555 -0.006251357
-    #>   Forschungsverbund                       -0.534679673  0.545482374
-    #>   Grabungsfirma                            2.394478944 -2.442857143
-    #>   keiner                                  -0.728145644  0.742857143
-    #>   Museum                                  -3.289546822  3.356009027
-    #>   Sonstiges                               -0.052393683  0.053452248
-    #>   Universität/Hochschule                   0.312193629 -0.318501208
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+ja
+</th>
+<th style="text-align:right;">
+nein
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Archiv
+</td>
+<td style="text-align:right;">
+0.9080252
+</td>
+<td style="text-align:right;">
+-0.9263710
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Außeruniversitäre Forschungseinrichtung
+</td>
+<td style="text-align:right;">
+1.9383045
+</td>
+<td style="text-align:right;">
+-1.9774661
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Denkmalbehörde
+</td>
+<td style="text-align:right;">
+0.0061276
+</td>
+<td style="text-align:right;">
+-0.0062514
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Forschungsverbund
+</td>
+<td style="text-align:right;">
+-0.5346797
+</td>
+<td style="text-align:right;">
+0.5454824
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grabungsfirma
+</td>
+<td style="text-align:right;">
+2.3944789
+</td>
+<td style="text-align:right;">
+-2.4428571
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+keiner
+</td>
+<td style="text-align:right;">
+-0.7281456
+</td>
+<td style="text-align:right;">
+0.7428571
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Museum
+</td>
+<td style="text-align:right;">
+-3.2895468
+</td>
+<td style="text-align:right;">
+3.3560090
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sonstiges
+</td>
+<td style="text-align:right;">
+-0.0523937
+</td>
+<td style="text-align:right;">
+0.0534522
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Universität/Hochschule
+</td>
+<td style="text-align:right;">
+0.3121936
+</td>
+<td style="text-align:right;">
+-0.3185012
+</td>
+</tr>
+</tbody>
+</table>
 
 Chi nur eingeschränkt nutzbar, weil die Voraussetzungen nicht 100%
 erfüllt. Grabungsfirmen und außeruniversitäre Forschungseinrichrungen
 haben häufiger einen Richtlinienkatalog als zu erwarten währen, während
 insbesondere Museen keine haben.
-
-Analyse der Software, die für Projektmanagement genutzt wird
-============================================================
-
-Häufigkeit der genannten Anbieter und ob dies freie oder proprietäre
-Software ist:
-
-![](../figures/unnamed-chunk-20-1.png)
 
 Acknowledgements
 ================
@@ -332,7 +810,7 @@ References
 
 ### Colophon
 
-This report was generated on 2020-07-30 17:53:45 using the following
+This report was generated on 2020-07-31 17:33:20 using the following
 computational environment and dependencies:
 
     #> - Session info ---------------------------------------------------------------
@@ -345,7 +823,7 @@ computational environment and dependencies:
     #>  collate  German_Germany.1252         
     #>  ctype    German_Germany.1252         
     #>  tz       Europe/Berlin               
-    #>  date     2020-07-30                  
+    #>  date     2020-07-31                  
     #> 
     #> - Packages -------------------------------------------------------------------
     #>  package     * version date       lib source        
@@ -369,7 +847,11 @@ computational environment and dependencies:
     #>  glue          1.4.1   2020-05-13 [1] CRAN (R 4.0.2)
     #>  gridExtra     2.3     2017-09-09 [1] CRAN (R 4.0.0)
     #>  gtable        0.3.0   2019-03-25 [1] CRAN (R 4.0.0)
+    #>  highr         0.8     2019-03-20 [1] CRAN (R 4.0.0)
+    #>  hms           0.5.3   2020-01-08 [1] CRAN (R 4.0.0)
     #>  htmltools     0.4.0   2019-10-04 [1] CRAN (R 4.0.0)
+    #>  httr          1.4.2   2020-07-20 [1] CRAN (R 4.0.2)
+    #>  kableExtra  * 1.1.0   2019-03-16 [1] CRAN (R 4.0.2)
     #>  knitr         1.28    2020-02-06 [1] CRAN (R 4.0.0)
     #>  labeling      0.3     2014-08-23 [1] CRAN (R 4.0.0)
     #>  lattice       0.20-41 2020-04-02 [2] CRAN (R 4.0.0)
@@ -391,10 +873,13 @@ computational environment and dependencies:
     #>  purrr         0.3.4   2020-04-17 [1] CRAN (R 4.0.0)
     #>  R6            2.4.1   2019-11-12 [1] CRAN (R 4.0.0)
     #>  Rcpp          1.0.4.6 2020-04-09 [1] CRAN (R 4.0.0)
+    #>  readr         1.3.1   2018-12-21 [1] CRAN (R 4.0.2)
     #>  remotes       2.2.0   2020-07-21 [1] CRAN (R 4.0.2)
     #>  rlang         0.4.7   2020-07-09 [1] CRAN (R 4.0.2)
     #>  rmarkdown     2.3     2020-06-18 [1] CRAN (R 4.0.2)
     #>  rprojroot     1.3-2   2018-01-03 [1] CRAN (R 4.0.0)
+    #>  rstudioapi    0.11    2020-02-07 [1] CRAN (R 4.0.0)
+    #>  rvest         0.3.5   2019-11-08 [1] CRAN (R 4.0.0)
     #>  scales        1.1.0   2019-11-18 [1] CRAN (R 4.0.0)
     #>  sessioninfo   1.1.1   2018-11-05 [1] CRAN (R 4.0.0)
     #>  stringi       1.4.6   2020-02-17 [1] CRAN (R 4.0.0)
@@ -407,8 +892,10 @@ computational environment and dependencies:
     #>  vctrs         0.3.1   2020-06-05 [1] CRAN (R 4.0.2)
     #>  viridis     * 0.5.1   2018-03-29 [1] CRAN (R 4.0.0)
     #>  viridisLite * 0.3.0   2018-02-01 [1] CRAN (R 4.0.0)
+    #>  webshot       0.5.2   2019-11-22 [1] CRAN (R 4.0.2)
     #>  withr         2.2.0   2020-04-20 [1] CRAN (R 4.0.0)
     #>  xfun          0.14    2020-05-20 [1] CRAN (R 4.0.0)
+    #>  xml2          1.3.1   2020-04-09 [1] CRAN (R 4.0.0)
     #>  yaml          2.2.1   2020-02-01 [1] CRAN (R 4.0.0)
     #> 
     #> [1] C:/Users/SCSchmidt/Documents/R/win-library/4.0
@@ -418,4 +905,4 @@ The current Git commit details are:
 
     #> Local:    gh-page E:/R/N4Oumfrage
     #> Remote:   gh-page @ origin (https://github.com/SCSchmidt/N4Oumfrage)
-    #> Head:     [2df90d8] 2020-07-30: moved docs
+    #> Head:     [7cbe4e5] 2020-07-31: Auslagerung d. Software- und Datenauswertung

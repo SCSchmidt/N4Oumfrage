@@ -1,0 +1,374 @@
+---
+title: "NFDI4Objects Umfrageauswertung: genutzte Software & Datenformate"
+author:
+  - Sophie C. Schmidt:
+      email: sophie.schmidt@dainst.org
+      institute: [DAI]
+      correspondence: true
+institute:
+  - DAI: Deutsches Archäologisches Institut
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  md_document:
+    variant: markdown_github
+always_allow_html: true
+
+---
+
+<!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
+
+<!-- With the following code you can access and display values from the yml header above. -->
+
+Keywords: `r rmarkdown::metadata$keywords`
+
+Highlights: `r rmarkdown::metadata$highlights`
+
+<!-- The following code chunk defines some general settings how code chunks should behave. -->
+
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  echo = FALSE,
+  comment = "#>",
+  fig.path = "../figures/",
+  dpi = 300
+)
+library(ggplot2)
+```
+
+# Datengrundlage
+
+Daten als csv bekommen und IPs etc entfernt. Insgesamt über 600 Antworten, dabei aber viele, die sich "nur durchgeklickt" haben oder nur Teile der Umfrage ausgefüllt haben (teilweise um die 70%).
+
+```{r}
+d <- read.csv2("../data/raw_data/results-survey615517.csv", sep = ",", encoding = "UTF-8")
+
+# remove "" as input and make NA out of it
+# dplyr solution fom here: https://stackoverflow.com/questions/24172111/change-the-blank-cells-to-na
+
+library(dplyr)
+
+empty_as_na <- function(x){
+    if("factor" %in% class(x)) x <- as.character(x) ## since ifelse wont work with factors
+    ifelse(as.character(x)!="", x, NA)
+}
+
+## transform all columns
+d <- d %>% 
+  mutate_each(funs(empty_as_na))
+
+```
+
+
+```{r rename column names}
+d_fr <- d[, c(1:65)]
+
+#colnames(d)
+
+colnames(d_fr) <- c("ID", "Datum", "zufallsid", "geschlecht", "alter", "blickwinkel", "einrichtung", "einrichtung_sonstiges", "disz", "studiernede", "promovierende", "lehrende", "techn_mitarb", "wiss_mitarb", "daten_it_beauftragt", "projektleiter", "einrichtung_leiter", "gruppe_sonstige", "arbeitgeber_richtlinienkatalog", "erfahrung_fdm", "stellenwert_fdm", "software_projman_janein", "software_projman", "software_fdm_janein", "software_fdm", "software_wiss_analyse", "xls", "doc", "pdf", "ods", "csv", "odt", "png", "jpg", "geotiff", "geojson", "shp", "json", "xml", "dateiformat-sonstige", "software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht-oeff_cloud", "zentralnetz_arbeitgeber", "institut-repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds-dvds", "datensicherung-sonstiges", "sicherung-nach-projekt", "FAIR_bekannt_janein", "verfuegung_wie", "verfuegung_wie-sonstiges", "fremddatennutzung-janein", "fremddaten_online-portal", "fremddaten_prsnl-anfrage", "wunsch_datenspeicherung", "fremddaten-sonsstiges", "mehrwert-n4o", "prsnl-mehrwert-n4o")
+
+```
+
+
+# Analyse der Software, die für Projektmanagement genutzt wird
+
+Häufigkeit der genannten Anbieter und ob dies freie oder proprietäre Software ist:
+
+```{r, eval=FALSE}
+software_projektmanangement <- d$Wenn.ja..welche.
+
+software_projektmanangement <- software_projektmanangement[!is.na(software_projektmanangement)] 
+software_projektmanangement<- as.data.frame(software_projektmanangement)
+
+write.csv2(software_projektmanangement, "../data/derived_data/software.csv", fileEncoding = "UTF-8")
+# Aufteilung / Säuberung der daten in LO
+
+```
+
+```{r softw_projmanagement}
+projman <- read.csv2("../data/derived_data/software2.csv", sep = ",")
+
+projman_anbieter <- as.data.frame(table(projman$anbieter, projman$frei_unfrei), na.rm = TRUE)
+projman_anbieter <- subset(projman_anbieter, projman_anbieter$Freq != 0 && !is.na(projman_anbieter$Var1))
+
+
+
+ggplot()+
+  geom_bar(data = projman_anbieter, 
+           aes(x = reorder(Var1, Freq), 
+               y = Freq,
+               fill = Var2),
+           stat = "identity",
+           na.rm = TRUE)+
+  coord_flip() +
+  theme_bw() + 
+  xlab("Anbieter") +
+  ylab("Häufigkeit Nennung")
+
+```
+
+# Analyse Software, die für Forschungsdatenanalyse genutzt wird
+
+1. Datenvorbereitung
+```{r}
+fdm_dienste <- d$Mit.welchen.Diensten..z.B..der.Netzbasierte.archäologische.Datenprozessierungsdienst.des.RGZM..und.Software.Applikationen..z.B..MS.Excel..QGIS..SPSS..R..etc...analysieren.Sie.Ihre.Forschungsdaten.im.Rahmen.Ihrer.wissenschaftlichen.Arbeit..Bitte.nennen.Sie.bis.zu.sieben.Beispiele..
+
+fdm_dienste <- fdm_dienste[!is.na(fdm_dienste)]
+
+fdm_dienste_df <- as.data.frame(fdm_dienste)
+
+
+library(tidyr)
+
+fdm_dienste_df <- fdm_dienste_df %>%
+  separate(fdm_dienste, c("A", "B", "C", "D", "E", "F", "G", "H"), ", ") %>%
+  gather( key = "egal", value = "fdm-dienst", c("A", "B", "C", "D", "E", "F", "G", "H"), na.rm = TRUE)
+
+fdm_d <- fdm_dienste_df$`fdm-dienst`
+
+library("tm")
+library("SnowballC")
+
+
+docs <- Corpus(VectorSource(fdm_d))
+
+#inspect(docs)
+
+# alles kleinschreiben
+docs <- tm_map(docs, content_transformer(tolower))
+
+toexcel <- content_transformer(function (x , pattern ) gsub(pattern, "excel", x))
+
+docs <- tm_map(docs, toexcel, "exel")
+
+
+# Remove punctuations
+docs <- tm_map(docs, removePunctuation)
+# Eliminate extra white spaces
+docs <- tm_map(docs, stripWhitespace)
+
+#remove words
+docs <- tm_map(docs, removeWords, c("ich", "die", "der", "das", "für", "analysen", "daten","nicht", "fragen", "und", "mit", "was", "ist", "des", "frage")) 
+
+
+
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d_docs <- data.frame(word = names(v),freq=v)
+head(d_docs, 30)
+
+
+
+```
+2. Visualisierung der Häufigkeiten der Nennung
+
+```{r dienste_häufigkeiten}
+
+d_docs %>%
+  filter(freq > 2) %>%
+ggplot()+
+  geom_col(aes(x = reorder(word, freq),
+                              y = freq,
+               fill = factor(ifelse(word == "eigene" | word == "keine","Highlighted","Normal"))),
+             show.legend = FALSE)+
+  xlab("Programme")+
+  ylab("Häufigkeit der Nennung (ab 2x)")+
+  geom_label(aes(x = 5, 
+                 y = 150,
+                 label = "text mining - Auswertung der Frage \n 'Mit welchen Diensten analysieren Sie Ihre Daten \n im Rahmen Ihrer wissenschaftlichen Arbeit?' "))+
+  coord_flip()
+```
+Zwei Programme werden extrem häufig genannt: Excel und QGIS. Die beiden hervorgehobenen Punkte "eigene" und "keine" sollen im Folgenden etwas im Detail analysiert werden: Wer programmiert eigene Lösungen und wer benutzt gar keine Analysesoftware?
+
+### eigen programmierte Lösungen
+
+```{r}
+library(tidyr)
+library(dplyr)
+library(magrittr)
+
+d_dienste_eigene <- dplyr::filter(d, grepl('eigene', Mit.welchen.Diensten..z.B..der.Netzbasierte.archäologische.Datenprozessierungsdienst.des.RGZM..und.Software.Applikationen..z.B..MS.Excel..QGIS..SPSS..R..etc...analysieren.Sie.Ihre.Forschungsdaten.im.Rahmen.Ihrer.wissenschaftlichen.Arbeit..Bitte.nennen.Sie.bis.zu.sieben.Beispiele..))
+
+d_dienste_selbst <- dplyr::filter(d, grepl('selbst', Mit.welchen.Diensten..z.B..der.Netzbasierte.archäologische.Datenprozessierungsdienst.des.RGZM..und.Software.Applikationen..z.B..MS.Excel..QGIS..SPSS..R..etc...analysieren.Sie.Ihre.Forschungsdaten.im.Rahmen.Ihrer.wissenschaftlichen.Arbeit..Bitte.nennen.Sie.bis.zu.sieben.Beispiele..))
+
+d_dienste_intern <- dplyr::filter(d, grepl('intern', Mit.welchen.Diensten..z.B..der.Netzbasierte.archäologische.Datenprozessierungsdienst.des.RGZM..und.Software.Applikationen..z.B..MS.Excel..QGIS..SPSS..R..etc...analysieren.Sie.Ihre.Forschungsdaten.im.Rahmen.Ihrer.wissenschaftlichen.Arbeit..Bitte.nennen.Sie.bis.zu.sieben.Beispiele..))
+
+d_dienste_eigenentwicklung <- rbind(d_dienste_selbst, d_dienste_eigene, d_dienste_intern)
+
+d_dienste_eigenentwicklung$Mit.welchen.Diensten..z.B..der.Netzbasierte.archäologische.Datenprozessierungsdienst.des.RGZM..und.Software.Applikationen..z.B..MS.Excel..QGIS..SPSS..R..etc...analysieren.Sie.Ihre.Forschungsdaten.im.Rahmen.Ihrer.wissenschaftlichen.Arbeit..Bitte.nennen.Sie.bis.zu.sieben.Beispiele..
+
+d_dienste_eigenentwicklung <- d_dienste_eigenentwicklung[-8,] # Antwort "Hierzu kann ich keine Angaben machen. Ich suche/erforsche Daten, trage unsere eigenen Daten in der Datenbank ein, erstelle Dokumente" raus
+
+
+```
+
+
+```{r}
+library(kableExtra)
+table(d_dienste_eigenentwicklung$In.welcher.Art.von.Einrichtung.sind.Sie.beruflich.tätig.)%>%
+  kable()
+
+```
+
+V.a. außeruniversitäre Forschungseinrichtungen (4x genannt) und Denkmalbehörden (4x -- einmal in sonstiges) wird selbständig Software entwickelt.
+
+### keine Angaben zu benutzer Software
+
+Insgesamt sind sehr häufig keine Angaben gemacht worden. Im Nachhinein herauszufiltern, warum dies geschah, kann kaum möglich. 
+
+```{r alter, eval= FALSE}
+library(tidyr)
+library(dplyr)
+library(magrittr)
+
+# Datencheck:
+d_fr %>%
+  filter(is.na(software_fd_analyse))%>%
+nrow()
+#  use_series(alter)%>%
+#  table()
+
+# umwandlung der "keine" Angaben
+d_fr2 <- d_fr
+
+d_fr2$software_fd_analyse[grepl("kein",d_fr2$software_fd_analyse)] <- NA
+
+nutzt_fd_software <- table(d_fr2$einrichtung, is.na(d_fr2$software_fd_analyse))
+
+nutzt_fd_software <- table(age_group$gruppe, is.na(age_group$software_fd_analyse))
+
+
+t<- chisq.test(nutzt_fd_software)
+t$residuals
+
+age_erfahrung <- d_fr[,c(5:65)]
+
+age_group <- age_erfahrung %>%
+  gather(key = "gruppe", value = "ja.nein", 6:14, na.rm = TRUE) %>%
+  filter(ja.nein == "Ja" )
+
+
+
+d_fr %>%
+  filter(grepl("kein", d_fr$software_fd_analyse))
+```
+19 x findet sich der Begriff "keine" o.ä. und 304 ist diese Frage nicht beantwortet worden, also ca. die Hälfte der Antwortenden hat keine Informationen dazu geben können / wollen.
+
+*"Mit keinen so richtig. Weiterbildung wäre gut"* ist ein Hinweis einer 30-39jährigen Person. Zudem gab es 4x den Hinweis, dass die Analyse von FD nicht zu den Aufgaben gehört.
+
+Der Chi-Quadrat-Test zeigt, dass es keine Zusammenhänge zwischen Alter / Einrichtung oder Gruppenzugehörigkeit und ob eine Angabe gemacht wurde oder nicht, gibt.
+
+## genutzte Datenformate
+
+```{r}
+# in auswahl genannte 
+library(tidyr)
+
+dataformats <- d_fr %>%
+  gather(key = "datenformat", value = "datjanein", c(27:39), na.rm = TRUE)
+
+dataformats <- subset(dataformats, dataformats$datjanein == "Ja")
+
+```
+
+
+```{r}
+# sonstige genannte 
+
+dat2 <- as.data.frame(d_fr$`dateiformat-sonstige`)
+colnames(dat2) <- "d"
+
+dat2 <- subset(dat2, !is.na(d))
+
+dat2_docs <- Corpus(VectorSource(dat2))
+
+inspect(dat2_docs)
+
+toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+dat2_docs <- tm_map(dat2_docs, toSpace, "/")
+dat2_docs <- tm_map(dat2_docs, toSpace, "@")
+dat2_docs <- tm_map(dat2_docs, toSpace, "\\|")
+
+
+
+# Convert the text to lower case
+dat2_docs <- tm_map(dat2_docs, content_transformer(tolower))
+
+# Remove english common stopwords
+dat2_docs <- tm_map(dat2_docs, removeWords, stopwords("german"))
+
+
+# Remove your own stop word
+# specify your stopwords as a character vector
+dat2_docs <- tm_map(dat2_docs, removeWords, c("3D", "etc", "formate","...")) 
+# Remove punctuations
+dat2_docs <- tm_map(dat2_docs, removePunctuation)
+# Eliminate extra white spaces
+dat2_docs <- tm_map(dat2_docs, stripWhitespace)
+# Text stemming
+# docs <- tm_map(docs, stemDocument)
+
+# Document matrix is a table containing the frequency of the words. 
+# Column names are words and row names are documents. 
+# The function TermDocumentMatrix() from text mining package can be used as follow :
+dtm <- TermDocumentMatrix(dat2_docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d <- data.frame(word = names(v),freq=v)
+head(d, 30)
+
+```
+
+```{r häufigkeiten_datenformate}
+dat <- as.data.frame(table(dataformats$datenformat))
+
+colnames(dat) <- c("word", "freq")
+
+dat3 <- rbind(dat, d)
+
+dat3 %>%
+  filter(freq > 2) %>%
+ggplot()+
+  geom_col(aes(x = reorder(word, freq),
+               y = freq))+
+  theme_bw()+
+  xlab("")+
+  ylab("Anzahl (Mehrfachnennungen möglich)")+
+  coord_flip()
+
+```
+Insgesamt `r nrow(dat3)` unterschiedliche Datenformate, darunter sehr spezialisierte Ausgabeformate von bestimmten Geräten (z.B. Laserscannern). Dargestellt sind hier diejenigen die häufiger als 2x genannt wurden.
+
+
+# Acknowledgements
+
+<!-- The following line inserts a page break  -->
+
+\newpage
+
+# References 
+
+<!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document (this will not work for PDF files):  -->
+
+<div id="refs"></div>
+
+\newpage
+
+### Colophon
+
+This report was generated on `r Sys.time()` using the following computational environment and dependencies: 
+
+```{r colophon, cache = FALSE}
+# which R packages and versions?
+if ("devtools" %in% installed.packages()) devtools::session_info()
+```
+
+The current Git commit details are:
+
+```{r}
+# what commit is this file at? 
+if ("git2r" %in% installed.packages() & git2r::in_repository(path = ".")) git2r::repository(here::here())  
+```
