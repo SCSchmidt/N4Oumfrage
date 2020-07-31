@@ -7,6 +7,8 @@ Highlights:
 
 <!-- The following code chunk defines some general settings how code chunks should behave. -->
 
+    ## Warning: package 'kableExtra' was built under R version 4.0.2
+
 Datengrundlage
 ==============
 
@@ -22,11 +24,11 @@ Alter und Beschäftigungsverhältnis
 
 Zuerst einige allgemeine Statistiken zu der Teilnehmergruppe:
 
-![](../figures/unnamed-chunk-2-1.png) Wir haben knapp 50 20-29jährige,
-der Großteil der befragten ist zwischen 30 udn 60 Jahre alt und arbeitet
-an einer Hochschule, in der Forschung, im Museum oder in einer
-Denkmalbehörde (man beachte die über 80jährige Person, die nicht mehr
-arbeitet…). Seltener kommen Grabungsfirmen und Archive vor.
+![](../figures/fig_alter_einrichtung-1.png) Wir haben knapp 50
+20-29jährige, der Großteil der befragten ist zwischen 30 udn 60 Jahre
+alt und arbeitet an einer Hochschule, in der Forschung, im Museum oder
+in einer Denkmalbehörde (man beachte die über 80jährige Person, die
+nicht mehr arbeitet…). Seltener kommen Grabungsfirmen und Archive vor.
 
 Alter und Gruppe
 ----------------
@@ -34,7 +36,7 @@ Alter und Gruppe
 Innerhalb der Altersstufen teilen sich die Menschen auf folgende Gruppen
 auf:
 
-![](../figures/unnamed-chunk-3-1.png) Das Gros besteht aus
+![](../figures/fig_einrichtung_gruppe-1.png) Das Gros besteht aus
 wissenschaftlichen Mitarbeiterinnen an der Hochschule und in
 Forschungseinrichtungen.
 
@@ -45,7 +47,7 @@ Gibt es einen Zusammenhang zwischen dem Alter der Teilnehmenden Person,
 der Erfahrung die sie in digitalen Forschungsdatenmanagement hat und dem
 Gewicht, dass sie dem sie ihm zuweist?
 
-![](../figures/unnamed-chunk-4-1.png) Alle Altersgruppen haben sehr
+![](../figures/fig_erfahrung_gruppe-1.png) Alle Altersgruppen haben sehr
 gemischt Erfahrungen und Wissensstände mit digitalem Datenmanagement.
 Bei den Senioren (70-79) lassen sich zwei Gruppen differenzieren (viel
 Ahnung - wenig Ahnung), sie halten digitales Forschungsdatenmanagement
@@ -98,31 +100,277 @@ Der Chi-Quadrat-Test darf eigentlich für diese Daten nicht angewendet
 werden, da die Erwartungswerte zu gering werden (Anzahl der Teilnehmer
 muss auf zu viele Subgruppen aufgeteilt werden). Anhang der Residuen
 lassen sich trotzdem Erkenntnisse erarbeiten:
-
-    #>               age_group[, 7]
-    #> age_group[, 1]           0           1           2           3           4
-    #>          20-29  3.78037151  0.71632797  0.71618591 -0.55873770  0.51366887
-    #>          30-39 -1.43572821 -2.03436124 -0.92463709 -0.41778759 -2.11440429
-    #>          40-49 -0.98551875 -0.21634759  0.99269261  0.03204506  0.77354509
-    #>          50-59  0.92900386  1.10154466 -1.31194466 -0.68883014  1.21180188
-    #>          60-69 -0.32686023  1.95685903  1.07641703  1.63596430  0.51084486
-    #>          70-79 -0.39223227 -0.41602515  2.05497797  2.42438082 -0.66506217
-    #>               age_group[, 7]
-    #> age_group[, 1]           5           6           7           8           9
-    #>          20-29  1.83449846 -0.81322300 -0.09464900 -1.40801899 -1.51197903
-    #>          30-39  0.23609608  0.08759594  1.80625803  1.65101601 -1.09917878
-    #>          40-49 -1.89930415  2.33560712 -1.56846874 -0.39036707  1.59411609
-    #>          50-59  0.53624892 -1.64944305 -0.41881213 -0.04001503  0.65351728
-    #>          60-69  0.57781270 -0.25292394  0.01669451 -1.08407273 -0.96210240
-    #>          70-79 -1.10940039 -0.92507796 -0.28380674 -0.53218116  1.87356783
-    #>               age_group[, 7]
-    #> age_group[, 1]          10
-    #>          20-29 -0.60235670
-    #>          30-39  0.02208477
-    #>          40-49  0.35484035
-    #>          50-59  0.94291664
-    #>          60-69 -1.47838058
-    #>          70-79 -0.77831178
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+0
+</th>
+<th style="text-align:right;">
+1
+</th>
+<th style="text-align:right;">
+2
+</th>
+<th style="text-align:right;">
+3
+</th>
+<th style="text-align:right;">
+4
+</th>
+<th style="text-align:right;">
+5
+</th>
+<th style="text-align:right;">
+6
+</th>
+<th style="text-align:right;">
+7
+</th>
+<th style="text-align:right;">
+8
+</th>
+<th style="text-align:right;">
+9
+</th>
+<th style="text-align:right;">
+10
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:right;">
+3.7803715
+</td>
+<td style="text-align:right;">
+0.7163280
+</td>
+<td style="text-align:right;">
+0.7161859
+</td>
+<td style="text-align:right;">
+-0.5587377
+</td>
+<td style="text-align:right;">
+0.5136689
+</td>
+<td style="text-align:right;">
+1.8344985
+</td>
+<td style="text-align:right;">
+-0.8132230
+</td>
+<td style="text-align:right;">
+-0.0946490
+</td>
+<td style="text-align:right;">
+-1.4080190
+</td>
+<td style="text-align:right;">
+-1.5119790
+</td>
+<td style="text-align:right;">
+-0.6023567
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:right;">
+-1.4357282
+</td>
+<td style="text-align:right;">
+-2.0343612
+</td>
+<td style="text-align:right;">
+-0.9246371
+</td>
+<td style="text-align:right;">
+-0.4177876
+</td>
+<td style="text-align:right;">
+-2.1144043
+</td>
+<td style="text-align:right;">
+0.2360961
+</td>
+<td style="text-align:right;">
+0.0875959
+</td>
+<td style="text-align:right;">
+1.8062580
+</td>
+<td style="text-align:right;">
+1.6510160
+</td>
+<td style="text-align:right;">
+-1.0991788
+</td>
+<td style="text-align:right;">
+0.0220848
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+40-49
+</td>
+<td style="text-align:right;">
+-0.9855187
+</td>
+<td style="text-align:right;">
+-0.2163476
+</td>
+<td style="text-align:right;">
+0.9926926
+</td>
+<td style="text-align:right;">
+0.0320451
+</td>
+<td style="text-align:right;">
+0.7735451
+</td>
+<td style="text-align:right;">
+-1.8993041
+</td>
+<td style="text-align:right;">
+2.3356071
+</td>
+<td style="text-align:right;">
+-1.5684687
+</td>
+<td style="text-align:right;">
+-0.3903671
+</td>
+<td style="text-align:right;">
+1.5941161
+</td>
+<td style="text-align:right;">
+0.3548404
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:right;">
+0.9290039
+</td>
+<td style="text-align:right;">
+1.1015447
+</td>
+<td style="text-align:right;">
+-1.3119447
+</td>
+<td style="text-align:right;">
+-0.6888301
+</td>
+<td style="text-align:right;">
+1.2118019
+</td>
+<td style="text-align:right;">
+0.5362489
+</td>
+<td style="text-align:right;">
+-1.6494430
+</td>
+<td style="text-align:right;">
+-0.4188121
+</td>
+<td style="text-align:right;">
+-0.0400150
+</td>
+<td style="text-align:right;">
+0.6535173
+</td>
+<td style="text-align:right;">
+0.9429166
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+60-69
+</td>
+<td style="text-align:right;">
+-0.3268602
+</td>
+<td style="text-align:right;">
+1.9568590
+</td>
+<td style="text-align:right;">
+1.0764170
+</td>
+<td style="text-align:right;">
+1.6359643
+</td>
+<td style="text-align:right;">
+0.5108449
+</td>
+<td style="text-align:right;">
+0.5778127
+</td>
+<td style="text-align:right;">
+-0.2529239
+</td>
+<td style="text-align:right;">
+0.0166945
+</td>
+<td style="text-align:right;">
+-1.0840727
+</td>
+<td style="text-align:right;">
+-0.9621024
+</td>
+<td style="text-align:right;">
+-1.4783806
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+70-79
+</td>
+<td style="text-align:right;">
+-0.3922323
+</td>
+<td style="text-align:right;">
+-0.4160251
+</td>
+<td style="text-align:right;">
+2.0549780
+</td>
+<td style="text-align:right;">
+2.4243808
+</td>
+<td style="text-align:right;">
+-0.6650622
+</td>
+<td style="text-align:right;">
+-1.1094004
+</td>
+<td style="text-align:right;">
+-0.9250780
+</td>
+<td style="text-align:right;">
+-0.2838067
+</td>
+<td style="text-align:right;">
+-0.5321812
+</td>
+<td style="text-align:right;">
+1.8735678
+</td>
+<td style="text-align:right;">
+-0.7783118
+</td>
+</tr>
+</tbody>
+</table>
 
 die größten Abweichungen gibt es bei der Altersgruppe der 20-29jährigen
 im Bereich “Erfahrung = 0”, dort sind sie überrepräsentiert, ebenso wie
@@ -209,9 +457,9 @@ Einfärbungen werden nun getestet:
 
 ### Gruppenzugehörigkeit
 
-![](../figures/unnamed-chunk-12-1.png) m. E. lässt sich kein
-Zusammenhang zwischen der Zugehörigkeit zu einer Gruppe und der Wichtung
-/ Erfahrung im digitalen FDM finden.
+![](../figures/fig_gruppe-1.png) m. E. lässt sich kein Zusammenhang
+zwischen der Zugehörigkeit zu einer Gruppe und der Wichtung / Erfahrung
+im digitalen FDM finden.
 
 Auffällig ist der/die einsame Studierende oben links in der Ecke,
 der/die die Bedeutung von FDM sehr hoch einschätzt, aber selber
@@ -227,12 +475,12 @@ vertreten, außer Daten- und IT-Beautragte.
 
 ### Blickwinkel der Antwortenden
 
-![](../figures/unnamed-chunk-13-1.png) Institutionen und Individuen
+![](../figures/fig_blickwinkel-1.png) Institutionen und Individuen
 zeigen keine Musterungen.
 
 ### Einrichtungen
 
-![](../figures/unnamed-chunk-14-1.png) Eventuell zeigen sich
+![](../figures/fig_einrichtungen-1.png) Eventuell zeigen sich
 Grabungsfirmen insbesondere in dem höherschätzenden Bereich. Es zeigt
 sich bei allen Einrichtungen eine große Heterogenität.
 
@@ -264,7 +512,7 @@ Stellenwert der dem digitalen FDM zugeschrieben wird.
 ### Gibt es eine Trennung zwischen Menschen mit viel und wenig Ahnung?
 
 Hier ist es sinnvoll, sich einfach die Verteilung anzuschauen. Ist sie
-normalverteilt? ![](../figures/unnamed-chunk-16-1.png)
+normalverteilt? ![](../figures/fig_verteilung_erfahrung-1.png)
 
 Die Erfahrung mit digitalem Datenmanagement in unserer Umfrage ist
 nicht-normalverteilt, sondern nach rechts verschoben:
@@ -430,161 +678,126 @@ Universität/Hochschule
 Für die Analyse, ob es hier nennenswerte Unterschiede gibt, entfernen
 wir die Angaben “weiß nicht”:
 
-    #>                                          
-    #>                                                     ja         nein
-    #>   Archiv                                   0.908025222 -0.926371019
-    #>   Außeruniversitäre Forschungseinrichtung  1.938304471 -1.977466093
-    #>   Denkmalbehörde                           0.006127555 -0.006251357
-    #>   Forschungsverbund                       -0.534679673  0.545482374
-    #>   Grabungsfirma                            2.394478944 -2.442857143
-    #>   keiner                                  -0.728145644  0.742857143
-    #>   Museum                                  -3.289546822  3.356009027
-    #>   Sonstiges                               -0.052393683  0.053452248
-    #>   Universität/Hochschule                   0.312193629 -0.318501208
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+ja
+</th>
+<th style="text-align:right;">
+nein
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Archiv
+</td>
+<td style="text-align:right;">
+0.9080252
+</td>
+<td style="text-align:right;">
+-0.9263710
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Außeruniversitäre Forschungseinrichtung
+</td>
+<td style="text-align:right;">
+1.9383045
+</td>
+<td style="text-align:right;">
+-1.9774661
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Denkmalbehörde
+</td>
+<td style="text-align:right;">
+0.0061276
+</td>
+<td style="text-align:right;">
+-0.0062514
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Forschungsverbund
+</td>
+<td style="text-align:right;">
+-0.5346797
+</td>
+<td style="text-align:right;">
+0.5454824
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grabungsfirma
+</td>
+<td style="text-align:right;">
+2.3944789
+</td>
+<td style="text-align:right;">
+-2.4428571
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+keiner
+</td>
+<td style="text-align:right;">
+-0.7281456
+</td>
+<td style="text-align:right;">
+0.7428571
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Museum
+</td>
+<td style="text-align:right;">
+-3.2895468
+</td>
+<td style="text-align:right;">
+3.3560090
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sonstiges
+</td>
+<td style="text-align:right;">
+-0.0523937
+</td>
+<td style="text-align:right;">
+0.0534522
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Universität/Hochschule
+</td>
+<td style="text-align:right;">
+0.3121936
+</td>
+<td style="text-align:right;">
+-0.3185012
+</td>
+</tr>
+</tbody>
+</table>
 
 Chi nur eingeschränkt nutzbar, weil die Voraussetzungen nicht 100%
 erfüllt. Grabungsfirmen und außeruniversitäre Forschungseinrichrungen
 haben häufiger einen Richtlinienkatalog als zu erwarten währen, während
 insbesondere Museen keine haben.
-
-Analyse der Software, die für Projektmanagement genutzt wird
-============================================================
-
-Häufigkeit der genannten Anbieter und ob dies freie oder proprietäre
-Software ist:
-
-![](../figures/unnamed-chunk-20-1.png)
-
-Analyse Software, die für Forschungsdatenanalyse genutzt wird
--------------------------------------------------------------
-
-1.  Datenvorbereitung
-
-<!-- -->
-
-    #>                  word freq
-    #> excel           excel  238
-    #> qgis             qgis  120
-    #> access         access   39
-    #> keine           keine   22
-    #> word             word   17
-    #> spss             spss   17
-    #> arcgis         arcgis   16
-    #> filemaker   filemaker   15
-    #> python         python   14
-    #> office         office   10
-    #> past             past   10
-    #> autocad       autocad    8
-    #> software     software    7
-    #> open             open    7
-    #> calc             calc    6
-    #> libre           libre    6
-    #> gephi           gephi    6
-    #> eigene         eigene    5
-    #> oxcal           oxcal    5
-    #> museumplus museumplus    5
-    #> mapinfo       mapinfo    5
-    #> meshlab       meshlab    5
-    #> adobe           adobe    5
-    #> gis               gis    4
-    #> metashape   metashape    4
-    #> idaifield   idaifield    4
-    #> blender       blender    4
-    #> origin         origin    4
-    #> jmp               jmp    3
-    #> sql               sql    3
-
-1.  Visualisierung der Häufigkeiten der Nennung
-
-![](../figures/unnamed-chunk-22-1.png) Zwei Programme werden extrem
-häufig genannt: Excel und QGIS. Die beiden hervorgehobenen Punkte
-“eigene” und “keine” sollen im Folgenden etwas im Detail analysiert
-werden: Wer programmiert eigene Lösungen und wer benutzt gar keine
-Analysesoftware?
-
-### eigen programmierte Lösungen
-
-1.  Datenaufbereitung
-
-<!-- -->
-
-    #>  [1] "MS Excel, Sparql, selbstgebauter Datenbankabfrage "                                                                                       
-    #>  [2] "oXygen XML Editor\nselbstgeschriebene Software\nMS Excel"                                                                                 
-    #>  [3] "R, ADP, selbstentwickelte Python-Applikationen"                                                                                           
-    #>  [4] "eigene Software"                                                                                                                          
-    #>  [5] "QGIS, eigene software Open Source"                                                                                                        
-    #>  [6] "MS Excel, QGIS, eigene Entwicklungen zur Datenbankauswertung"                                                                             
-    #>  [7] "MS Excel, QGIS  für die tägliche Arbeit / eigene Forschungsprojekte sind zur Zeit nicht in Bearbeitung"                                   
-    #>  [8] "Hierzu kann ich keine Angaben machen. Ich suche/erforsche Daten, trage unsere eigenen Daten in der Datenbank ein, erstelle Dokumente."    
-    #>  [9] "R, Excel, ADP (www.rgzm.de/adp), AMT (www.academic-meta-tool.xyz), SamianResearch (www.rgzm.de/samian), QGIS, ArcGIS, eigene Analysetools"
-    #> [10] "Kein externer Dienst, nur dienststellen interne Datenbanken"                                                                              
-    #> [11] "interne Fundstellendatenbank, QGIS, MS Excel"
-    #> 
-    #> Außeruniversitäre Forschungseinrichtung                          Denkmalbehörde 
-    #>                                       4                                       3 
-    #>                               Sonstiges                  Universität/Hochschule 
-    #>                                       2                                       1
-
-V.a. außeruniversitäre Forschungseinrichtungen (4x genannt) und
-Denkmalbehörden (4x – einmal in sonstiges) wird selbständig Software
-entwickelt.
-
-### keine Angaben zu benutzer Software
-
-Insgesamt sind sehr häufig keine Angaben gemacht worden. Im Nachhinein
-herauszufiltern, warum dies geschah, kann kaum möglich.
-
-19 x “keine” + 304 NA, also ca. die Hälfte der Antwortenden hat keine
-Informationen dazu geben können / wollen.
-
-“Mit keinen so richtig. Weiterbildung wäre gut”, Hinweis einer
-30-39jährigen Person. 4x Hinweis das die Analyse von FD nicht zu den
-Aufgaben gehört. Der Chi-Quadrat-Test zeigt, dass es keine Zusammenhänge
-zwischen Alter / Einrichtung oder Gruppenzugehörigkeit und ob eine
-Angabe gemacht wurde oder nicht, gibt.
-
-genutzte Datenformate
----------------------
-
-    #> <<SimpleCorpus>>
-    #> Metadata:  corpus specific: 1, document level (indexed): 0
-    #> Content:  documents: 1
-    #> 
-    #> [1] c("software proprietäre formate", "txt", "cdr eps", "Markdown, SVG", "PLY", "Geodatabases (.gdb)", "dwg", "wav, mp3, mkv, avi, mpeg 4 ", "Wavefront *.obj", "jdx", "lido", "Sequencing Data (FastQ, BAM Files)", "netcdf", "Obj (für 3D)", "mus", "jmp, indd, ddd, zip, ico, ai, mdb, acddb, svg, eps, txt, ", "czi, ai, hp3d", "kml, vrt (Raster), obj (3D), stl (3D), LAZ (Laser), zLAS (Laser)", ".Rscript., .svg", "R, Rmd", "ttl,rdf,geojson-ld", "sql", "ai, pptx", "Lido", "osm", "vg, atos", "indd, ai, fmp12", \n"Apple Formate ", ".ndt; .wsng; .vieng", "TIFF", "Tif", "wav, mp4, kml, ps, gmp", "Fotos: RAW, DNG usw., Datenbanken, Harris-Matrix", "dwg", "obj, pcg, ftr, gsi, dxf, isproj", "PDF/A", "dwg", "ASCII", "wld, dxf, cdr", "txt", ".fm, .psd", ".blend, dae", "tiff", "md", "dwg, dxf", "dbf, sqlite, md, Rmd, txt, mdb, R", "svg", "dwg", "na", "tiff, DAtenbankeinträge!", "md", "raw", "pts, u3d, obj, ply", ".accdb; .tex", "python", "ai; svg; dwg; dxf", "obj,", "gdb.", "Photoshop Format", "diverse weitere", \n"geopackage", "geopackage", "aphoto, gephi, tex, diverse interne", "svg", "ai psd 3D-Formate", "dwg", "dwg", "id", "psd", "map", "dwg", "spc, zvi und weietre native Analysenformate", ".hmcx, .gephi, oxcal", "dwg, mde", "rdf", "cxt, stx, asc, sp, txt, etc. ", "ppt, fp, ai", "ai", "accdb", "obj", "ctv6", "ai", "svg", "OBJ | PLY | STL", "Eps; tiff", ".scriv (XML)", "db", "obj, ply, ...", "mp4, wav", "fbx obj", "ai, tiff, dxf, dwg", "diverse GPS-Formate", "RDF", "txt", "ply / stl / pts / ptx / e57 / postgresql ", \n"TIFF", "cdr, tiff, bmp, svg, shape", "dwg", "dwg, dxf", "psd", "mdb", "obj", "tex, md", "fmp12", "gpkg", "ai, indd, obj, dwg, dxt, fmp", "ply, obj ", "ply", "DWG, SQL", "gif, svg", "dwg")
-    #>                                word freq
-    #> tiff                           tiff    7
-    #> diverse                     diverse    3
-    #> indd                           indd    3
-    #> accdb                         accdb    2
-    #> fmp12                         fmp12    2
-    #> geopackage               geopackage    2
-    #> lido                           lido    2
-    #> acddb                         acddb    1
-    #> analysenformate     analysenformate    1
-    #> aphoto                       aphoto    1
-    #> apple                         apple    1
-    #> ascii                         ascii    1
-    #> atos                           atos    1
-    #> blend                         blend    1
-    #> ctv6                           ctv6    1
-    #> data                           data    1
-    #> datenbankeinträge datenbankeinträge    1
-    #> datenbanken             datenbanken    1
-    #> fastq                         fastq    1
-    #> files                         files    1
-    #> format                       format    1
-    #> fotos                         fotos    1
-    #> geodatabases           geodatabases    1
-    #> geojson                     geojson    1
-    #> gephi                         gephi    1
-    #> gpkg                           gpkg    1
-    #> harrismatrix           harrismatrix    1
-    #> hmcxgephi                 hmcxgephi    1
-    #> hp3d                           hp3d    1
-    #> interne                     interne    1
-
-![](../figures/unnamed-chunk-26-1.png) Insgesamt 67 unterschiedliche
-Datenformate.
 
 Acknowledgements
 ================
@@ -597,7 +810,7 @@ References
 
 ### Colophon
 
-This report was generated on 2020-07-31 17:11:47 using the following
+This report was generated on 2020-07-31 17:33:20 using the following
 computational environment and dependencies:
 
     #> - Session info ---------------------------------------------------------------
@@ -644,13 +857,12 @@ computational environment and dependencies:
     #>  lattice       0.20-41 2020-04-02 [2] CRAN (R 4.0.0)
     #>  lifecycle     0.2.0   2020-03-06 [1] CRAN (R 4.0.0)
     #>  lsr         * 0.5     2015-03-02 [1] CRAN (R 4.0.0)
-    #>  magrittr    * 1.5     2014-11-22 [1] CRAN (R 4.0.0)
+    #>  magrittr      1.5     2014-11-22 [1] CRAN (R 4.0.0)
     #>  Matrix        1.2-18  2019-11-27 [2] CRAN (R 4.0.0)
     #>  memoise       1.1.0   2017-04-21 [1] CRAN (R 4.0.0)
     #>  mgcv          1.8-31  2019-11-09 [2] CRAN (R 4.0.0)
     #>  munsell       0.5.0   2018-06-12 [1] CRAN (R 4.0.0)
     #>  nlme          3.1-147 2020-04-13 [2] CRAN (R 4.0.0)
-    #>  NLP         * 0.2-0   2018-10-18 [1] CRAN (R 4.0.0)
     #>  pillar        1.4.3   2019-12-20 [1] CRAN (R 4.0.0)
     #>  pkgbuild      1.0.7   2020-04-25 [1] CRAN (R 4.0.0)
     #>  pkgconfig     2.0.3   2019-09-22 [1] CRAN (R 4.0.0)
@@ -670,15 +882,12 @@ computational environment and dependencies:
     #>  rvest         0.3.5   2019-11-08 [1] CRAN (R 4.0.0)
     #>  scales        1.1.0   2019-11-18 [1] CRAN (R 4.0.0)
     #>  sessioninfo   1.1.1   2018-11-05 [1] CRAN (R 4.0.0)
-    #>  slam          0.1-47  2019-12-21 [1] CRAN (R 4.0.0)
-    #>  SnowballC   * 0.7.0   2020-04-01 [1] CRAN (R 4.0.0)
     #>  stringi       1.4.6   2020-02-17 [1] CRAN (R 4.0.0)
     #>  stringr     * 1.4.0   2019-02-10 [1] CRAN (R 4.0.0)
     #>  testthat      2.3.2   2020-03-02 [1] CRAN (R 4.0.0)
     #>  tibble        3.0.0   2020-03-30 [1] CRAN (R 4.0.0)
     #>  tidyr       * 1.0.3   2020-05-07 [1] CRAN (R 4.0.0)
     #>  tidyselect    1.1.0   2020-05-11 [1] CRAN (R 4.0.0)
-    #>  tm          * 0.7-7   2019-12-12 [1] CRAN (R 4.0.2)
     #>  usethis       1.6.1   2020-04-29 [1] CRAN (R 4.0.0)
     #>  vctrs         0.3.1   2020-06-05 [1] CRAN (R 4.0.2)
     #>  viridis     * 0.5.1   2018-03-29 [1] CRAN (R 4.0.0)
@@ -696,4 +905,4 @@ The current Git commit details are:
 
     #> Local:    gh-page E:/R/N4Oumfrage
     #> Remote:   gh-page @ origin (https://github.com/SCSchmidt/N4Oumfrage)
-    #> Head:     [7611107] 2020-07-30: moving things around so the links are fine again
+    #> Head:     [7cbe4e5] 2020-07-31: Auslagerung d. Software- und Datenauswertung

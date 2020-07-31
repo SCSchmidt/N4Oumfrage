@@ -35,6 +35,7 @@ knitr::opts_chunk$set(
   fig.path = "../figures/",
   dpi = 300
 )
+library(kableExtra)
 ```
 
 # Datengrundlage
@@ -78,7 +79,7 @@ colnames(d_fr) <- c("ID", "Datum", "zufallsid", "geschlecht", "alter", "blickwin
 
 Zuerst einige allgemeine Statistiken zu der Teilnehmergruppe:
 
-```{r}
+```{r fig_alter_einrichtung}
 age_erfahrung <- d[,c(5:21)]
 
 library(ggplot2)
@@ -99,7 +100,7 @@ Wir haben knapp 50 20-29jährige, der Großteil der befragten ist zwischen 30 ud
 
 Innerhalb der Altersstufen teilen sich die Menschen auf folgende Gruppen auf:
 
-```{r}
+```{r fig_einrichtung_gruppe}
 
 # 1. Daten umstrukturieren (breits Format von Spalte 6-14 in langes Format umwandeln. NAs raus und "nein" raus.)
 # df4 <- df3 %>% gather(key = "placenr", value = "example", "A", "B","C","D", na.rm = TRUE)
@@ -133,7 +134,7 @@ Das Gros besteht aus wissenschaftlichen Mitarbeiterinnen an der Hochschule und i
 
 Gibt es einen Zusammenhang zwischen dem Alter der Teilnehmenden Person, der Erfahrung die sie in digitalen Forschungsdatenmanagement hat  und dem Gewicht, dass sie dem sie ihm zuweist?
 
-```{r}
+```{r fig_erfahrung_gruppe}
 library(viridis)
 ggplot(data = age_group, 
            aes_string(x = names(age_group)[1],
@@ -189,7 +190,8 @@ Der Chi-Quadrat-Test darf eigentlich für diese Daten nicht angewendet werden, d
 ```{r}
 chi <- chisq.test(age_group[,1], age_group[,7])
 
-chi$residuals
+chi$residuals%>%
+  kable()
 ```
 die größten Abweichungen gibt es bei der Altersgruppe der 20-29jährigen im Bereich "Erfahrung = 0", dort sind sie überrepräsentiert, ebenso wie die Altersgruppen 60-69 und 70-70 im Bereich der niedrigen Erfahrungswerte 1-3 überrepräsentiert sind.
 
@@ -237,7 +239,7 @@ Allgemein kann der Zusammenhang bestätigt werden (eingezeichnet blaue Linie ist
 
 ### Gruppenzugehörigkeit
 
-```{r}
+```{r fig_gruppe}
 
 erfahrung_group <- age_erfahrung %>%
   gather(key = "gruppe", value = "ja.nein", 6:14, na.rm = TRUE) %>%
@@ -283,7 +285,7 @@ Der Bereich "hat selber wenig Erfahrung, schätzt aber die Bedeutung für die ei
 
 ### Blickwinkel der Antwortenden
 
-```{r}
+```{r fig_blickwinkel}
 
 ggplot()+
   geom_jitter(data = erfahrung_group, aes_string(x = names(erfahrung_group)[7],
@@ -306,7 +308,7 @@ ggplot()+
 Institutionen und Individuen zeigen keine Musterungen.
 
 ### Einrichtungen
-```{r}
+```{r fig_einrichtungen}
 cbp1 <- c("#999999", "#E69F00", "#56B4E9", "#009E73",
           "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 ggplot()+
@@ -347,7 +349,7 @@ R² ~ 0,34: moderater Zusammenhang zwischen eigener Erfahrung und dem Stellenwer
 ### Gibt es eine Trennung zwischen Menschen mit viel und wenig Ahnung?
 
 Hier ist es sinnvoll, sich einfach die Verteilung anzuschauen. Ist sie normalverteilt?
-```{r}
+```{r fig_verteilung_erfahrung}
 ggplot()+
   geom_bar(data = age_erfahrung, 
            aes_string(x = names(age_erfahrung[16])))+
@@ -378,7 +380,7 @@ Hier kann sich zeigen, dass wir vor allem Leute erreicht haben, die sich mit dem
 
 # Welche Arbeitgeber haben ein Richtlinienkatalog?
 
-```{r}
+```{r tab_einrichtungen_richtlinien}
 
 library(kableExtra)
 
@@ -399,7 +401,8 @@ d1 <- d%>%
 
 chi <- chisq.test(table(d1$In.welcher.Art.von.Einrichtung.sind.Sie.beruflich.tätig., d1$Verfügt.Ihr.Arbeitgeber...Ihre.Einrichtung.über.einen.Richtlinienkatalog...eine.Strategie.zum.Umgang.mit.Forschungsdaten.))
 
-chi$residuals
+chi$residuals%>%
+  kable()
 
 ```
 Chi nur eingeschränkt nutzbar, weil die Voraussetzungen nicht 100% erfüllt. Grabungsfirmen und außeruniversitäre Forschungseinrichrungen haben häufiger einen Richtlinienkatalog als zu erwarten währen, während insbesondere Museen keine haben.
