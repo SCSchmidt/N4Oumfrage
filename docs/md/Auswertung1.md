@@ -22,9 +22,7 @@ Alter und Beschäftigungsverhältnis
 
 Zuerst einige allgemeine Statistiken zu der Teilnehmergruppe:
 
-![](../figures/unnamed-chunk-2-1.png) 
-
-Wir haben knapp 50 20-29jährige,
+![](../figures/unnamed-chunk-2-1.png) Wir haben knapp 50 20-29jährige,
 der Großteil der befragten ist zwischen 30 udn 60 Jahre alt und arbeitet
 an einer Hochschule, in der Forschung, im Museum oder in einer
 Denkmalbehörde (man beachte die über 80jährige Person, die nicht mehr
@@ -220,12 +218,12 @@ der/die die Bedeutung von FDM sehr hoch einschätzt, aber selber
 überhaupt keine Erfahrung hat. Kann dieser Person jemand bitte ganz
 schnell einen Datenbankenkurs anbieten?
 
-Der Bereich “hat selber wenig Erfahrung, schätzt aber die Bedeutung hoch
-ein” (also Einschätzung Bedeutung FDM 6-10 und Einschätzung eigene
-Erfahrung FDM 0-4) ist eine Zielgruppe für uns: Das sind die Personen,
-die wissen, dass sie sich fortbilden müssen, denen aber evtl einfach das
-Angebot fehlt. Es sind darin alle Gruppen vertreten, außer Daten und
-IT-Beautragte.
+Der Bereich “hat selber wenig Erfahrung, schätzt aber die Bedeutung für
+die eigene Arbeit hoch ein” (also Einschätzung Bedeutung FDM 6-10 und
+Einschätzung eigene Erfahrung FDM 0-4) ist eine Zielgruppe für uns: Das
+sind die Personen, die wissen, dass sie sich fortbilden müssen, denen
+aber evtl einfach das Angebot fehlt. Es sind darin alle Gruppen
+vertreten, außer Daten- und IT-Beautragte.
 
 ### Blickwinkel der Antwortenden
 
@@ -283,17 +281,151 @@ Gruppen unterscheiden.
 Welche Arbeitgeber haben ein Richtlinienkatalog?
 ================================================
 
-    #>                                          
-    #>                                           ja nein weiß nicht
-    #>   Archiv                                   4    1          2
-    #>   Außeruniversitäre Forschungseinrichtung 66   36         24
-    #>   Denkmalbehörde                          24   23         18
-    #>   Forschungsverbund                        3    5          2
-    #>   Grabungsfirma                           15    1          1
-    #>   keiner                                   1    3         10
-    #>   Museum                                  24   67         32
-    #>   Sonstiges                                7    7         12
-    #>   Universität/Hochschule                  60   53         55
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+ja
+</th>
+<th style="text-align:right;">
+nein
+</th>
+<th style="text-align:right;">
+weiß nicht
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Archiv
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Außeruniversitäre Forschungseinrichtung
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Denkmalbehörde
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Forschungsverbund
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grabungsfirma
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+keiner
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Museum
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sonstiges
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Universität/Hochschule
+</td>
+<td style="text-align:right;">
+60
+</td>
+<td style="text-align:right;">
+53
+</td>
+<td style="text-align:right;">
+55
+</td>
+</tr>
+</tbody>
+</table>
 
 Für die Analyse, ob es hier nennenswerte Unterschiede gibt, entfernen
 wir die Angaben “weiß nicht”:
@@ -323,6 +455,137 @@ Software ist:
 
 ![](../figures/unnamed-chunk-20-1.png)
 
+Analyse Software, die für Forschungsdatenanalyse genutzt wird
+-------------------------------------------------------------
+
+1.  Datenvorbereitung
+
+<!-- -->
+
+    #>                  word freq
+    #> excel           excel  238
+    #> qgis             qgis  120
+    #> access         access   39
+    #> keine           keine   22
+    #> word             word   17
+    #> spss             spss   17
+    #> arcgis         arcgis   16
+    #> filemaker   filemaker   15
+    #> python         python   14
+    #> office         office   10
+    #> past             past   10
+    #> autocad       autocad    8
+    #> software     software    7
+    #> open             open    7
+    #> calc             calc    6
+    #> libre           libre    6
+    #> gephi           gephi    6
+    #> eigene         eigene    5
+    #> oxcal           oxcal    5
+    #> museumplus museumplus    5
+    #> mapinfo       mapinfo    5
+    #> meshlab       meshlab    5
+    #> adobe           adobe    5
+    #> gis               gis    4
+    #> metashape   metashape    4
+    #> idaifield   idaifield    4
+    #> blender       blender    4
+    #> origin         origin    4
+    #> jmp               jmp    3
+    #> sql               sql    3
+
+1.  Visualisierung der Häufigkeiten der Nennung
+
+![](../figures/unnamed-chunk-22-1.png) Zwei Programme werden extrem
+häufig genannt: Excel und QGIS. Die beiden hervorgehobenen Punkte
+“eigene” und “keine” sollen im Folgenden etwas im Detail analysiert
+werden: Wer programmiert eigene Lösungen und wer benutzt gar keine
+Analysesoftware?
+
+### eigen programmierte Lösungen
+
+1.  Datenaufbereitung
+
+<!-- -->
+
+    #>  [1] "MS Excel, Sparql, selbstgebauter Datenbankabfrage "                                                                                       
+    #>  [2] "oXygen XML Editor\nselbstgeschriebene Software\nMS Excel"                                                                                 
+    #>  [3] "R, ADP, selbstentwickelte Python-Applikationen"                                                                                           
+    #>  [4] "eigene Software"                                                                                                                          
+    #>  [5] "QGIS, eigene software Open Source"                                                                                                        
+    #>  [6] "MS Excel, QGIS, eigene Entwicklungen zur Datenbankauswertung"                                                                             
+    #>  [7] "MS Excel, QGIS  für die tägliche Arbeit / eigene Forschungsprojekte sind zur Zeit nicht in Bearbeitung"                                   
+    #>  [8] "Hierzu kann ich keine Angaben machen. Ich suche/erforsche Daten, trage unsere eigenen Daten in der Datenbank ein, erstelle Dokumente."    
+    #>  [9] "R, Excel, ADP (www.rgzm.de/adp), AMT (www.academic-meta-tool.xyz), SamianResearch (www.rgzm.de/samian), QGIS, ArcGIS, eigene Analysetools"
+    #> [10] "Kein externer Dienst, nur dienststellen interne Datenbanken"                                                                              
+    #> [11] "interne Fundstellendatenbank, QGIS, MS Excel"
+    #> 
+    #> Außeruniversitäre Forschungseinrichtung                          Denkmalbehörde 
+    #>                                       4                                       3 
+    #>                               Sonstiges                  Universität/Hochschule 
+    #>                                       2                                       1
+
+V.a. außeruniversitäre Forschungseinrichtungen (4x genannt) und
+Denkmalbehörden (4x – einmal in sonstiges) wird selbständig Software
+entwickelt.
+
+### keine Angaben zu benutzer Software
+
+Insgesamt sind sehr häufig keine Angaben gemacht worden. Im Nachhinein
+herauszufiltern, warum dies geschah, kann kaum möglich.
+
+19 x “keine” + 304 NA, also ca. die Hälfte der Antwortenden hat keine
+Informationen dazu geben können / wollen.
+
+“Mit keinen so richtig. Weiterbildung wäre gut”, Hinweis einer
+30-39jährigen Person. 4x Hinweis das die Analyse von FD nicht zu den
+Aufgaben gehört. Der Chi-Quadrat-Test zeigt, dass es keine Zusammenhänge
+zwischen Alter / Einrichtung oder Gruppenzugehörigkeit und ob eine
+Angabe gemacht wurde oder nicht, gibt.
+
+genutzte Datenformate
+---------------------
+
+    #> <<SimpleCorpus>>
+    #> Metadata:  corpus specific: 1, document level (indexed): 0
+    #> Content:  documents: 1
+    #> 
+    #> [1] c("software proprietäre formate", "txt", "cdr eps", "Markdown, SVG", "PLY", "Geodatabases (.gdb)", "dwg", "wav, mp3, mkv, avi, mpeg 4 ", "Wavefront *.obj", "jdx", "lido", "Sequencing Data (FastQ, BAM Files)", "netcdf", "Obj (für 3D)", "mus", "jmp, indd, ddd, zip, ico, ai, mdb, acddb, svg, eps, txt, ", "czi, ai, hp3d", "kml, vrt (Raster), obj (3D), stl (3D), LAZ (Laser), zLAS (Laser)", ".Rscript., .svg", "R, Rmd", "ttl,rdf,geojson-ld", "sql", "ai, pptx", "Lido", "osm", "vg, atos", "indd, ai, fmp12", \n"Apple Formate ", ".ndt; .wsng; .vieng", "TIFF", "Tif", "wav, mp4, kml, ps, gmp", "Fotos: RAW, DNG usw., Datenbanken, Harris-Matrix", "dwg", "obj, pcg, ftr, gsi, dxf, isproj", "PDF/A", "dwg", "ASCII", "wld, dxf, cdr", "txt", ".fm, .psd", ".blend, dae", "tiff", "md", "dwg, dxf", "dbf, sqlite, md, Rmd, txt, mdb, R", "svg", "dwg", "na", "tiff, DAtenbankeinträge!", "md", "raw", "pts, u3d, obj, ply", ".accdb; .tex", "python", "ai; svg; dwg; dxf", "obj,", "gdb.", "Photoshop Format", "diverse weitere", \n"geopackage", "geopackage", "aphoto, gephi, tex, diverse interne", "svg", "ai psd 3D-Formate", "dwg", "dwg", "id", "psd", "map", "dwg", "spc, zvi und weietre native Analysenformate", ".hmcx, .gephi, oxcal", "dwg, mde", "rdf", "cxt, stx, asc, sp, txt, etc. ", "ppt, fp, ai", "ai", "accdb", "obj", "ctv6", "ai", "svg", "OBJ | PLY | STL", "Eps; tiff", ".scriv (XML)", "db", "obj, ply, ...", "mp4, wav", "fbx obj", "ai, tiff, dxf, dwg", "diverse GPS-Formate", "RDF", "txt", "ply / stl / pts / ptx / e57 / postgresql ", \n"TIFF", "cdr, tiff, bmp, svg, shape", "dwg", "dwg, dxf", "psd", "mdb", "obj", "tex, md", "fmp12", "gpkg", "ai, indd, obj, dwg, dxt, fmp", "ply, obj ", "ply", "DWG, SQL", "gif, svg", "dwg")
+    #>                                word freq
+    #> tiff                           tiff    7
+    #> diverse                     diverse    3
+    #> indd                           indd    3
+    #> accdb                         accdb    2
+    #> fmp12                         fmp12    2
+    #> geopackage               geopackage    2
+    #> lido                           lido    2
+    #> acddb                         acddb    1
+    #> analysenformate     analysenformate    1
+    #> aphoto                       aphoto    1
+    #> apple                         apple    1
+    #> ascii                         ascii    1
+    #> atos                           atos    1
+    #> blend                         blend    1
+    #> ctv6                           ctv6    1
+    #> data                           data    1
+    #> datenbankeinträge datenbankeinträge    1
+    #> datenbanken             datenbanken    1
+    #> fastq                         fastq    1
+    #> files                         files    1
+    #> format                       format    1
+    #> fotos                         fotos    1
+    #> geodatabases           geodatabases    1
+    #> geojson                     geojson    1
+    #> gephi                         gephi    1
+    #> gpkg                           gpkg    1
+    #> harrismatrix           harrismatrix    1
+    #> hmcxgephi                 hmcxgephi    1
+    #> hp3d                           hp3d    1
+    #> interne                     interne    1
+
+![](../figures/unnamed-chunk-26-1.png) Insgesamt 67 unterschiedliche
+Datenformate.
+
 Acknowledgements
 ================
 
@@ -334,7 +597,7 @@ References
 
 ### Colophon
 
-This report was generated on 2020-07-30 17:53:45 using the following
+This report was generated on 2020-07-31 17:11:47 using the following
 computational environment and dependencies:
 
     #> - Session info ---------------------------------------------------------------
@@ -347,7 +610,7 @@ computational environment and dependencies:
     #>  collate  German_Germany.1252         
     #>  ctype    German_Germany.1252         
     #>  tz       Europe/Berlin               
-    #>  date     2020-07-30                  
+    #>  date     2020-07-31                  
     #> 
     #> - Packages -------------------------------------------------------------------
     #>  package     * version date       lib source        
@@ -371,18 +634,23 @@ computational environment and dependencies:
     #>  glue          1.4.1   2020-05-13 [1] CRAN (R 4.0.2)
     #>  gridExtra     2.3     2017-09-09 [1] CRAN (R 4.0.0)
     #>  gtable        0.3.0   2019-03-25 [1] CRAN (R 4.0.0)
+    #>  highr         0.8     2019-03-20 [1] CRAN (R 4.0.0)
+    #>  hms           0.5.3   2020-01-08 [1] CRAN (R 4.0.0)
     #>  htmltools     0.4.0   2019-10-04 [1] CRAN (R 4.0.0)
+    #>  httr          1.4.2   2020-07-20 [1] CRAN (R 4.0.2)
+    #>  kableExtra  * 1.1.0   2019-03-16 [1] CRAN (R 4.0.2)
     #>  knitr         1.28    2020-02-06 [1] CRAN (R 4.0.0)
     #>  labeling      0.3     2014-08-23 [1] CRAN (R 4.0.0)
     #>  lattice       0.20-41 2020-04-02 [2] CRAN (R 4.0.0)
     #>  lifecycle     0.2.0   2020-03-06 [1] CRAN (R 4.0.0)
     #>  lsr         * 0.5     2015-03-02 [1] CRAN (R 4.0.0)
-    #>  magrittr      1.5     2014-11-22 [1] CRAN (R 4.0.0)
+    #>  magrittr    * 1.5     2014-11-22 [1] CRAN (R 4.0.0)
     #>  Matrix        1.2-18  2019-11-27 [2] CRAN (R 4.0.0)
     #>  memoise       1.1.0   2017-04-21 [1] CRAN (R 4.0.0)
     #>  mgcv          1.8-31  2019-11-09 [2] CRAN (R 4.0.0)
     #>  munsell       0.5.0   2018-06-12 [1] CRAN (R 4.0.0)
     #>  nlme          3.1-147 2020-04-13 [2] CRAN (R 4.0.0)
+    #>  NLP         * 0.2-0   2018-10-18 [1] CRAN (R 4.0.0)
     #>  pillar        1.4.3   2019-12-20 [1] CRAN (R 4.0.0)
     #>  pkgbuild      1.0.7   2020-04-25 [1] CRAN (R 4.0.0)
     #>  pkgconfig     2.0.3   2019-09-22 [1] CRAN (R 4.0.0)
@@ -393,24 +661,32 @@ computational environment and dependencies:
     #>  purrr         0.3.4   2020-04-17 [1] CRAN (R 4.0.0)
     #>  R6            2.4.1   2019-11-12 [1] CRAN (R 4.0.0)
     #>  Rcpp          1.0.4.6 2020-04-09 [1] CRAN (R 4.0.0)
+    #>  readr         1.3.1   2018-12-21 [1] CRAN (R 4.0.2)
     #>  remotes       2.2.0   2020-07-21 [1] CRAN (R 4.0.2)
     #>  rlang         0.4.7   2020-07-09 [1] CRAN (R 4.0.2)
     #>  rmarkdown     2.3     2020-06-18 [1] CRAN (R 4.0.2)
     #>  rprojroot     1.3-2   2018-01-03 [1] CRAN (R 4.0.0)
+    #>  rstudioapi    0.11    2020-02-07 [1] CRAN (R 4.0.0)
+    #>  rvest         0.3.5   2019-11-08 [1] CRAN (R 4.0.0)
     #>  scales        1.1.0   2019-11-18 [1] CRAN (R 4.0.0)
     #>  sessioninfo   1.1.1   2018-11-05 [1] CRAN (R 4.0.0)
+    #>  slam          0.1-47  2019-12-21 [1] CRAN (R 4.0.0)
+    #>  SnowballC   * 0.7.0   2020-04-01 [1] CRAN (R 4.0.0)
     #>  stringi       1.4.6   2020-02-17 [1] CRAN (R 4.0.0)
     #>  stringr     * 1.4.0   2019-02-10 [1] CRAN (R 4.0.0)
     #>  testthat      2.3.2   2020-03-02 [1] CRAN (R 4.0.0)
     #>  tibble        3.0.0   2020-03-30 [1] CRAN (R 4.0.0)
     #>  tidyr       * 1.0.3   2020-05-07 [1] CRAN (R 4.0.0)
     #>  tidyselect    1.1.0   2020-05-11 [1] CRAN (R 4.0.0)
+    #>  tm          * 0.7-7   2019-12-12 [1] CRAN (R 4.0.2)
     #>  usethis       1.6.1   2020-04-29 [1] CRAN (R 4.0.0)
     #>  vctrs         0.3.1   2020-06-05 [1] CRAN (R 4.0.2)
     #>  viridis     * 0.5.1   2018-03-29 [1] CRAN (R 4.0.0)
     #>  viridisLite * 0.3.0   2018-02-01 [1] CRAN (R 4.0.0)
+    #>  webshot       0.5.2   2019-11-22 [1] CRAN (R 4.0.2)
     #>  withr         2.2.0   2020-04-20 [1] CRAN (R 4.0.0)
     #>  xfun          0.14    2020-05-20 [1] CRAN (R 4.0.0)
+    #>  xml2          1.3.1   2020-04-09 [1] CRAN (R 4.0.0)
     #>  yaml          2.2.1   2020-02-01 [1] CRAN (R 4.0.0)
     #> 
     #> [1] C:/Users/SCSchmidt/Documents/R/win-library/4.0
@@ -420,4 +696,4 @@ The current Git commit details are:
 
     #> Local:    gh-page E:/R/N4Oumfrage
     #> Remote:   gh-page @ origin (https://github.com/SCSchmidt/N4Oumfrage)
-    #> Head:     [2df90d8] 2020-07-30: moved docs
+    #> Head:     [7611107] 2020-07-30: moving things around so the links are fine again
