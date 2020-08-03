@@ -1,0 +1,330 @@
+---
+title: "NFDI4Objects Umfrageauswertung: Datensicherung"
+author:
+  - Sophie C. Schmidt:
+      email: sophie.schmidt@dainst.org
+      institute: [DAI]
+      correspondence: true
+institute:
+  - DAI: Deutsches Archäologisches Institut
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  md_document:
+    variant: markdown_github
+always_allow_html: true
+
+---
+
+<!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
+
+<!-- With the following code you can access and display values from the yml header above. -->
+
+Keywords: `r rmarkdown::metadata$keywords`
+
+Highlights: `r rmarkdown::metadata$highlights`
+
+<!-- The following code chunk defines some general settings how code chunks should behave. -->
+
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  echo = FALSE,
+  comment = "#>",
+  fig.path = "../figures/",
+  dpi = 300
+)
+library(ggplot2)
+```
+
+# Datengrundlage
+
+Daten als csv bekommen und IPs etc entfernt. Insgesamt über 600 Antworten, dabei aber viele, die sich "nur durchgeklickt" haben oder nur Teile der Umfrage ausgefüllt haben (teilweise um die 70%).
+
+```{r}
+d <- read.csv2("../data/raw_data/results-survey615517.csv", sep = ",", encoding = "UTF-8")
+
+# remove "" as input and make NA out of it
+# dplyr solution fom here: https://stackoverflow.com/questions/24172111/change-the-blank-cells-to-na
+
+library(dplyr)
+
+empty_as_na <- function(x){
+    if("factor" %in% class(x)) x <- as.character(x) ## since ifelse wont work with factors
+    ifelse(as.character(x)!="", x, NA)
+}
+
+## transform all columns
+d <- d %>% 
+  mutate_each(funs(empty_as_na))
+
+```
+
+
+```{r rename column names}
+d_fr <- d[, c(1:65)]
+
+#colnames(d)
+
+colnames(d_fr) <- c("ID", "Datum", "zufallsid", "geschlecht", "alter", "blickwinkel", "einrichtung", "einrichtung_sonstiges", "disz", "studiernede", "promovierende", "lehrende", "techn_mitarb", "wiss_mitarb", "daten_it_beauftragt", "projektleiter", "einrichtung_leiter", "gruppe_sonstige", "arbeitgeber_richtlinienkatalog", "erfahrung_fdm", "stellenwert_fdm", "software_projman_janein", "software_projman", "software_fdm_janein", "software_fdm", "software_wiss_analyse", "xls", "doc", "pdf", "ods", "csv", "odt", "png", "jpg", "geotiff", "geojson", "shp", "json", "xml", "dateiformat-sonstige", "software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht-oeff_cloud", "zentralnetz_arbeitgeber", "institut-repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds-dvds", "datensicherung-sonstiges", "sicherung-nach-projekt", "FAIR_bekannt_janein", "verfuegung_wie", "verfuegung_wie_sonstiges", "fremddatennutzung-janein", "fremddaten_online-portal", "fremddaten_prsnl-anfrage", "fremddaten-sonstiges",  "wunsch_datenspeicherung", "mehrwert-n4o", "prsnl-mehrwert-n4o")
+
+```
+
+```{r datastorage}
+
+library(tidyr)
+datastorage <- d_fr %>%
+  gather( key = "datastorage", value = "jn", c("software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht-oeff_cloud", "zentralnetz_arbeitgeber", "institut-repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds-dvds"), na.rm = TRUE)%>%
+  filter(jn == "Ja")
+
+ds <- as.data.frame(table(datastorage$datastorage))
+
+ggplot(data = ds)+
+  geom_col(aes (x = reorder(Var1, Freq), 
+                y=  Freq))+
+  coord_flip() +
+  theme_bw() + 
+  xlab("Art der Datenspeicherung") +
+  scale_x_discrete(breaks = levels(ds$Var1),
+       labels = c("CD/DVD", "externe Festplatte", "externes Datenzentrum", "institutionelle Repositorium \n des Arbeitgebers", "lokaler Dienstrechner", "lokaler Privatrechner", "nicht-öffentlicher \n Cloud-Service", "privatwirtschaftlicher \n Cloud-Service", "Repositorium der \n Fachcommunity", "USB", "Versionierungssystem", "Zentralnetz des Arbeitgebers"))+
+  ylab("Häufigkeit Nennung (Mehrfachnennung möglich)")
+  
+  
+
+
+
+```
+
+Die häufigsten Back-Up-Methoden während der Projektphase sind das Netz des Arbeitgebers, die externe Festplatte und lokale Rechner. Externe Datenzentren, Versionierungssysteme und Fach-Repositorien liegen weit abgeschlagen zusammen mit DVDs und CDs. 
+
+```{r}
+# textmining spaß mit sonstiges
+
+
+library("tm")
+library("SnowballC")
+
+ds_sonst <- d_fr$`datensicherung-sonstiges`
+ds_sonst <- ds_sonst[!is.na(ds_sonst)]
+
+```
+Das ändert sich auch nicht durch die Nennungen unter "sonstiges": `ds_sonst`
+
+## FAIR Prinzipien
+
+```{r FAIR}
+ggplot()+
+  geom_bar(data = d_fr, aes(x = FAIR_bekannt_janein))+
+  ggtitle("Sind Ihnen die FAIR Prinzipien bekannt?")+
+  ylab("Anzahl")+
+  xlab ("Antworten")
+ 
+```
+Tatsächlich sind die FAIR-Prinzipien nicht einmal der Hälfte derjenigen, die überhaupt eine Antwort gegeben hat, bekannt.
+
+## Stellen Sie Ihre Daten nach Projektabschluss zur Verfügung?
+
+```{r verfuegung}
+verfuegung <- as.data.frame(table(d_fr$verfuegung_wie))
+
+ggplot()+
+  geom_col(data = verfuegung, aes(x = reorder(Var1, Freq),
+                           y = Freq))+
+  coord_flip()+
+  xlab("Methode der Verfügungsstellung")+
+  ylab("Häufigkeit der Nennung")
+
+```
+
+### Kategorisierung der sonstiges Angaben
+
+Unter den sonstigen Angaben stechen werden diese besonders häufig genannt:
+
+```{r sonstige_verfuegung}
+docs_verf <- d_fr$`verfuegung_wie_sonstiges`
+docs_verf <- docs_verf[!is.na(docs_verf)]
+docs_verf <- as.data.frame(docs_verf)
+
+library(stringr)
+
+docs_verf$kat[str_detect(docs_verf$docs_verf, "abhängig", negate = FALSE)] <- "mehrere Wege"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "mehrere", negate = FALSE)] <- "mehrere Wege"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "z.T.", negate = FALSE)] <- "mehrere Wege"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "versch.", negate = FALSE)] <- "mehrere Wege"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "Hängt ab", negate = FALSE)] <- "mehrere Wege"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "Ansonsten", negate = FALSE)] <- "mehrere Wege"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "Plattformen", negate = FALSE)] <- "mehrere Wege"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "unterschiedlich", negate = FALSE)] <- "mehrere Wege"
+
+docs_verf$kat[str_detect(docs_verf$docs_verf, "institutionell", negate = FALSE)] <- "institutionell"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "institituionell", negate = FALSE)] <- "institutionell"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "Arbeitgeber", negate = FALSE)] <- "institutionell"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "Fachamt", negate = FALSE)] <- "institutionell"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "Amt", negate = FALSE)] <- "institutionell"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "BODEON", negate = FALSE)] <- "institutionell"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "Forschungsinstitution", negate = FALSE)] <- "institutionell"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "Institution", negate = FALSE)] <- "institutionell"
+
+
+
+docs_verf$kat[str_detect(docs_verf$docs_verf, "publikation", negate = FALSE)] <- "Publikation"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "Publikation", negate = FALSE)] <- "Publikation"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "supplementary", negate = FALSE)] <- "Publikation"
+
+docs_verf$kat[str_detect(docs_verf$docs_verf, "Rechtsfragen", negate = FALSE)] <- "Rechtsfragen"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "Datenschutz", negate = FALSE)] <- "Rechtsfragen"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "lizenzrechtlich", negate = FALSE)] <- "Rechtsfragen"
+
+docs_verf$kat[str_detect(docs_verf$docs_verf, "Datenbank", negate = FALSE)] <- "online-Datenbank"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "Datenbank", negate = FALSE)] <- "online-Datenbank"
+
+
+docs_verf$kat[str_detect(docs_verf$docs_verf, "iDAI.world", negate = FALSE)] <- "iDAI.world"
+docs_verf$kat[str_detect(docs_verf$docs_verf, "Neotoma", negate = FALSE)] <- "Neotoma"
+
+library(ggplot2)
+library(tidyr)
+docs_verf %>%
+  filter(!is.na(kat))%>%
+ggplot()+
+  geom_bar(aes(x = kat), na.rm = TRUE)+
+  coord_flip()+
+  theme_bw()
+
+
+```
+Häufig wird auf Rechtsfragen / Lizenzen etc. hingewiesen.
+
+Die Publikation der Daten in dem Journal als supplementary data wird angesprochen. 
+
+Viele nutzen unterschiedliche Wege, wobei hier der Punkt "persönlich" häufig genannt wird und z.T. fachspezifische Repositorien genannt werden.
+Unter "institutionell" verbergen sich Angabe nach dem Amt, Instituten und dem Arbeitgeber.
+
+Einzelne Interessante Wortmeldungen im O-Ton:
+`r docs_verf$docs_verf[2]`,`r docs_verf$docs_verf[20]`, `r docs_verf$docs_verf[28]`, `r docs_verf$docs_verf[32]`.
+
+## Werden Daten anderer für die eigene Arbeit genutzt?
+
+In diesem Kapitel kann man evtl. die vielen "NA"s, also keine Angaben damit interpretieren, dass es Leute noch nicht probiert haben. 
+```{r fremdedaten}
+ggplot()+
+  geom_bar(data = d_fr, aes(x = `fremddatennutzung-janein`))+
+  ggtitle("Nutzen Sie digitale Forschungsdaten, die in anderen Projekten erhoben wurden?")+
+  ylab("Anzahl")+
+  xlab ("Antworten")+
+  theme_bw()
+ 
+```
+
+```{r onlineportal_fremdedaten}
+ggplot()+
+  geom_bar(data = d_fr, aes(x = `fremddaten_online-portal`))+
+  ggtitle("Erhalten Sie Zugang zu Daten über ein Online-Portal?")+
+  ylab("Anzahl")+
+  xlab ("Antworten")+
+  theme_bw()
+ 
+```
+
+```{r anfrage_fremddaten}
+ggplot()+
+  geom_bar(data = d_fr, aes(x = `fremddaten_prsnl-anfrage`))+
+  ggtitle("Erhalten Sie Zugang zu Daten über persönliche Anfragen?")+
+  ylab("Anzahl")+
+  xlab ("Antworten")+
+  theme_bw()
+ 
+```
+Versuch einer Kategorisierung der sonstigen Antworten:
+```{r}
+
+fremddaten_sonst <- d_fr$`fremddaten-sonstiges`
+fremddaten_sonst <- fremddaten_sonst[!is.na(fremddaten_sonst)]
+
+daten_sonst <- as.data.frame(fremddaten_sonst)
+
+library(stringr)
+
+daten_sonst$kat[str_detect(daten_sonst$fremddaten_sonst, "Publikation", negate = FALSE)] <- "Publikation"
+daten_sonst$kat[str_detect(daten_sonst$fremddaten_sonst, "Publikation", negate = FALSE)] <- "Publikation"
+daten_sonst$kat[str_detect(daten_sonst$fremddaten_sonst, "analog", negate = FALSE)] <- "Publikation"
+
+daten_sonst$kat[str_detect(daten_sonst$fremddaten_sonst, "persönl", negate = FALSE)] <- "persönlich"
+daten_sonst$kat[str_detect(daten_sonst$fremddaten_sonst, "Anfrage", negate = FALSE)] <- "persönlich"
+daten_sonst$kat[str_detect(daten_sonst$fremddaten_sonst, "Kooperation", negate = FALSE)] <- "persönlich"
+daten_sonst$kat[str_detect(daten_sonst$fremddaten_sonst, "Vorgängerproj", negate = FALSE)] <- "persönlich"
+daten_sonst$kat[str_detect(daten_sonst$fremddaten_sonst, "institutseigene", negate = FALSE)] <- "persönlich"
+
+
+daten_sonst$kat[str_detect(daten_sonst$fremddaten_sonst, "Website", negate = FALSE)] <- "Datenbanken online"
+daten_sonst$kat[str_detect(daten_sonst$fremddaten_sonst, "Datendienst", negate = FALSE)] <- "Datenbanken online"
+daten_sonst$kat[str_detect(daten_sonst$fremddaten_sonst, "Direkt online", negate = FALSE)] <- "Datenbanken online"
+daten_sonst$kat[str_detect(daten_sonst$fremddaten_sonst, "Schnittstellen", negate = FALSE)] <-  "Datenbanken online"
+
+```
+
+Hinweise auf online Datenbanken (3x), Publikationen (vmtl als Print gemeint, aber nicht eindeutig, 3x) und letztendlich persönliche Kontakte (Kooperationen, Vorgängerprojekte etc). Manchmal werden mehrere Wege genannt.
+
+### Welche Maßnahmen würden Sie sich wünschen (im Bezug auf Datenspeicherung in ihrem Arbeitsfeld)?
+
+```{r wuenschedaten}
+wuensche <- d_fr$wunsch_datenspeicherung
+
+
+library("tm")
+library("SnowballC")
+
+
+docs <- Corpus(VectorSource(wuensche))
+
+#inspect(docs)
+
+# alles kleinschreiben
+docs <- tm_map(docs, content_transformer(tolower))
+
+#toexcel <- content_transformer(function (x , pattern ) gsub(pattern, "excel", x))
+
+#docs <- tm_map(docs, toexcel, "exel")
+
+# Remove english common stopwords
+docs <- tm_map(docs, removeWords, stopwords("german"))
+
+
+# Remove your own stop word
+# specify your stopwords as a character vector
+docs <- tm_map(docs, removeWords, c("dass","etc")) 
+
+# Remove punctuations
+docs <- tm_map(docs, removePunctuation)
+# Eliminate extra white spaces
+docs <- tm_map(docs, stripWhitespace)
+
+# Text stemming
+docs <- tm_map(docs, stemDocument)
+
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d_docs <- data.frame(word = names(v),freq=v)
+head(d_docs, 30)
+```
+
+```{r wuensche_textmining}
+d_docs %>%
+  filter(freq > 20) %>%
+ggplot()+
+  geom_col(aes(x = reorder(word, freq),
+               y = freq))+
+  theme_bw()+
+  xlab("")+
+  ylab("Anzahl (Mehrfachnennungen möglich)")+
+  coord_flip()
+```
+
+
+
+```{r}
+wuensche <- wuensche[!is.na(wuensche)]
+```
+
