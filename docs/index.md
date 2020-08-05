@@ -4,7 +4,7 @@
 
 [Auswertung Teil 2: Software und Datenformate](https://github.com/SCSchmidt/N4Oumfrage/blob/master/docs/md/Auswertung_Software_Datenformate.md)
 
-[Auswertung Teil 2: Datensicherung](https://github.com/SCSchmidt/N4Oumfrage/blob/master/docs/md/Auswertung_Datensicherung.md)
+[Auswertung Teil 3: Datensicherung](https://github.com/SCSchmidt/N4Oumfrage/blob/master/docs/md/Auswertung_Datensicherung.md)
 
 
 
