@@ -1,5 +1,5 @@
-## Auswertung der NFDI-Umfrage.
+## Auswertung der NFDI4Objects-Umfrage.
 
-[Auswertung Teil 1: Demographische Angaben und Erfahrung](https://github.com/SCSchmidt/N4Oumfrage/blob/master/docs/md/Auswertung1.md)
+Dieses Repository dient der Auswertung der Community-Umfrage von NFDI4Objects. 
 
-[Auswertung Teil 2: Software und Datenformate](https://github.com/SCSchmidt/N4Oumfrage/blob/master/docs/md/Auswertung_Software_Datenformate.md)
+Ergebnisse werden hier dargestellt: https://scschmidt.github.io/N4Oumfrage/
