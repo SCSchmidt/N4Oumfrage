@@ -12,6 +12,8 @@ output:
   md_document:
     variant: markdown_github
 always_allow_html: true
+keywords: "Auswertung Umfrage, Software, Datenformate"
+highlights: "Anbieter benutzter Projektmanagement-Software: v.a. Microsoft und Atlassian, aber auch sehr spezialisiert, meist genannte Forschungsdatenauswertende Programme: QGIS und Excel"
 
 ---
 
@@ -105,13 +107,15 @@ ggplot()+
   coord_flip() +
   theme_bw() + 
   xlab("Anbieter") +
-  ylab("Häufigkeit Nennung")
+  ylab("Häufigkeit Nennung")+
+  scale_fill_discrete(name = "")
+  
 
 ```
+Lösungen von Atlassian und Microsoft sind besonders beliebt. Einige nutzen selbstprogrammierte Lösungen. Versionskontrolle ist relativ bekannt. 
 
 # Analyse Software, die für Forschungsdatenanalyse genutzt wird
 
-1. Datenvorbereitung
 ```{r}
 fdm_dienste <- d$Mit.welchen.Diensten..z.B..der.Netzbasierte.archäologische.Datenprozessierungsdienst.des.RGZM..und.Software.Applikationen..z.B..MS.Excel..QGIS..SPSS..R..etc...analysieren.Sie.Ihre.Forschungsdaten.im.Rahmen.Ihrer.wissenschaftlichen.Arbeit..Bitte.nennen.Sie.bis.zu.sieben.Beispiele..
 
@@ -158,12 +162,13 @@ dtm <- TermDocumentMatrix(docs)
 m <- as.matrix(dtm)
 v <- sort(rowSums(m),decreasing=TRUE)
 d_docs <- data.frame(word = names(v),freq=v)
-head(d_docs, 30)
+#head(d_docs, 30)
 
 
 
 ```
-2. Visualisierung der Häufigkeiten der Nennung
+
+Visualisierung der Häufigkeiten der Nennung (bis zu sieben Nennungen pro Person)
 
 ```{r dienste_häufigkeiten}
 
@@ -181,7 +186,7 @@ ggplot()+
                  label = "text mining - Auswertung der Frage \n 'Mit welchen Diensten analysieren Sie Ihre Daten \n im Rahmen Ihrer wissenschaftlichen Arbeit?' "))+
   coord_flip()
 ```
-Zwei Programme werden extrem häufig genannt: Excel und QGIS. Die beiden hervorgehobenen Punkte "eigene" und "keine" sollen im Folgenden etwas im Detail analysiert werden: Wer programmiert eigene Lösungen und wer benutzt gar keine Analysesoftware?
+Zwei Programme werden extrem häufig genannt: Excel und QGIS. Access ist das bekannteste Datenbanksystem. Die beiden hervorgehobenen Punkte "eigene" und "keine" sollen im Folgenden etwas im Detail analysiert werden: Wer programmiert eigene Lösungen und wer benutzt gar keine Analysesoftware?
 
 ### eigen programmierte Lösungen
 
@@ -213,11 +218,11 @@ table(d_dienste_eigenentwicklung$In.welcher.Art.von.Einrichtung.sind.Sie.berufli
 
 ```
 
-V.a. außeruniversitäre Forschungseinrichtungen (4x genannt) und Denkmalbehörden (4x -- einmal in sonstiges) wird selbständig Software entwickelt.
+V.a. in außeruniversitären Forschungseinrichtungen (4x genannt) und Denkmalbehörden (4x -- einmal in sonstiges) wird selbständig Software entwickelt.
 
 ### keine Angaben zu benutzer Software
 
-Insgesamt sind sehr häufig keine Angaben gemacht worden. Im Nachhinein herauszufiltern, warum dies geschah, kann kaum möglich. 
+Insgesamt sind sehr häufig keine Angaben gemacht worden. Im Nachhinein herauszufiltern, warum dies geschah, ist kaum möglich. 
 
 ```{r alter, eval= FALSE}
 library(tidyr)
@@ -236,14 +241,6 @@ d_fr2 <- d_fr
 
 d_fr2$software_fd_analyse[grepl("kein",d_fr2$software_fd_analyse)] <- NA
 
-nutzt_fd_software <- table(d_fr2$einrichtung, is.na(d_fr2$software_fd_analyse))
-
-nutzt_fd_software <- table(age_group$gruppe, is.na(age_group$software_fd_analyse))
-
-
-t<- chisq.test(nutzt_fd_software)
-t$residuals
-
 age_erfahrung <- d_fr[,c(5:65)]
 
 age_group <- age_erfahrung %>%
@@ -251,9 +248,16 @@ age_group <- age_erfahrung %>%
   filter(ja.nein == "Ja" )
 
 
+nutzt_fd_software <- table(d_fr2$einrichtung, is.na(d_fr2$software_fd_analyse))
 
-d_fr %>%
-  filter(grepl("kein", d_fr$software_fd_analyse))
+nutzt_fd_software <- table(age_group$gruppe, is.na(age_group$software_fd_analyse))
+
+
+t<- chisq.test(nutzt_fd_software)
+# t$residuals
+
+#d_fr %>%
+#  filter(grepl("kein", d_fr$software_fd_analyse))
 ```
 19 x findet sich der Begriff "keine" o.ä. und 304 ist diese Frage nicht beantwortet worden, also ca. die Hälfte der Antwortenden hat keine Informationen dazu geben können / wollen.
 
@@ -285,7 +289,7 @@ dat2 <- subset(dat2, !is.na(d))
 
 dat2_docs <- Corpus(VectorSource(dat2))
 
-inspect(dat2_docs)
+#inspect(dat2_docs)
 
 toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
 dat2_docs <- tm_map(dat2_docs, toSpace, "/")
@@ -318,7 +322,7 @@ dtm <- TermDocumentMatrix(dat2_docs)
 m <- as.matrix(dtm)
 v <- sort(rowSums(m),decreasing=TRUE)
 d <- data.frame(word = names(v),freq=v)
-head(d, 30)
+#head(d, 30)
 
 ```
 

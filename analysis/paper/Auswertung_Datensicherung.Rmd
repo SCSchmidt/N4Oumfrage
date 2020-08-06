@@ -67,7 +67,7 @@ d_fr <- d[, c(1:65)]
 
 #colnames(d)
 
-colnames(d_fr) <- c("ID", "Datum", "zufallsid", "geschlecht", "alter", "blickwinkel", "einrichtung", "einrichtung_sonstiges", "disz", "studiernede", "promovierende", "lehrende", "techn_mitarb", "wiss_mitarb", "daten_it_beauftragt", "projektleiter", "einrichtung_leiter", "gruppe_sonstige", "arbeitgeber_richtlinienkatalog", "erfahrung_fdm", "stellenwert_fdm", "software_projman_janein", "software_projman", "software_fdm_janein", "software_fdm", "software_wiss_analyse", "xls", "doc", "pdf", "ods", "csv", "odt", "png", "jpg", "geotiff", "geojson", "shp", "json", "xml", "dateiformat-sonstige", "software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht-oeff_cloud", "zentralnetz_arbeitgeber", "institut-repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds-dvds", "datensicherung-sonstiges", "sicherung-nach-projekt", "FAIR_bekannt_janein", "verfuegung_wie", "verfuegung_wie_sonstiges", "fremddatennutzung-janein", "fremddaten_online-portal", "fremddaten_prsnl-anfrage", "fremddaten-sonstiges",  "wunsch_datenspeicherung", "mehrwert-n4o", "prsnl-mehrwert-n4o")
+colnames(d_fr) <- c("ID", "Datum", "zufallsid", "geschlecht", "alter", "blickwinkel", "einrichtung", "einrichtung_sonstiges", "disz", "studiernede", "promovierende", "lehrende", "techn_mitarb", "wiss_mitarb", "daten_it_beauftragt", "projektleiter", "einrichtung_leiter", "gruppe_sonstige", "arbeitgeber_richtlinienkatalog", "erfahrung_fdm", "stellenwert_fdm", "software_projman_janein", "software_projman", "software_fdm_janein", "software_fdm", "software_wiss_analyse", "xls", "doc", "pdf", "ods", "csv", "odt", "png", "jpg", "geotiff", "geojson", "shp", "json", "xml", "dateiformat-sonstige", "software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht-oeff_cloud", "zentralnetz_arbeitgeber", "institut-repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds-dvds", "datensicherung-sonstiges", "sicherung-nach-projekt", "FAIR_bekannt_janein", "verfuegung_wie", "verfuegung_wie-sonstiges", "fremddatennutzung-janein", "fremddaten_online-portal", "fremddaten_prsnl-anfrage",  "fremddaten-sonstiges",  "wunsch_datenspeicherung", "mehrwert-n4o", "prsnl-mehrwert-n4o")
 
 ```
 
@@ -277,6 +277,7 @@ library("SnowballC")
 
 
 docs <- Corpus(VectorSource(wuensche))
+docs$meta$language <- "de"
 
 #inspect(docs)
 
@@ -290,6 +291,8 @@ docs <- tm_map(docs, content_transformer(tolower))
 # Remove english common stopwords
 docs <- tm_map(docs, removeWords, stopwords("german"))
 
+# Text stemming
+docs <- tm_map(docs, stemDocument)
 
 # Remove your own stop word
 # specify your stopwords as a character vector
@@ -301,7 +304,7 @@ docs <- tm_map(docs, removePunctuation)
 docs <- tm_map(docs, stripWhitespace)
 
 # Text stemming
-docs <- tm_map(docs, stemDocument)
+docs <- tm_map(docs, stemDocument, "german")
 
 dtm <- TermDocumentMatrix(docs)
 m <- as.matrix(dtm)
@@ -312,19 +315,26 @@ head(d_docs, 30)
 
 ```{r wuensche_textmining}
 d_docs %>%
-  filter(freq > 20) %>%
+  filter(freq > 10) %>%
 ggplot()+
   geom_col(aes(x = reorder(word, freq),
                y = freq))+
   theme_bw()+
   xlab("")+
-  ylab("Anzahl (Mehrfachnennungen möglich)")+
-  coord_flip()
+  ylab("Anzahl")+
+  coord_flip()+
+  ggtitle("Besonders häufig genutzte Wortstämme")
 ```
 
 
 
 ```{r}
 wuensche <- wuensche[!is.na(wuensche)]
+
+write.csv(wuensche, "../data/derived_data/wuensche.csv", fileEncoding = "UTF-8")
+
+w <- as.data.frame(wuensche)
+
 ```
+
 

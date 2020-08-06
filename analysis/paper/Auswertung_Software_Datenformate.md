@@ -1,9 +1,11 @@
 <!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
 <!-- With the following code you can access and display values from the yml header above. -->
 
-Keywords:
+Keywords: Auswertung Umfrage, Software, Datenformate
 
-Highlights:
+Highlights: Anbieter benutzter Projektmanagement-Software: v.a.
+Microsoft und Atlassian, aber auch sehr spezialisiert, meist genannte
+Forschungsdatenauswertende Programme: QGIS und Excel
 
 <!-- The following code chunk defines some general settings how code chunks should behave. -->
 
@@ -20,54 +22,21 @@ Analyse der Software, die für Projektmanagement genutzt wird
 Häufigkeit der genannten Anbieter und ob dies freie oder proprietäre
 Software ist:
 
-![](../figures/softw_projmanagement-1.png)
+![](../figures/softw_projmanagement-1.png) Lösungen von Atlassian und
+Microsoft sind besonders beliebt. Einige nutzen selbstprogrammierte
+Lösungen. Versionskontrolle ist relativ bekannt.
 
 Analyse Software, die für Forschungsdatenanalyse genutzt wird
 =============================================================
 
-1.  Datenvorbereitung
-
-<!-- -->
-
-    #>                  word freq
-    #> excel           excel  238
-    #> qgis             qgis  120
-    #> access         access   39
-    #> keine           keine   22
-    #> word             word   17
-    #> spss             spss   17
-    #> arcgis         arcgis   16
-    #> filemaker   filemaker   15
-    #> python         python   14
-    #> office         office   10
-    #> past             past   10
-    #> autocad       autocad    8
-    #> software     software    7
-    #> open             open    7
-    #> calc             calc    6
-    #> libre           libre    6
-    #> gephi           gephi    6
-    #> eigene         eigene    5
-    #> oxcal           oxcal    5
-    #> museumplus museumplus    5
-    #> mapinfo       mapinfo    5
-    #> meshlab       meshlab    5
-    #> adobe           adobe    5
-    #> gis               gis    4
-    #> metashape   metashape    4
-    #> idaifield   idaifield    4
-    #> blender       blender    4
-    #> origin         origin    4
-    #> jmp               jmp    3
-    #> sql               sql    3
-
-1.  Visualisierung der Häufigkeiten der Nennung
+Visualisierung der Häufigkeiten der Nennung (bis zu sieben Nennungen pro
+Person)
 
 ![](../figures/dienste_häufigkeiten-1.png) Zwei Programme werden extrem
-häufig genannt: Excel und QGIS. Die beiden hervorgehobenen Punkte
-“eigene” und “keine” sollen im Folgenden etwas im Detail analysiert
-werden: Wer programmiert eigene Lösungen und wer benutzt gar keine
-Analysesoftware?
+häufig genannt: Excel und QGIS. Access ist das bekannteste
+Datenbanksystem. Die beiden hervorgehobenen Punkte “eigene” und “keine”
+sollen im Folgenden etwas im Detail analysiert werden: Wer programmiert
+eigene Lösungen und wer benutzt gar keine Analysesoftware?
 
 ### eigen programmierte Lösungen
 
@@ -130,14 +99,14 @@ Universität/Hochschule
 </tbody>
 </table>
 
-V.a. außeruniversitäre Forschungseinrichtungen (4x genannt) und
+V.a. in außeruniversitären Forschungseinrichtungen (4x genannt) und
 Denkmalbehörden (4x – einmal in sonstiges) wird selbständig Software
 entwickelt.
 
 ### keine Angaben zu benutzer Software
 
 Insgesamt sind sehr häufig keine Angaben gemacht worden. Im Nachhinein
-herauszufiltern, warum dies geschah, kann kaum möglich.
+herauszufiltern, warum dies geschah, ist kaum möglich.
 
 19 x findet sich der Begriff “keine” o.ä. und 304 ist diese Frage nicht
 beantwortet worden, also ca. die Hälfte der Antwortenden hat keine
@@ -153,43 +122,6 @@ oder nicht, gibt.
 
 genutzte Datenformate
 ---------------------
-
-    #> <<SimpleCorpus>>
-    #> Metadata:  corpus specific: 1, document level (indexed): 0
-    #> Content:  documents: 1
-    #> 
-    #> [1] c("software proprietäre formate", "txt", "cdr eps", "Markdown, SVG", "PLY", "Geodatabases (.gdb)", "dwg", "wav, mp3, mkv, avi, mpeg 4 ", "Wavefront *.obj", "jdx", "lido", "Sequencing Data (FastQ, BAM Files)", "netcdf", "Obj (für 3D)", "mus", "jmp, indd, ddd, zip, ico, ai, mdb, acddb, svg, eps, txt, ", "czi, ai, hp3d", "kml, vrt (Raster), obj (3D), stl (3D), LAZ (Laser), zLAS (Laser)", ".Rscript., .svg", "R, Rmd", "ttl,rdf,geojson-ld", "sql", "ai, pptx", "Lido", "osm", "vg, atos", "indd, ai, fmp12", \n"Apple Formate ", ".ndt; .wsng; .vieng", "TIFF", "Tif", "wav, mp4, kml, ps, gmp", "Fotos: RAW, DNG usw., Datenbanken, Harris-Matrix", "dwg", "obj, pcg, ftr, gsi, dxf, isproj", "PDF/A", "dwg", "ASCII", "wld, dxf, cdr", "txt", ".fm, .psd", ".blend, dae", "tiff", "md", "dwg, dxf", "dbf, sqlite, md, Rmd, txt, mdb, R", "svg", "dwg", "na", "tiff, DAtenbankeinträge!", "md", "raw", "pts, u3d, obj, ply", ".accdb; .tex", "python", "ai; svg; dwg; dxf", "obj,", "gdb.", "Photoshop Format", "diverse weitere", \n"geopackage", "geopackage", "aphoto, gephi, tex, diverse interne", "svg", "ai psd 3D-Formate", "dwg", "dwg", "id", "psd", "map", "dwg", "spc, zvi und weietre native Analysenformate", ".hmcx, .gephi, oxcal", "dwg, mde", "rdf", "cxt, stx, asc, sp, txt, etc. ", "ppt, fp, ai", "ai", "accdb", "obj", "ctv6", "ai", "svg", "OBJ | PLY | STL", "Eps; tiff", ".scriv (XML)", "db", "obj, ply, ...", "mp4, wav", "fbx obj", "ai, tiff, dxf, dwg", "diverse GPS-Formate", "RDF", "txt", "ply / stl / pts / ptx / e57 / postgresql ", \n"TIFF", "cdr, tiff, bmp, svg, shape", "dwg", "dwg, dxf", "psd", "mdb", "obj", "tex, md", "fmp12", "gpkg", "ai, indd, obj, dwg, dxt, fmp", "ply, obj ", "ply", "DWG, SQL", "gif, svg", "dwg")
-    #>                                word freq
-    #> tiff                           tiff    7
-    #> diverse                     diverse    3
-    #> indd                           indd    3
-    #> accdb                         accdb    2
-    #> fmp12                         fmp12    2
-    #> geopackage               geopackage    2
-    #> lido                           lido    2
-    #> acddb                         acddb    1
-    #> analysenformate     analysenformate    1
-    #> aphoto                       aphoto    1
-    #> apple                         apple    1
-    #> ascii                         ascii    1
-    #> atos                           atos    1
-    #> blend                         blend    1
-    #> ctv6                           ctv6    1
-    #> data                           data    1
-    #> datenbankeinträge datenbankeinträge    1
-    #> datenbanken             datenbanken    1
-    #> fastq                         fastq    1
-    #> files                         files    1
-    #> format                       format    1
-    #> fotos                         fotos    1
-    #> geodatabases           geodatabases    1
-    #> geojson                     geojson    1
-    #> gephi                         gephi    1
-    #> gpkg                           gpkg    1
-    #> harrismatrix           harrismatrix    1
-    #> hmcxgephi                 hmcxgephi    1
-    #> hp3d                           hp3d    1
-    #> interne                     interne    1
 
 ![](../figures/häufigkeiten_datenformate-1.png) Insgesamt 67
 unterschiedliche Datenformate, darunter sehr spezialisierte
@@ -207,7 +139,7 @@ References
 
 ### Colophon
 
-This report was generated on 2020-07-31 17:26:36 using the following
+This report was generated on 2020-08-06 15:40:24 using the following
 computational environment and dependencies:
 
     #> - Session info ---------------------------------------------------------------
@@ -220,7 +152,7 @@ computational environment and dependencies:
     #>  collate  German_Germany.1252         
     #>  ctype    German_Germany.1252         
     #>  tz       Europe/Berlin               
-    #>  date     2020-07-31                  
+    #>  date     2020-08-06                  
     #> 
     #> - Packages -------------------------------------------------------------------
     #>  package     * version date       lib source        
@@ -299,4 +231,4 @@ The current Git commit details are:
 
     #> Local:    gh-page E:/R/N4Oumfrage
     #> Remote:   gh-page @ origin (https://github.com/SCSchmidt/N4Oumfrage)
-    #> Head:     [cabf352] 2020-07-31: weiterfÃ¼hrung der analyse
+    #> Head:     [f61ad09] 2020-08-04: ups, verderhung ausgemerzt
