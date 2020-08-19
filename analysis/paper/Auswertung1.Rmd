@@ -40,11 +40,9 @@ library(kableExtra)
 
 # Datengrundlage
 
-Daten als csv bekommen und IPs etc entfernt. Insgesamt über 600 Antworten, dabei aber viele, die sich "nur durchgeklickt" haben oder nur Teile der Umfrage ausgefüllt haben (teilweise um die 70%).
 
 ```{r}
 d <- read.csv2("../data/raw_data/results-survey615517.csv", sep = ",", encoding = "UTF-8")
-
 # remove "" as input and make NA out of it
 # dplyr solution fom here: https://stackoverflow.com/questions/24172111/change-the-blank-cells-to-na
 
@@ -59,15 +57,24 @@ empty_as_na <- function(x){
 d <- d %>% 
   mutate_each(funs(empty_as_na))
 
+
+# farbskala für NFDI
+
+n4o_tafarben <- c("#9B163C", "#9506C5", "#4DA1EE", "#36CE97",  "#4CCA33","#FF962E", "#FF6243")
+
+n4o_farben <- c("#072A54", "#9B163C", "#9506C5", "#4DA1EE", "#36CE97",  "#4CCA33","#FF962E", "#FF6243", "#005F8E", "#6A6D71", "#A6AAAC", "#E8EAEB")
 ```
 
+Insgesamt haben wir `r nrow(d)` Antworten erhalten, das ist ein deutlich größerer Rücklauf als bei der Aridande+ - Umfrage von 2019 (https://ariadne-infrastructure.eu/key-results-of-the-community-needs-survey/) und der IANUS-Umfrage von 2013 (https://www.ianus-fdz.de/projects/ergebnisse/wiki). Damit kann ein erhöhtes Interesse der Community an dem Thema abgelesen werden.
 
 ```{r rename column names}
+# datensatz begrenzen auf den frageteil
 d_fr <- d[, c(1:65)]
 
 #colnames(d)
 
-colnames(d_fr) <- c("ID", "Datum", "zufallsid", "geschlecht", "alter", "blickwinkel", "einrichtung", "einrichtung_sonstiges", "disz", "studiernede", "promovierende", "lehrende", "techn_mitarb", "wiss_mitarb", "daten_it_beauftragt", "projektleiter", "einrichtung_leiter", "gruppe_sonstige", "arbeitgeber_richtlinienkatalog", "erfahrung_fdm", "stellenwert_fdm", "software_projman_janein", "software_projman", "software_fdm_janein", "software_fdm", "software_wiss_analyse", "xls", "doc", "pdf", "ods", "csv", "odt", "png", "jpg", "geotiff", "geojson", "shp", "json", "xml", "dateiformat-sonstige", "software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht-oeff_cloud", "zentralnetz_arbeitgeber", "institut-repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds-dvds", "datensicherung-sonstiges", "sicherung-nach-projekt", "FAIR_bekannt_janein", "verfuegung_wie", "verfuegung_wie-sonstiges", "fremddatennutzung-janein", "fremddaten_online-portal", "fremddaten_prsnl-anfrage",  "fremddaten-sonstiges",  "wunsch_datenspeicherung", "mehrwert-n4o", "prsnl-mehrwert-n4o")
+# spaltennamen in etwas kürzere sprechende namen umwandeln
+colnames(d_fr) <- c("ID", "Datum", "zufallsid", "geschlecht", "alter", "blickwinkel", "einrichtung", "einrichtung_sonstiges", "disz", "studiernede", "promovierende", "lehrende", "techn_mitarb", "wiss_mitarb", "daten_it_beauftragt", "projektleiter", "einrichtung_leiter", "gruppe_sonstige", "arbeitgeber_richtlinienkatalog", "erfahrung_fdm", "stellenwert_fdm", "software_projman_janein", "software_projman", "software_fdm_janein", "software_fdm", "software_wiss_analyse", "xls", "doc", "pdf", "ods", "csv", "odt", "png", "jpg", "geotiff", "geojson", "shp", "json", "xml", "dateiformat_sonstige", "software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht_oeff_cloud", "zentralnetz_arbeitgeber", "institut_repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds_dvds", "datensicherung_sonstiges", "sicherung_nach_projekt", "FAIR_bekannt_janein", "verfuegung_wie", "verfuegung_wie_sonstiges", "fremddatennutzung_janein", "fremddaten_online_portal", "fremddaten_prsnl_anfrage",  "fremddaten_sonstiges",  "wunsch_datenspeicherung", "mehrwert_n4o", "prsnl_mehrwert_n4o")
 
 ```
 
@@ -80,25 +87,73 @@ colnames(d_fr) <- c("ID", "Datum", "zufallsid", "geschlecht", "alter", "blickwin
 Zuerst einige allgemeine Statistiken zu der Teilnehmergruppe:
 
 ```{r fig_alter_einrichtung}
-age_erfahrung <- d[,c(5:21)]
+age_erfahrung <- d_fr[,c(5:21)]
+
+
 
 library(ggplot2)
+library(dplyr)
 
+age_erfahrung %>%
+  filter(!is.na(alter) & !is.na(einrichtung)) %>%
 ggplot()+
-  geom_bar(data = age_erfahrung, aes(x = Wie.alt.sind.Sie., 
-                                     fill = In.welcher.Art.von.Einrichtung.sind.Sie.beruflich.tätig.,
-                                     na.rm = TRUE))+
+  geom_bar(aes(x = alter,
+               fill = einrichtung),
+           na.rm = TRUE)+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 45, hjust=0.8),
         axis.title.x = element_blank()) +
   ylab("Anzahl")+
-  scale_fill_discrete(name = "Arbeitsplatz")
+  scale_fill_manual(name = "Arbeitsplatz",
+                    values = n4o_farben[1:9]) +
+  geom_text(x = 7, y = 150, label = paste("n = ", nrow(age_erfahrung %>%
+  filter(!is.na(alter) & !is.na(einrichtung)))))
+                                        
 ```
-Wir haben knapp 50 20-29jährige, der Großteil der befragten ist zwischen 30 udn 60 Jahre alt und arbeitet an einer Hochschule, in der Forschung, im Museum oder in einer Denkmalbehörde (man beachte die über 80jährige Person, die nicht mehr arbeitet...). Seltener kommen Grabungsfirmen und Archive vor. 
+Wir haben knapp 50 20-29jährige, der Großteil der Befragten ist zwischen 30 und 60 Jahre alt und arbeitet an einer Hochschule, in der Forschung, im Museum oder in einer Denkmalbehörde (man beachte die über 80jährige Person, die nicht mehr arbeitet...). Seltener kommen Grabungsfirmen und Archive vor. Eine ähnliche Verteilung hatten die Umfrageteilnehmer bei Ariadne+ und IANUS.
 
-## Alter und Gruppe
+```{r}
+d_fr$alter %>%
+  table()%>%
+  as_tibble() %>%
+  rename(Alter = ".") %>%
+  mutate(Prozent = round((n/sum(n)*100),1)) %>%
+  arrange(desc(n))%>%
+  kable()
+```
 
-Innerhalb der Altersstufen teilen sich die Menschen auf folgende Gruppen auf:
+
+```{r}
+
+d_fr$einrichtung %>%
+  table()%>%
+  as_tibble() %>%
+  rename(Einrichtung = ".") %>%
+  mutate(Prozent = round((n/sum(n)*100),1)) %>%
+  arrange(desc(n))%>%
+  kable()
+
+```
+
+
+```{r, eval = FALSE}
+d_fr %>%
+  filter(!is.na(geschlecht))%>%
+  nrow()
+
+gsch <- na.omit(d_fr$geschlecht)
+
+table(gsch)[2]/length(gsch)
+```
+
+
+Mit ca. 51% männlichen und 42% weiblichen sowie 2 diversen Teilnehmer*innen (keine Angabe: 6%) sind auch hier die Teilnehmer repräsentativ. 
+
+
+
+## Einrichtungen und Gruppe
+
+Innerhalb der Einrichtungen teilen sich die Teilnehmer*innen auf folgende Gruppen auf:
 
 ```{r fig_einrichtung_gruppe}
 
@@ -113,22 +168,50 @@ age_group <- age_erfahrung %>%
 
 ggplot()+
   geom_bar(data = age_group, 
-           aes(x = In.welcher.Art.von.Einrichtung.sind.Sie.beruflich.tätig.,
-               fill = gruppe,
-               na.rm = TRUE))+
+           aes(x = einrichtung,
+               fill = gruppe),
+           na.rm = TRUE)+
   theme_bw()+
   xlab("")+
   ylab("Anzahl (Mehrfachnennungen möglich)")+
   coord_flip()+
-  scale_fill_discrete(name="Gruppe",
-                         labels=c("Daten/IT-Beauftragte", "Lehrende", "Leiter/in der Einrichtung", "Projektleiter/in", "Promovierende", "Studierende", "technische Mitarbeiter/innen", "wissenschaftliche Mitarbeiter/innen"))+
+  scale_fill_manual(name="Gruppe",
+                         labels=c("Daten/IT-Beauftragte", "Lehrende", "Leiter/in der Einrichtung", "Projektleiter/in", "Promovierende", "Studierende", "technische Mitarbeit.", "wissenschaftl. Mitarbeit."),
+                     values = n4o_farben[1:8])+
   theme(legend.position = "bottom", 
         legend.key.size = unit(0.25, "cm"),
-        legend.text = element_text(size = 6))
-  
+        legend.text = element_text(size = 6)) +
+ geom_text(x = 0, 
+           y = 300, 
+           label = paste("n = ", 
+                         length(na.omit(age_erfahrung$einrichtung)))) 
 
 ```
 Das Gros besteht aus wissenschaftlichen Mitarbeiterinnen an der Hochschule und in Forschungseinrichtungen.
+
+```{r}
+
+age_group$gruppe %>%
+  table()%>%
+  as_tibble() %>%
+  rename(Gruppe = ".") %>%
+  mutate(Prozent = round((n/sum(n)*100),1)) %>%
+  arrange(desc(n))%>%
+  mutate(Gruppe = recode(Gruppe,
+                         "wiss_mitarb" = "wissenschaftliche Mitarbeiter/innen",
+                         "projektleider" = "Projektleiter",
+                         "lehrende" = "Lehrende",
+                         "einrichtung_leiter" = "Leiter/in der Einrichtung",
+                         "promovierende" = "Promovierende",
+                         "date_it_beauftragt" = "Daten/IT-Beauftragte",
+                         "techn_mitarb" = "technische Mitarbeiter/innen",
+                         "studiernede" = "Studierende")) %>%
+  kable()
+  
+  #"Daten/IT-Beauftragte", "Lehrende", , "Projektleiter/in", , "Studierende", "technische Mitarbeit.", "wissenschaftl. Mitarbeit."
+  
+```
+
 
 # Alter und Erfahrung + Wichtung
 
@@ -138,8 +221,8 @@ Gibt es einen Zusammenhang zwischen dem Alter der Teilnehmenden Person, der Erfa
 library(viridis)
 ggplot(data = age_group, 
            aes_string(x = names(age_group)[1],
-               y = names(age_group)[7],
-               na.rm = TRUE))+
+               y = names(age_group)[7]),
+       na.rm = TRUE)+
   geom_boxplot()+
   geom_jitter(position=position_jitter(width=.3, height=0), aes_string(colour = names(age_group)[8]))+
   theme_bw()+
@@ -186,7 +269,7 @@ Aus diesem Grund wird die Vermutung eines linearen Zusammenhangs aufgegeben und 
 
 ### Test: Alter - Erfahrung mit chi²
 
-Der Chi-Quadrat-Test darf eigentlich für diese Daten nicht angewendet werden, da die Erwartungswerte zu gering werden (Anzahl der Teilnehmer muss auf zu viele Subgruppen aufgeteilt werden). Anhang der Residuen lassen sich trotzdem Erkenntnisse erarbeiten:
+Der Chi-Quadrat-Test darf eigentlich für diese Daten nicht angewendet werden, da die Erwartungswerte zu gering werden (Anzahl der Teilnehmer muss auf zu viele Subgruppen aufgeteilt werden). Anhand der Residuen lassen sich trotzdem Erkenntnisse erarbeiten:
 ```{r}
 chi <- chisq.test(age_group[,1], age_group[,7])
 
@@ -221,7 +304,8 @@ Wie oben kann auch hier nur mit den Residualwerten gearbeitet werden.
 ```{r}
 chi <- chisq.test(age_group[,1], age_group[,8])
 
-chi$residuals
+chi$residuals%>%
+  kable()
 ```
 Auffällig ist hier die Altersgruppe der 20-29jährigen, die dem digitalen FDM eine höhere Bedeutung zuweist als erwartet. Ältere Semester tun das wenig überraschender weise gegenteilig. 
 
@@ -330,7 +414,8 @@ ggplot()+
               method = "glm",
               formula = y~x) # y abhängig von x 
 ```
-Eventuell zeigen sich Grabungsfirmen insbesondere in dem höherschätzenden Bereich. Es zeigt sich bei allen Einrichtungen eine große Heterogenität.
+
+Eventuell zeigen sich Grabungsfirmen insbesondere in dem höherschätzenden Bereich. Es zeigt sich bei allen Einrichtungen eine große Heterogenität. 
 
 
 ### Teststatistiken zu dem Zusammenhang eigenes Wissen und Bedeutung
@@ -406,6 +491,14 @@ chi$residuals%>%
 
 ```
 Chi nur eingeschränkt nutzbar, weil die Voraussetzungen nicht 100% erfüllt. Grabungsfirmen und außeruniversitäre Forschungseinrichrungen haben häufiger einen Richtlinienkatalog als zu erwarten währen, während insbesondere Museen keine haben.
+
+## Stellenwert nach Disziplin
+
+```{r, eval = FALSE, echo = FALSE}
+# Disziplinen zusammenfasen.
+
+```
+
 
 
 # Acknowledgements

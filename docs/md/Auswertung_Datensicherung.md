@@ -7,12 +7,8 @@ Highlights:
 
 <!-- The following code chunk defines some general settings how code chunks should behave. -->
 
-Datengrundlage
-==============
-
-Daten als csv bekommen und IPs etc entfernt. Insgesamt über 600
-Antworten, dabei aber viele, die sich “nur durchgeklickt” haben oder nur
-Teile der Umfrage ausgefüllt haben (teilweise um die 70%).
+Wie werden Daten gesichert?
+===========================
 
 ![](../figures/datastorage-1.png)
 
@@ -21,8 +17,54 @@ des Arbeitgebers, die externe Festplatte und lokale Rechner. Externe
 Datenzentren, Versionierungssysteme und Fach-Repositorien liegen weit
 abgeschlagen zusammen mit DVDs und CDs.
 
+Im Vergleich zu der IANUS-Umfrage von 2013
+(<a href="https://www.ianus-fdz.de/projects/ap3-community/wiki/Stakeholderanalyse" class="uri">https://www.ianus-fdz.de/projects/ap3-community/wiki/Stakeholderanalyse</a>)
+ist dabei “der eigene Arbeitsrechner” vom “Zentralnetz des Arbeitgebers”
+als häufigste Nennung abgelöst worden. Hier zeigt sich eine erste
+Sensibilisierung der Einrichtungen gegenüber dem Thema der
+Datenarchivierung. Die externe Festplatte und die lokalen Rechner
+bleiben jedoch von großer Bedeutung.
+
 Das ändert sich auch nicht durch die Nennungen unter “sonstiges”:
 `ds_sonst`
+
+### Datensicherung nach Projektende
+
+Die Datensicherung nach Projektende wurde in einer Freitextfrage
+abgefragt. Aus diesem Grund wird eine einfache text-mining Analyse
+ausgeführt, die die am häufigsten genannten Wortstämme ausgibt.
+
+    #>                          word freq
+    #> festplatt           festplatt  102
+    #> extern                 extern   91
+    #> arbeitgeb           arbeitgeb   77
+    #> serv                     serv   73
+    #> netzlaufwerk     netzlaufwerk   38
+    #> privat                 privat   34
+    #> cloud                   cloud   29
+    #> zentral               zentral   25
+    #> institutionell institutionell   18
+    #> rechn                   rechn   16
+    #> institution       institution   15
+    #> datenbank           datenbank   14
+    #> digital               digital   12
+    #> lokal                   lokal   11
+    #> universitat       universitat   11
+    #> analog                 analog   11
+    #> archiv                 archiv   11
+    #> projekt               projekt   10
+    #> zenodo                 zenodo    8
+    #> repositorium     repositorium    8
+    #> laufwerk             laufwerk    8
+    #> dienstlich         dienstlich    8
+    #> eig                       eig    7
+    #> intern                 intern    7
+    #> netzwerk             netzwerk    7
+    #> onlin                   onlin    7
+    #> publikation       publikation    7
+    #> sowi                     sowi    7
+    #> speicher             speicher    6
+    #> zusatz                 zusatz    6
 
 FAIR Prinzipien
 ---------------
@@ -35,6 +77,12 @@ Stellen Sie Ihre Daten nach Projektabschluss zur Verfügung?
 -----------------------------------------------------------
 
 ![](../figures/verfuegung-1.png)
+
+Vergleichen wir diese Antworten mit der aus der IANUS-Umfrage von 2013
+so fällt auf, dass noch immer die Daten am häufigsten auf individuelle
+oder perönliche Anfrage herausgegeben werden. Die Bereitstellung der
+Daten als Download über ein Datenportal hat sich jedoch prozentual im
+Vergleich zu 2013 deutlich gesteigert.
 
 ### Kategorisierung der sonstiges Angaben
 
@@ -74,41 +122,43 @@ der sonstigen Antworten:
 
 Hinweise auf online Datenbanken (3x), Publikationen (vmtl als Print
 gemeint, aber nicht eindeutig, 3x) und letztendlich persönliche Kontakte
-(Kooperationen, Vorgängerprojekte etc). Manchmal werden mehrere Wege
-genannt.
+(Kooperationen, Vorgängerprojekte etc) sind am häufigsten. Manchmal
+werden mehrere Wege genannt.
 
 ### Welche Maßnahmen würden Sie sich wünschen (im Bezug auf Datenspeicherung in ihrem Arbeitsfeld)?
 
-    #>                                      word freq
-    #> daten                               daten  120
-    #> mehr                                 mehr   51
-    #> besser                             besser   37
-    #> zentral                           zentral   30
-    #> zugang                             zugang   28
-    #> vernetzung                     vernetzung   28
-    #> einheitlich                   einheitlich   28
-    #> archivierung                 archivierung   23
-    #> forschungsdaten           forschungsdaten   22
-    #> einfach                           einfach   22
-    #> standard                         standard   22
-    #> langzeitarchivierung langzeitarchivierung   17
-    #> datenspeicherung         datenspeicherung   16
-    #> nutzung                           nutzung   15
-    #> verfügung                       verfügung   15
-    #> projekt                           projekt   15
-    #> zugänglichkeit             zugänglichkeit   15
-    #> speicherung                   speicherung   14
-    #> open                                 open   14
-    #> möglichkeit                   möglichkeit   14
-    #> datenbanken                   datenbanken   13
-    #> möglichkeiten               möglichkeiten   13
-    #> digital                           digital   11
-    #> klare                               klare   10
-    #> dauerhaft                       dauerhaft   10
-    #> bereitstellung             bereitstellung   10
-    #> server                             server   10
-    #> speicherplatz               speicherplatz   10
-    #> publikationen               publikationen   10
-    #> zugriff                           zugriff   10
+    #>                                word freq
+    #> dat                             dat  120
+    #> mehr                           mehr   57
+    #> zugang                       zugang   54
+    #> bess                           bess   39
+    #> moglich                     moglich   38
+    #> einheit                     einheit   36
+    #> zentral                     zentral   34
+    #> einfach                     einfach   30
+    #> vernetz                     vernetz   28
+    #> projekt                     projekt   25
+    #> archivier                 archivier   24
+    #> forschungsdat         forschungsdat   22
+    #> standard                   standard   22
+    #> datenbank                 datenbank   20
+    #> digital                     digital   19
+    #> gross                         gross   19
+    #> klar                           klar   17
+    #> langzeitarchivier langzeitarchivier   17
+    #> sich                           sich   17
+    #> datenspeicher         datenspeicher   16
+    #> nutzung                     nutzung   15
+    #> verfug                       verfug   15
+    #> offent                       offent   14
+    #> speicher                   speicher   14
+    #> open                           open   14
+    #> einricht                   einricht   13
+    #> war                             war   13
+    #> gut                             gut   13
+    #> bereitstell             bereitstell   13
+    #> objekt                       objekt   12
 
 ![](../figures/wuensche_textmining-1.png)
+
+![](../figures/unnamed-chunk-6-1.png)
