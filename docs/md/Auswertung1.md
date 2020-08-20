@@ -1388,6 +1388,247 @@ insbesondere Museen keine haben.
 Stellenwert nach Disziplin
 --------------------------
 
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Disziplin
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+Prozent
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Archäologie
+</td>
+<td style="text-align:right;">
+327
+</td>
+<td style="text-align:right;">
+49.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+keine Angabe
+</td>
+<td style="text-align:right;">
+120
+</td>
+<td style="text-align:right;">
+18.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MINT
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Musikwissenschaft
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kunst
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Geschichte
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Archäo-Wissenschaften
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Denkmalpflege und Bauforschung
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Restaurationswissenschaften
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IT
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Geistes-und Kulturwissenschaften
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sonstige
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Museologie
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Numismatik
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Altertumswissenschaften
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Anthropologie
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Digitales
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bibliothekswissenschaft
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Provenienzforschung
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+</tr>
+</tbody>
+</table>
+
+Die Angaben zur Disziplinzugehörigkeit waren von unterschiedlicher
+Genauigkeit. Zusammengefasst sieht man eine große Vielfalt
+unterschiedlicher Archäologischer Disziplinen (allgemein, UFG, AdRP,
+Ägyptologie, vorderasiatische Archäologie, Mittelalter und Neuzeit etc
+pp), zusammen etwa 50% aller Antworten. Häufig genannt wurden außerdem
+Musikwissenschaft, Kunstgeschichte, Geschichte,
+Restaurationswissenschaften, unterschiedliche IT-Bereiche,
+Denkmalpflege, Museologie, Numismatik und unterschiedliche
+interdisziplinären Felder wie Archäometrie, Geoinformatik und DH.
+
+![](../figures/stellenwert_fdm_disziplin_grob-1.png)
+
+besonders in der Archäologie breit gestreute Antworten.
+
 Acknowledgements
 ================
 
@@ -1399,7 +1640,7 @@ References
 
 ### Colophon
 
-This report was generated on 2020-08-19 16:49:06 using the following
+This report was generated on 2020-08-20 19:25:53 using the following
 computational environment and dependencies:
 
     #> - Session info ---------------------------------------------------------------
@@ -1412,7 +1653,7 @@ computational environment and dependencies:
     #>  collate  German_Germany.1252         
     #>  ctype    German_Germany.1252         
     #>  tz       Europe/Berlin               
-    #>  date     2020-08-19                  
+    #>  date     2020-08-20                  
     #> 
     #> - Packages -------------------------------------------------------------------
     #>  package     * version date       lib source        
@@ -1494,4 +1735,4 @@ The current Git commit details are:
 
     #> Local:    gh-page E:/R/N4Oumfrage
     #> Remote:   gh-page @ origin (https://github.com/SCSchmidt/N4Oumfrage)
-    #> Head:     [4dee3f4] 2020-08-06: Ãœberarbeitung der Auswertung Software / Datenformate
+    #> Head:     [88ae4ec] 2020-08-19: erste Vergleiche zu IANUS und Ardiadne+

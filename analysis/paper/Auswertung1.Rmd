@@ -33,7 +33,9 @@ knitr::opts_chunk$set(
   echo = FALSE,
   comment = "#>",
   fig.path = "../figures/",
-  dpi = 300
+  dpi = 300,
+  fig.height = 5,
+  fig.width = 5
 )
 library(kableExtra)
 ```
@@ -43,6 +45,7 @@ library(kableExtra)
 
 ```{r}
 d <- read.csv2("../data/raw_data/results-survey615517.csv", sep = ",", encoding = "UTF-8")
+
 # remove "" as input and make NA out of it
 # dplyr solution fom here: https://stackoverflow.com/questions/24172111/change-the-blank-cells-to-na
 
@@ -494,12 +497,50 @@ Chi nur eingeschränkt nutzbar, weil die Voraussetzungen nicht 100% erfüllt. Gr
 
 ## Stellenwert nach Disziplin
 
-```{r, eval = FALSE, echo = FALSE}
+```{r, eval = TRUE, echo = FALSE}
 # Disziplinen zusammenfasen.
 
+write.table(d_fr$disz, "E:/R/N4Oumfrage/analysis/data/derived_data/disziplinen.csv", fileEncoding = "UTF-8")
+
+disz <- read.csv2("E:/R/N4Oumfrage/analysis/data/derived_data/disziplinen3.csv", encoding = "UTF-8", sep = ",")
+
+d_fr2 <- cbind(d_fr, disz)
+d_fr2 <- d_fr2 %>% 
+  mutate_each(funs(empty_as_na))
 ```
 
 
+```{r}
+na.omit(d_fr2$disz_grob) %>%  
+  table()%>%
+  as_tibble() %>%
+  rename(Disziplin = ".") %>%
+  mutate(Prozent = round((n/sum(n)*100),1)) %>%
+  arrange(desc(n))%>%
+  kable()
+```
+
+Die Angaben zur Disziplinzugehörigkeit waren von unterschiedlicher Genauigkeit. Zusammengefasst sieht man eine große Vielfalt unterschiedlicher Archäologischer Disziplinen (allgemein, UFG, AdRP, Ägyptologie, vorderasiatische Archäologie, Mittelalter und Neuzeit etc pp), zusammen etwa 50% aller Antworten. Häufig genannt wurden außerdem Musikwissenschaft, Kunstgeschichte, Geschichte, Restaurationswissenschaften, unterschiedliche IT-Bereiche, Denkmalpflege, Museologie, Numismatik und unterschiedliche interdisziplinären Felder wie Archäometrie, Geoinformatik und DH.
+
+```{r stellenwert_fdm_disziplin_grob}
+library(ggplot2)
+library(viridis)
+  ggplot(data = d_fr2, aes(x = disz_grob,
+               y = stellenwert_fdm))+
+  geom_boxplot()+
+      geom_jitter(position=position_jitter(width=.3, height=0), aes(colour = stellenwert_fdm))+
+  theme_bw()+
+  theme(axis.title.x = element_blank(),
+        title = element_text("Selbsteinschätzung: Stellenwert des digitalen Forschungsdatenmanagement")) +
+  ylab("0: geringer Stellenwert, 10: hoher Stellenwert") + 
+  xlab ("zusammengefasste Disziplinen")+
+  scale_color_viridis(option = "D")+
+  scale_colour_viridis(name = " Einschätzung des Stellenwertes \n von FDM für tägliche Arbeit ")+
+    coord_flip()
+  
+```
+
+besonders in der Archäologie breit gestreute Antworten. 
 
 # Acknowledgements
 
