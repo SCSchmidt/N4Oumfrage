@@ -209,7 +209,7 @@ age_group$gruppe %>%
                          "lehrende" = "Lehrende",
                          "einrichtung_leiter" = "Leiter/in der Einrichtung",
                          "promovierende" = "Promovierende",
-                         "date_it_beauftragt" = "Daten/IT-Beauftragte",
+                         "daten_it_beauftragt" = "Daten/IT-Beauftragte",
                          "techn_mitarb" = "technische Mitarbeiter/innen",
                          "studiernede" = "Studierende")) %>%
   kable()
@@ -218,8 +218,38 @@ age_group$gruppe %>%
   
 ```
 
+##Vertretene Disziplinen
 
-# Alter und Erfahrung + Wichtung
+```{r, eval = TRUE, echo = FALSE}
+# Disziplinen zusammenfasen.
+
+write.table(d_fr$disz, "E:/R/N4Oumfrage/analysis/data/derived_data/disziplinen.csv", fileEncoding = "UTF-8")
+
+disz <- read.csv2("E:/R/N4Oumfrage/analysis/data/derived_data/disziplinen3.csv", encoding = "UTF-8", sep = ",")
+
+d_fr2 <- cbind(d_fr, disz)
+d_fr2 <- d_fr2 %>% 
+  mutate_each(funs(empty_as_na))
+```
+
+
+```{r}
+na.omit(d_fr2$disz_grob) %>%  
+  table()%>%
+  as_tibble() %>%
+  rename(Disziplin = ".") %>%
+  mutate(Prozent = round((n/sum(n)*100),1)) %>%
+  arrange(desc(n))%>%
+  kable()
+```
+
+Die Angaben zur Disziplinzugehörigkeit waren von unterschiedlicher Genauigkeit. Zusammengefasst sieht man eine große Vielfalt unterschiedlicher Archäologischer Disziplinen (allgemein, UFG, AdRP, Ägyptologie, vorderasiatische Archäologie, Mittelalter und Neuzeit etc pp), zusammen etwa 50% aller Antworten. Häufig genannt wurden außerdem Musikwissenschaft, Kunstgeschichte, Geschichte, Restaurationswissenschaften, unterschiedliche IT-Bereiche, Denkmalpflege, Museologie, Numismatik und unterschiedliche interdisziplinären Felder wie Archäometrie, Geoinformatik und DH.
+--> deutlich breiter aufgestellt als IANUS 2013 (https://www.ianus-fdz.de/attachments/download/774/Teil1-Ergebnisse_2014-02-26_FINAL.pdf, S. 6)
+
+
+# Analyse zum Thema Erfahrungen im Bereich FMD und Bedeutung von FDM für die tägliche Arbeit
+
+## Alter und Erfahrung + Wichtung
 
 Gibt es einen Zusammenhang zwischen dem Alter der Teilnehmenden Person, der Erfahrung die sie in digitalen Forschungsdatenmanagement hat  und dem Gewicht, dass sie dem sie ihm zuweist?
 
@@ -247,33 +277,7 @@ Jüngere Teilnehmende schätzen ihre eigene Erfahrung deutlich geringer ein als 
 
 Wer viel von Forschungsdatenmanagement hält, scheint sich häufig schon recht gut weitergebildet zu haben (oder anders herum: Einschätzung der Wichtigkeit kommt von eigener Erfahrung!). Nur wenige Personen geben an, ihre Erfahrung als mittig einzuschätzen, wenn sie FDM für wichtig halten und die gelben Punkte (sehr hoher Stellenwert des digitalen FDM für die eigene Arbeit) häufen sich im Bereich "viel Erfahrung). 
 
-Diese Ergebnisse sollten statistische getestet werden:
-
-### Test: Alter - Erfahrung mit spearmans rho
-
-Für den Test werden die Teilnehmer entfernt, die keine Altersangabe gemacht haben.
-```{r}
-age_group <- subset(age_group, age_group[1] != "keine Angabe")
-
-colnames(age_group) <- c("alter", "blickwinkel", "einrichtung", "einricht_sonst", "disz", "fdm_strategie_arbeitgeb", "erfahrung_digfdm", "stellenwert_digfdm", "gruppe", "ja.nein")
-
-```
-Es bleiben für den Vergleich `r nrow(age_group)` Teilnehmer.
-
-```{r}
-age_group2 <- age_group %>%
-  separate(alter, c("beginn", "ende"), sep = "-") 
-
-age_group2$beginn <- as.numeric(age_group2$beginn)
-
-cor.test(age_group2$beginn, age_group2$erfahrung_digfdm,  method = "spearman")
-
-```
-Nach der Berechnung des Tests lässt sich keine signifikante Korrelation zwischen Alter und Erfahrung feststellen, somit besteht kein linearer Zusammenhang zwischen Alter und Erfahrung mit digitalem FDM. Dies überrascht nicht, da die älteren Kolleg*innen vmtl weniger Kontakt bisher damit hatten.
-
-Aus diesem Grund wird die Vermutung eines linearen Zusammenhangs aufgegeben und nur ein Vergleich der verschiedenen Gruppen (kategorial) geführt:
-
-### Test: Alter - Erfahrung mit chi²
+Diese Ergebnisse sollten statistische getestet werden (Details siehe [detailliertere Auswertung](https://github.com/SCSchmidt/N4Oumfrage/blob/master/docs/md/Auswertung1.md):
 
 Der Chi-Quadrat-Test darf eigentlich für diese Daten nicht angewendet werden, da die Erwartungswerte zu gering werden (Anzahl der Teilnehmer muss auf zu viele Subgruppen aufgeteilt werden). Anhand der Residuen lassen sich trotzdem Erkenntnisse erarbeiten:
 ```{r}
@@ -294,26 +298,16 @@ Cramers V ergibt einen Wert von 0,16, was auf einen schwachen Zusammenhang zwisc
 
 --> Conclusio: Ältere und junge haben wenig Erfahrung.
 
-Als nächstes kann die Gewichtung für die eigene Arbeit untersucht werden: 
+Als nächstes kann die Gewichtung für die eigene Arbeit untersucht werden:
 
-### Test: Alter - Wichtung mit spearmans rho
-
-```{r}
-cor.test(rank(age_group[,1]), age_group[,8],  method = "spearman")
-
-```
-Je älter, desto weniger wichtig. Schwacher, aber höchstsignifikanter Zusammenhang.
-
-### Test: Alter - Wichtung mit Chi²
-
-Wie oben kann auch hier nur mit den Residualwerten gearbeitet werden. 
+Wie oben kann auch hier nur mit den Residualwerten des Chi-Quadrat-Tests gearbeitet werden. 
 ```{r}
 chi <- chisq.test(age_group[,1], age_group[,8])
 
 chi$residuals%>%
   kable()
 ```
-Auffällig ist hier die Altersgruppe der 20-29jährigen, die dem digitalen FDM eine höhere Bedeutung zuweist als erwartet. Ältere Semester tun das wenig gegenteilig. 
+Auffällig ist hier die Altersgruppe der 20-29jährigen, die dem digitalen FDM eine höhere Bedeutung zuweist als erwartet. Ältere Semester tun das gegenteilig. 
 
 ```{r}
 cramersV(age_group[,1], age_group[,8])
@@ -329,7 +323,7 @@ Allgemein kann der Zusammenhang bestätigt werden (eingezeichnet blaue Linie ist
 
 ### Gruppenzugehörigkeit
 
-```{r fig_gruppe}
+```{r fig_gruppe, fig.width=10}
 
 erfahrung_group <- age_erfahrung %>%
   gather(key = "gruppe", value = "ja.nein", 6:14, na.rm = TRUE) %>%
@@ -338,9 +332,6 @@ erfahrung_group <- age_erfahrung %>%
 library(stringr)
 erfahrung_group$gruppe <- str_replace_all(erfahrung_group$gruppe,"Zu.welchen.Gruppen.fühlen.Sie.sich.zugehörig...","")
 
-
-cbp1 <- c("#999999", "#E69F00", "#56B4E9", "#009E73",
-          "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
 ggplot()+
   geom_jitter(data = erfahrung_group, aes_string(x = names(erfahrung_group)[7],
@@ -354,12 +345,12 @@ ggplot()+
   scale_y_continuous(breaks=c(0,2,4,6,8,10),
                    labels = c(0,2,4,6,8,10))+
   scale_colour_manual(name="Gruppe",
-                        values = c(cbp1, "grey80"),
-                      breaks = c("Daten.und..oder.IT.Beauftragte.", "Lehrende.","Leiter.in.der.Einrichtung.", "Projektleiter.in.", "Promovierende.", "Studierende.", "technische.Mitarbeiter.innen.","wissenschaftliche.Mitarbeiter.innen."),
+                        values = c(n4o_farben[1:9]),
+                      breaks = c("daten_it_beauftragt", "lehrende","einrichtung_leiter", "projektleiter", "promovierende", "studiernede", "techn_mitarb","wiss_mitarb"),
                       labels=c("Daten/IT-Beauftragte", "Lehrende", "Leiter/in der Einrichtung", "Projektleiter/in", "Promovierende", "Studierende", "technische Mitarbeiter/innen", "wissenschaftliche Mitarbeiter/innen")) +
   geom_text(aes(x = 5, y = 0, label = "gestreute Daten um Überlappungen zu vermeiden!"))+
-  geom_segment(aes(x = -1, y = 6, xend = 4, yend = 6), colour="grey", linetype = "dashed", alpha = 0.5)+
-  geom_segment(aes(x = 4, y = 6, xend = 4, yend = 11), colour="grey", linetype = "dashed", alpha = 0.5)+
+  geom_segment(aes(x = -1, y = 6, xend = 4, yend = 6), colour= n4o_farben[10], linetype = "dashed")+
+  geom_segment(aes(x = 4, y = 6, xend = 4, yend = 11), colour = n4o_farben[10], linetype = "dashed")+
   geom_smooth(data = erfahrung_group, aes_string(x = names(erfahrung_group)[7],
                                    y = names(erfahrung_group)[8]),
               method = "glm",
@@ -367,74 +358,43 @@ ggplot()+
    scale_alpha_continuous(guide=FALSE)+
   scale_linetype_discrete(guide = FALSE)
 ```
-m. E. lässt sich kein Zusammenhang zwischen der Zugehörigkeit zu einer Gruppe und der Wichtung / Erfahrung im digitalen FDM finden.
+m. E. lässt sich kein Zusammenhang zwischen der Zugehörigkeit zu einer Gruppe und der Wichtung / Erfahrung im digitalen FDM finden, nur allgemein der Zusammenhang von Einschätzung der eigenen Erfahrung und der Einschätzung der Bedeutung korreliert mit R² ~ 0,34: moderater Zusammenhang
+
 
 Auffällig ist der/die einsame Studierende oben links in der Ecke, der/die die Bedeutung von FDM sehr hoch einschätzt, aber selber überhaupt keine Erfahrung hat. Kann dieser Person jemand bitte ganz schnell einen Datenbankenkurs anbieten? 
 
 Der Bereich "hat selber wenig Erfahrung, schätzt aber die Bedeutung für die eigene Arbeit hoch ein" (also Einschätzung Bedeutung FDM 6-10 und Einschätzung eigene Erfahrung FDM 0-4) ist eine Zielgruppe für uns: Das sind die Personen, die wissen, dass sie sich fortbilden müssen, denen aber evtl einfach das Angebot fehlt. Es sind darin alle Gruppen vertreten, außer Daten- und IT-Beautragte.
 
-### Blickwinkel der Antwortenden
+In  der [detaillierteren Auswertung](https://github.com/SCSchmidt/N4Oumfrage/blob/master/docs/md/Auswertung1.md) wurden folgende Punkte untersucht:
 
-```{r fig_blickwinkel}
+ - Blickwinnkel der Antworten (keine Unterschiede zwischen Institutionen und Individuen)
+ - Einrichtungen ( Es zeigt sich bei allen Einrichtungen eine große Heterogenität.Eventuell zeigen sich Grabungsfirmen insbesondere in dem höherschätzenden Bereich. )
 
-ggplot()+
-  geom_jitter(data = erfahrung_group, aes_string(x = names(erfahrung_group)[7],
-                                   y = names(erfahrung_group)[8],
-                                   col = names(erfahrung_group)[2]))+
-  ylab("Einschätzung Bedeutung FDM")+
-  xlab("Einschätzung eigene Erfahrung FDM")+
-  theme_bw() +
-  scale_x_continuous(breaks=c(2,4,6,8,10),
-                   labels = c(2,4,6,8,10))+
-  scale_y_continuous(breaks=c(2,4,6,8,10),
-                   labels = c(2,4,6,8,10))+
-  scale_colour_discrete(name="Blickwinkel")+
-  geom_text(aes(x = 5, y = 0, label = "gestreute Daten um Überlappungen zu vermeiden!"))+
-  geom_smooth(data = erfahrung_group, aes_string(x = names(erfahrung_group)[7],
-                                   y = names(erfahrung_group)[8]),
-              method = "glm",
-              formula = y~x) # y abhängig von x 
-```
-Institutionen und Individuen zeigen keine Musterungen.
 
-### Einrichtungen
-```{r fig_einrichtungen}
-cbp1 <- c("#999999", "#E69F00", "#56B4E9", "#009E73",
-          "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
-ggplot()+
-  geom_jitter(data = erfahrung_group, aes_string(x = names(erfahrung_group)[7],
-                                   y = names(erfahrung_group)[8],
-                                   col = names(erfahrung_group)[3]))+
-  ylab("Einschätzung Bedeutung FDM")+
-  xlab("Einschätzung eigene Erfahrung FDM")+
-  theme_bw() +
-  scale_x_continuous(breaks=c(2,4,6,8,10),
-                   labels = c(2,4,6,8,10))+
-  scale_y_continuous(breaks=c(2,4,6,8,10),
-                   labels = c(2,4,6,8,10))+
-  scale_colour_manual(name="Einrichtung",
-                        values = c(cbp1, "black"))+
-  geom_text(aes(x = 5, y = 0, label = "gestreute Daten um Überlappungen zu vermeiden!"))+
-  geom_smooth(data = erfahrung_group, aes_string(x = names(erfahrung_group)[7],
-                                   y = names(erfahrung_group)[8]),
-              method = "glm",
-              formula = y~x) # y abhängig von x 
+## Stellenwert nach Disziplin
+
+
+
+```{r stellenwert_fdm_disziplin_grob}
+library(ggplot2)
+library(viridis)
+  ggplot(data = d_fr2, aes(x = disz_grob,
+               y = stellenwert_fdm))+
+  geom_boxplot()+
+      geom_jitter(position=position_jitter(width=.3, height=0), aes(colour = stellenwert_fdm))+
+  theme_bw()+
+  theme(axis.title.x = element_blank(),
+        title = element_text("Selbsteinschätzung: Stellenwert des digitalen Forschungsdatenmanagement")) +
+  ylab("0: geringer Stellenwert, 10: hoher Stellenwert") + 
+  xlab ("zusammengefasste Disziplinen")+
+  scale_color_viridis(option = "D")+
+  scale_colour_viridis(name = " Einschätzung des Stellenwertes \n von FDM für tägliche Arbeit ")+
+    coord_flip()
+  
 ```
 
-Eventuell zeigen sich Grabungsfirmen insbesondere in dem höherschätzenden Bereich. Es zeigt sich bei allen Einrichtungen eine große Heterogenität. 
+besonders in der Archäologie breit gestreute Antworten. 
 
-
-### Teststatistiken zu dem Zusammenhang eigenes Wissen und Bedeutung
-
-```{r}
-colnames(erfahrung_group) <- c("alter", "blickwinkel", "einrichtung", "einricht_sonst", "disz", "fdm_strategie_arbeitgeb", "erfahrung_digfdm", "stellenwert_digfdm", "gruppe", "ja.nein")
-
-fit <- lm(erfahrung_digfdm ~ stellenwert_digfdm, data = erfahrung_group)
-
-summary(fit)
-
-```
-R² ~ 0,34: moderater Zusammenhang zwischen eigener Erfahrung und dem Stellenwert der dem digitalen FDM zugeschrieben wird.
 
 
 ### Gibt es eine Trennung zwischen Menschen mit viel und wenig Erfahrung?
@@ -469,7 +429,8 @@ Die Erfahrung mit digitalem Datenmanagement in unserer Umfrage ist nicht-normalv
 
 Hier kann sich zeigen, dass wir vor allem Leute erreicht haben, die sich mit dem Thema schon beschäftigt haben. Es gibt einen deutlichen Anstieg zwischen der Einschätzung "4" und "5". Hier lassen sich eventuell zwei Gruppen unterscheiden.
 
-# Welche Arbeitgeber haben ein Richtlinienkatalog?
+
+## Welche Arbeitgeber haben ein Richtlinienkatalog?
 
 ```{r tab_einrichtungen_richtlinien}
 
@@ -482,70 +443,328 @@ dt %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 ```
+Grabungsfirmen und außeruniversitäre Forschungseinrichrungen haben häufiger einen Richtlinienkatalog als zu erwarten währen, während insbesondere Museen keine haben.
 
-Für die Analyse, ob es hier nennenswerte Unterschiede gibt, entfernen wir die Angaben "weiß nicht":
 
-```{r}
-
-d1 <- d%>%
-  filter(Verfügt.Ihr.Arbeitgeber...Ihre.Einrichtung.über.einen.Richtlinienkatalog...eine.Strategie.zum.Umgang.mit.Forschungsdaten. != "weiß nicht")
-
-chi <- chisq.test(table(d1$In.welcher.Art.von.Einrichtung.sind.Sie.beruflich.tätig., d1$Verfügt.Ihr.Arbeitgeber...Ihre.Einrichtung.über.einen.Richtlinienkatalog...eine.Strategie.zum.Umgang.mit.Forschungsdaten.))
-
-chi$residuals%>%
-  kable()
-
-```
-Chi nur eingeschränkt nutzbar, weil die Voraussetzungen nicht 100% erfüllt. Grabungsfirmen und außeruniversitäre Forschungseinrichrungen haben häufiger einen Richtlinienkatalog als zu erwarten währen, während insbesondere Museen keine haben.
-
-## Stellenwert nach Disziplin
-
-```{r, eval = TRUE, echo = FALSE}
-# Disziplinen zusammenfasen.
-
-write.table(d_fr$disz, "E:/R/N4Oumfrage/analysis/data/derived_data/disziplinen.csv", fileEncoding = "UTF-8")
-
-disz <- read.csv2("E:/R/N4Oumfrage/analysis/data/derived_data/disziplinen3.csv", encoding = "UTF-8", sep = ",")
-
-d_fr2 <- cbind(d_fr, disz)
-d_fr2 <- d_fr2 %>% 
-  mutate_each(funs(empty_as_na))
-```
-
+# Analyse der Dienste und Datenformate für Forschungsdaten
 
 ```{r}
-na.omit(d_fr2$disz_grob) %>%  
-  table()%>%
-  as_tibble() %>%
-  rename(Disziplin = ".") %>%
+fdm_dienste <- d$Mit.welchen.Diensten..z.B..der.Netzbasierte.archäologische.Datenprozessierungsdienst.des.RGZM..und.Software.Applikationen..z.B..MS.Excel..QGIS..SPSS..R..etc...analysieren.Sie.Ihre.Forschungsdaten.im.Rahmen.Ihrer.wissenschaftlichen.Arbeit..Bitte.nennen.Sie.bis.zu.sieben.Beispiele..
+
+fdm_dienste <- fdm_dienste[!is.na(fdm_dienste)]
+
+fdm_dienste_df <- as.data.frame(fdm_dienste)
+
+
+library(tidyr)
+
+fdm_dienste_df <- fdm_dienste_df %>%
+  separate(fdm_dienste, c("A", "B", "C", "D", "E", "F", "G", "H"), ", ") %>%
+  gather( key = "egal", value = "fdm-dienst", c("A", "B", "C", "D", "E", "F", "G", "H"), na.rm = TRUE)
+
+fdm_d <- fdm_dienste_df$`fdm-dienst`
+
+library("tm")
+library("SnowballC")
+
+
+docs <- Corpus(VectorSource(fdm_d))
+
+#inspect(docs)
+
+# alles kleinschreiben
+docs <- tm_map(docs, content_transformer(tolower))
+
+toexcel <- content_transformer(function (x , pattern ) gsub(pattern, "excel", x))
+
+docs <- tm_map(docs, toexcel, "exel")
+
+
+# Remove punctuations
+docs <- tm_map(docs, removePunctuation)
+# Eliminate extra white spaces
+docs <- tm_map(docs, stripWhitespace)
+
+#remove words
+docs <- tm_map(docs, removeWords, c("ich", "die", "der", "das", "für", "analysen", "daten","nicht", "fragen", "und", "mit", "was", "ist", "des", "frage")) 
+
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d_docs <- data.frame(word = names(v),freq=v)
+#head(d_docs, 30)
+```
+
+Visualisierung der Häufigkeiten der Nennung (bis zu sieben Nennungen pro Person): 
+
+```{r dienste_häufigkeiten}
+
+d_docs %>%
+  filter(freq > 2) %>%
+ggplot()+
+  geom_col(aes(x = reorder(word, freq),
+                              y = freq,
+               fill = factor(ifelse(word == "eigene" | word == "keine","Highlighted","Normal"))),
+             show.legend = FALSE)+
+  xlab("Programme")+
+  ylab("Häufigkeit der Nennung (ab 2x)")+
+  geom_label(aes(x = 5, 
+                 y = 150,
+                 label = "text mining - Auswertung der Frage \n 'Mit welchen Diensten analysieren Sie Ihre Daten \n im Rahmen Ihrer wissenschaftlichen Arbeit?' "))+
+  coord_flip()
+```
+Zwei Programme werden extrem häufig genannt: Excel und QGIS. Access ist das bekannteste Datenbanksystem.
+
+V.a. in außeruniversitären Forschungseinrichtungen (4x genannt) und Denkmalbehörden (4x -- einmal in sonstiges) wird selbständig Software entwickelt.
+
+
+## Datenformate
+
+
+```{r}
+# in auswahl genannte 
+library(tidyr)
+
+dataformats <- d_fr %>%
+  gather(key = "datenformat", value = "datjanein", c(27:39), na.rm = TRUE)
+
+dataformats <- subset(dataformats, dataformats$datjanein == "Ja")
+
+```
+```{r}
+# in auswahl genannte 
+library(tidyr)
+
+dataformats <- d_fr %>%
+  gather(key = "datenformat", value = "datjanein", c(27:39), na.rm = TRUE)
+
+dataformats <- subset(dataformats, dataformats$datjanein == "Ja")
+
+```
+
+
+```{r}
+# sonstige genannte 
+
+dat2 <- as.data.frame(d_fr$`dateiformat_sonstige`)
+colnames(dat2) <- "d"
+
+dat2 <- subset(dat2, !is.na(d))
+
+dat2_docs <- Corpus(VectorSource(dat2))
+
+#inspect(dat2_docs)
+
+toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+dat2_docs <- tm_map(dat2_docs, toSpace, "/")
+dat2_docs <- tm_map(dat2_docs, toSpace, "@")
+dat2_docs <- tm_map(dat2_docs, toSpace, "\\|")
+
+
+
+# Convert the text to lower case
+dat2_docs <- tm_map(dat2_docs, content_transformer(tolower))
+
+# Remove english common stopwords
+dat2_docs <- tm_map(dat2_docs, removeWords, stopwords("german"))
+
+
+# Remove your own stop word
+# specify your stopwords as a character vector
+dat2_docs <- tm_map(dat2_docs, removeWords, c("3D", "etc", "formate","...")) 
+# Remove punctuations
+dat2_docs <- tm_map(dat2_docs, removePunctuation)
+# Eliminate extra white spaces
+dat2_docs <- tm_map(dat2_docs, stripWhitespace)
+# Text stemming
+# docs <- tm_map(docs, stemDocument)
+
+# Document matrix is a table containing the frequency of the words. 
+# Column names are words and row names are documents. 
+# The function TermDocumentMatrix() from text mining package can be used as follow :
+dtm <- TermDocumentMatrix(dat2_docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d <- data.frame(word = names(v),freq=v)
+#head(d, 30)
+````
+
+```{r häufigkeiten_datenformate}
+dat <- as.data.frame(table(dataformats$datenformat))
+
+colnames(dat) <- c("word", "freq")
+
+dat3 <- rbind(dat, d)
+
+dat3 %>%
+  filter(freq > 2) %>%
+ggplot()+
+  geom_col(aes(x = reorder(word, freq),
+               y = freq))+
+  theme_bw()+
+  xlab("")+
+  ylab("Anzahl (Mehrfachnennungen möglich)")+
+  coord_flip()
+
+```
+
+PDF, doc, jpg und xls werden mit deutlichem Abstand am häufigsten genannt.
+
+Insgesamt `r nrow(dat3)` unterschiedliche Datenformate, darunter sehr spezialisierte Ausgabeformate von bestimmten Geräten (z.B. Laserscannern). Dargestellt sind hier diejenigen die häufiger als 2x genannt wurden.
+
+# Wie werden Daten gesichert?
+
+
+```{r datastorage}
+
+library(tidyr)
+datastorage <- d_fr %>%
+  gather( key = "datastorage", value = "jn", c("software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht_oeff_cloud", "zentralnetz_arbeitgeber", "institut_repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds_dvds"), na.rm = TRUE)%>%
+  filter(jn == "Ja")
+
+ds <- as.data.frame(table(datastorage$datastorage))
+
+ggplot(data = ds)+
+  geom_col(aes (x = reorder(Var1, Freq), 
+                y=  Freq))+
+  coord_flip() +
+  theme_bw() + 
+  xlab("Art der Datenspeicherung") +
+  scale_x_discrete(breaks = levels(ds$Var1),
+       labels = c("CD/DVD", "externe Festplatte", "externes Datenzentrum", "institutionelle Repositorium \n des Arbeitgebers", "lokaler Dienstrechner", "lokaler Privatrechner", "nicht-öffentlicher \n Cloud-Service", "privatwirtschaftlicher \n Cloud-Service", "Repositorium der \n Fachcommunity", "USB", "Versionierungssystem", "Zentralnetz des Arbeitgebers"))+
+  ylab("Häufigkeit Nennung (Mehrfachnennung möglich)")
+
+```
+
+Die häufigsten Back-Up-Methoden während der Projektphase sind das Netz des Arbeitgebers, die externe Festplatte und lokale Rechner. Externe Datenzentren, Versionierungssysteme und Fach-Repositorien liegen weit abgeschlagen zusammen mit DVDs und CDs. 
+
+Im Vergleich zu der IANUS-Umfrage von 2013 (https://www.ianus-fdz.de/projects/ap3-community/wiki/Stakeholderanalyse) ist dabei "der eigene Arbeitsrechner" vom "Zentralnetz des Arbeitgebers" als häufigste Nennung abgelöst worden. Hier zeigt sich eine erste Sensibilisierung der Einrichtungen gegenüber dem Thema der Datenarchivierung. Die externe Festplatte und die lokalen Rechner bleiben jedoch von großer Bedeutung. 
+
+```{r}
+#sonstige
+
+ds_sonst <- d_fr$datensicherung_sonstiges
+ds_sonst <- ds_sonst[!is.na(ds_sonst)]
+
+```
+Das ändert sich auch nicht durch die Nennungen unter "sonstiges": `r ds_sonst`
+
+
+```{r}
+write.csv2(d_fr$sicherung_nach_projekt, "E:/R/N4Oumfrage/analysis/data/derived_data/nach_projektende.csv", fileEncoding = "UTF-8")
+# händische Katalogisierung
+```
+
+# Vergleich der beiden Zeitpunkte: Während des Projektes und nach Projektende
+```{r}
+library(dplyr)
+
+
+sicherung <- read.table("E:/R/N4Oumfrage/analysis/data/derived_data/nach_projektende2.csv", 
+                        sep = ",", 
+                        header = TRUE, 
+                        encoding = "UTF-8")
+
+sicherung2<- sicherung %>%
+  separate(sicherung_kat, c("A","B","C","D", "E", "F"), "," )  %>%
+  gather(key = "placenr", value = "kat_sich", "A", "B","C","D", "E", "F", na.rm = TRUE)
+
+
+empty_as_na <- function(x){
+    if("factor" %in% class(x)) x <- as.character(x) ## since ifelse wont work with factors
+    ifelse(as.character(x)!="", x, NA)
+}
+
+sicherung_kat <- sicherung2$kat_sich %>%
+  table() %>%
+  as_tibble()%>%
+  rename(Sicherungssystem = ".") 
+
+```
+
+Zuerst die Ergebnisse der Umfrage für "nach Projektende"
+```{r}
+## transform all columns
+
+sicherung_kat %>% 
+  mutate_each(funs(empty_as_na))%>%
   mutate(Prozent = round((n/sum(n)*100),1)) %>%
   arrange(desc(n))%>%
   kable()
+
 ```
 
-Die Angaben zur Disziplinzugehörigkeit waren von unterschiedlicher Genauigkeit. Zusammengefasst sieht man eine große Vielfalt unterschiedlicher Archäologischer Disziplinen (allgemein, UFG, AdRP, Ägyptologie, vorderasiatische Archäologie, Mittelalter und Neuzeit etc pp), zusammen etwa 50% aller Antworten. Häufig genannt wurden außerdem Musikwissenschaft, Kunstgeschichte, Geschichte, Restaurationswissenschaften, unterschiedliche IT-Bereiche, Denkmalpflege, Museologie, Numismatik und unterschiedliche interdisziplinären Felder wie Archäometrie, Geoinformatik und DH.
---> deutlich breiter aufgestellt als IANUS 2013 (https://www.ianus-fdz.de/attachments/download/774/Teil1-Ergebnisse_2014-02-26_FINAL.pdf, S. 6)
+
+Umfrage "nach Projektende" war eine Freifeldaufgabe und wurde händisch in die Kategorien der "während der Projektlaufzeit" - Frage eingeordnet. Dabei entstanden einige wenige Kategorien außerhalb der vorherigen Auswahlmöglichkeit.
 
 
-```{r stellenwert_fdm_disziplin_grob}
+```{r}
+rownames(ds) <- c("CD/DVD", "externe Festplatte", "externes Datenzentrum", "institutionelles Repositorium des Arbeitgebers", "lokaler Dienstrechner", "lokaler Privatrechner", "nicht-öffentlicher Cloud-Service", "privatwirtschaftlicher Cloud-Service", "Repositorium der Fachcommunity", "USB", "Versionierungssystem", "Zentralnetz des Arbeitgebers")
+
+colnames(ds) <- c("Sicherungssystem", "n")
+
+ds$Sicherungssystem <- rownames(ds)
+ds$zeitpunkt <- "während der Projektlaufzeit"
+colnames(ds) <- c("Sicherungssystem", "n", "zeitpunkt")
+
+sicherung_kat <- as.data.frame(sicherung_kat)
+
+rownames(sicherung_kat) <- sicherung_kat$Sicherungssystem
+
+sicherung_kat$zeitpunkt <- "nach Projektende"
+
+vergleich_sicherung <- rbind(sicherung_kat, ds)
+```
+
+
+
+```{r nachmache plot ianus, fig.width=10}
+
+vergleich_sicherung$Sicherungssystem <- reorder(as.factor(vergleich_sicherung$Sicherungssystem), vergleich_sicherung$n)
+
+vergleich_sicherung %>%
+  filter(n > 2)%>%
+  filter(Sicherungssystem != "")%>%
+ggplot()+
+  geom_col(aes(x = Sicherungssystem,
+               y = n,
+               fill = zeitpunkt),
+           position = "dodge")+
+  scale_fill_manual(values = c(n4o_farben[1], n4o_farben[11]))+
+  coord_flip()+
+    ylab("Häufigkeit Nennung (Mehrfachnennung möglich)")+
+  theme_bw()
+```
+Vergleich IANUS (https://www.ianus-fdz.de/attachments/download/774/Teil1-Ergebnisse_2014-02-26_FINAL.pdf), S. 10.
+
+
+# Vorläufige Analyse der geäußerten Wünsche
+
+Da dies eine Freitext-Frage war, werden die Wünsche gerade noch händisch in Kategorien überführt. Hier ist eine erste Übersicht von 149 von 313 Angaben:
+```{r wunschdarstellung}
+
+w <- read.csv2("../data/derived_data/wuensche2.csv", sep = ",", encoding = "UTF-8")
+
+library(tidyr)
+library(dplyr)
+w_kat<- w %>%
+  gather(key = "k", value = "wunsch", c(kat1:kat10)) %>%
+  mutate_each(funs(empty_as_na))
+
 library(ggplot2)
-library(viridis)
-  ggplot(data = d_fr2, aes(x = disz_grob,
-               y = stellenwert_fdm))+
-  geom_boxplot()+
-      geom_jitter(position=position_jitter(width=.3, height=0), aes(colour = stellenwert_fdm))+
-  theme_bw()+
-  theme(axis.title.x = element_blank(),
-        title = element_text("Selbsteinschätzung: Stellenwert des digitalen Forschungsdatenmanagement")) +
-  ylab("0: geringer Stellenwert, 10: hoher Stellenwert") + 
-  xlab ("zusammengefasste Disziplinen")+
-  scale_color_viridis(option = "D")+
-  scale_colour_viridis(name = " Einschätzung des Stellenwertes \n von FDM für tägliche Arbeit ")+
-    coord_flip()
-  
+
+w_tab <- as.data.frame(table(w_kat$wunsch))
+
+w_tab %>%
+  filter(Freq > 1) %>%
+ggplot()+
+  geom_col(aes(x = reorder(Var1, Freq),
+               y = Freq), na.rm = TRUE,
+           col = n4o_farben[1])+
+  coord_flip()
+
 ```
 
-besonders in der Archäologie breit gestreute Antworten. 
 
 # Acknowledgements
 
