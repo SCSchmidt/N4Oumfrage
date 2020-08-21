@@ -33,14 +33,11 @@ knitr::opts_chunk$set(
   echo = FALSE,
   comment = "#>",
   fig.path = "../figures/",
-  dpi = 300
+  dpi = 300,
+  fig.height = 5
 )
 library(ggplot2)
 ```
-
-# Datengrundlage
-
-Daten als csv bekommen und IPs etc entfernt. Insgesamt über 600 Antworten, dabei aber viele, die sich "nur durchgeklickt" haben oder nur Teile der Umfrage ausgefüllt haben (teilweise um die 70%).
 
 ```{r}
 d <- read.csv2("../data/raw_data/results-survey615517.csv", sep = ",", encoding = "UTF-8")
@@ -67,15 +64,17 @@ d_fr <- d[, c(1:65)]
 
 #colnames(d)
 
-colnames(d_fr) <- c("ID", "Datum", "zufallsid", "geschlecht", "alter", "blickwinkel", "einrichtung", "einrichtung_sonstiges", "disz", "studiernede", "promovierende", "lehrende", "techn_mitarb", "wiss_mitarb", "daten_it_beauftragt", "projektleiter", "einrichtung_leiter", "gruppe_sonstige", "arbeitgeber_richtlinienkatalog", "erfahrung_fdm", "stellenwert_fdm", "software_projman_janein", "software_projman", "software_fdm_janein", "software_fdm", "software_wiss_analyse", "xls", "doc", "pdf", "ods", "csv", "odt", "png", "jpg", "geotiff", "geojson", "shp", "json", "xml", "dateiformat-sonstige", "software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht-oeff_cloud", "zentralnetz_arbeitgeber", "institut-repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds-dvds", "datensicherung-sonstiges", "sicherung-nach-projekt", "FAIR_bekannt_janein", "verfuegung_wie", "verfuegung_wie-sonstiges", "fremddatennutzung-janein", "fremddaten_online-portal", "fremddaten_prsnl-anfrage",  "fremddaten-sonstiges",  "wunsch_datenspeicherung", "mehrwert-n4o", "prsnl-mehrwert-n4o")
+colnames(d_fr) <- c("ID", "Datum", "zufallsid", "geschlecht", "alter", "blickwinkel", "einrichtung", "einrichtung_sonstiges", "disz", "studiernede", "promovierende", "lehrende", "techn_mitarb", "wiss_mitarb", "daten_it_beauftragt", "projektleiter", "einrichtung_leiter", "gruppe_sonstige", "arbeitgeber_richtlinienkatalog", "erfahrung_fdm", "stellenwert_fdm", "software_projman_janein", "software_projman", "software_fdm_janein", "software_fdm", "software_wiss_analyse", "xls", "doc", "pdf", "ods", "csv", "odt", "png", "jpg", "geotiff", "geojson", "shp", "json", "xml", "dateiformat_sonstige", "software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht_oeff_cloud", "zentralnetz_arbeitgeber", "institut_repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds_dvds", "datensicherung_sonstiges", "sicherung_nach_projekt", "FAIR_bekannt_janein", "verfuegung_wie", "verfuegung_wie_sonstiges", "fremddatennutzung_janein", "fremddaten_online_portal", "fremddaten_prsnl_anfrage",  "fremddaten_sonstiges",  "wunsch_datenspeicherung", "mehrwert_n4o", "prsnl_mehrwert_n4o")
 
 ```
+# Wie werden Daten gesichert?
+
 
 ```{r datastorage}
 
 library(tidyr)
 datastorage <- d_fr %>%
-  gather( key = "datastorage", value = "jn", c("software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht-oeff_cloud", "zentralnetz_arbeitgeber", "institut-repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds-dvds"), na.rm = TRUE)%>%
+  gather( key = "datastorage", value = "jn", c("software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht_oeff_cloud", "zentralnetz_arbeitgeber", "institut_repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds_dvds"), na.rm = TRUE)%>%
   filter(jn == "Ja")
 
 ds <- as.data.frame(table(datastorage$datastorage))
@@ -98,6 +97,8 @@ ggplot(data = ds)+
 
 Die häufigsten Back-Up-Methoden während der Projektphase sind das Netz des Arbeitgebers, die externe Festplatte und lokale Rechner. Externe Datenzentren, Versionierungssysteme und Fach-Repositorien liegen weit abgeschlagen zusammen mit DVDs und CDs. 
 
+Im Vergleich zu der IANUS-Umfrage von 2013 (https://www.ianus-fdz.de/projects/ap3-community/wiki/Stakeholderanalyse) ist dabei "der eigene Arbeitsrechner" vom "Zentralnetz des Arbeitgebers" als häufigste Nennung abgelöst worden. Hier zeigt sich eine erste Sensibilisierung der Einrichtungen gegenüber dem Thema der Datenarchivierung. Die externe Festplatte und die lokalen Rechner bleiben jedoch von großer Bedeutung. 
+
 ```{r}
 # textmining spaß mit sonstiges
 
@@ -105,11 +106,69 @@ Die häufigsten Back-Up-Methoden während der Projektphase sind das Netz des Arb
 library("tm")
 library("SnowballC")
 
-ds_sonst <- d_fr$`datensicherung-sonstiges`
+ds_sonst <- d_fr$datensicherung_sonstiges
 ds_sonst <- ds_sonst[!is.na(ds_sonst)]
 
 ```
 Das ändert sich auch nicht durch die Nennungen unter "sonstiges": `ds_sonst`
+
+### Datensicherung nach Projektende
+Die Datensicherung nach Projektende wurde in einer Freitextfrage abgefragt. Aus diesem Grund wird eine einfache text-mining Analyse ausgeführt, die die am häufigsten genannten Wortstämme ausgibt.  
+
+```{r, eval=FALSE, echo=FALSE}
+library(quanteda)
+
+corpus <- corpus(d_fr$sicherung_nach_projekt)
+
+kwic(corpus, "gespeichert")
+
+#https://quanteda.io/articles/pkgdown/quickstart.html 
+
+```
+
+
+```{r}
+
+library("tm")
+library("SnowballC")
+
+docs <- Corpus(VectorSource(d_fr$sicherung_nach_projekt))
+docs$meta$language <- "de"
+
+#inspect(docs)
+
+# alles kleinschreiben
+docs <- tm_map(docs, content_transformer(tolower))
+
+#toexcel <- content_transformer(function (x , pattern ) gsub(pattern, "excel", x))
+
+#docs <- tm_map(docs, toexcel, "exel")
+
+# Remove english common stopwords
+docs <- tm_map(docs, removeWords, stopwords("german"))
+
+# Remove your own stop word
+# specify your stopwords as a character vector
+docs <- tm_map(docs, removeWords, c("auf","dem", "etc", "daten", "bzw")) 
+
+# Remove punctuations
+docs <- tm_map(docs, removePunctuation)
+# Eliminate extra white spaces
+docs <- tm_map(docs, stripWhitespace)
+
+# Text stemming
+docs <- tm_map(docs, stemDocument, "german")
+
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d_docs <- data.frame(word = names(v),freq=v)
+head(d_docs, 30)
+
+
+```
+
+
 
 ## FAIR Prinzipien
 
@@ -133,9 +192,12 @@ ggplot()+
                            y = Freq))+
   coord_flip()+
   xlab("Methode der Verfügungsstellung")+
-  ylab("Häufigkeit der Nennung")
+  ylab("Häufigkeit der Nennung") +
+  geom_text(x = 2, y = 50, label = paste("n = ", nrow(verfuegung)))
 
 ```
+
+Vergleichen wir diese Antworten mit der aus der IANUS-Umfrage von 2013 so fällt auf, dass noch immer die Daten am häufigsten auf individuelle oder perönliche Anfrage herausgegeben werden. Die Bereitstellung der Daten als Download über ein Datenportal hat sich jedoch prozentual im Vergleich zu 2013 deutlich gesteigert. 
 
 ### Kategorisierung der sonstiges Angaben
 
@@ -209,7 +271,7 @@ Einzelne Interessante Wortmeldungen im O-Ton:
 In diesem Kapitel kann man evtl. die vielen "NA"s, also keine Angaben damit interpretieren, dass es Leute noch nicht probiert haben. 
 ```{r fremdedaten}
 ggplot()+
-  geom_bar(data = d_fr, aes(x = `fremddatennutzung-janein`))+
+  geom_bar(data = d_fr, aes(x = `fremddatennutzung_janein`))+
   ggtitle("Nutzen Sie digitale Forschungsdaten, die in anderen Projekten erhoben wurden?")+
   ylab("Anzahl")+
   xlab ("Antworten")+
@@ -217,9 +279,10 @@ ggplot()+
  
 ```
 
+
 ```{r onlineportal_fremdedaten}
 ggplot()+
-  geom_bar(data = d_fr, aes(x = `fremddaten_online-portal`))+
+  geom_bar(data = d_fr, aes(x = `fremddaten_online_portal`))+
   ggtitle("Erhalten Sie Zugang zu Daten über ein Online-Portal?")+
   ylab("Anzahl")+
   xlab ("Antworten")+
@@ -229,7 +292,7 @@ ggplot()+
 
 ```{r anfrage_fremddaten}
 ggplot()+
-  geom_bar(data = d_fr, aes(x = `fremddaten_prsnl-anfrage`))+
+  geom_bar(data = d_fr, aes(x = `fremddaten_prsnl_anfrage`))+
   ggtitle("Erhalten Sie Zugang zu Daten über persönliche Anfragen?")+
   ylab("Anzahl")+
   xlab ("Antworten")+
@@ -264,7 +327,7 @@ daten_sonst$kat[str_detect(daten_sonst$fremddaten_sonst, "Schnittstellen", negat
 
 ```
 
-Hinweise auf online Datenbanken (3x), Publikationen (vmtl als Print gemeint, aber nicht eindeutig, 3x) und letztendlich persönliche Kontakte (Kooperationen, Vorgängerprojekte etc). Manchmal werden mehrere Wege genannt.
+Hinweise auf online Datenbanken (3x), Publikationen (vmtl als Print gemeint, aber nicht eindeutig, 3x) und letztendlich persönliche Kontakte (Kooperationen, Vorgängerprojekte etc) sind am häufigsten. Manchmal werden mehrere Wege genannt.
 
 ### Welche Maßnahmen würden Sie sich wünschen (im Bezug auf Datenspeicherung in ihrem Arbeitsfeld)?
 
@@ -333,7 +396,30 @@ wuensche <- wuensche[!is.na(wuensche)]
 
 write.csv(wuensche, "../data/derived_data/wuensche.csv", fileEncoding = "UTF-8")
 
-w <- as.data.frame(wuensche)
+w <- read.csv2("../data/derived_data/wuensche2.csv", sep = ",", encoding = "UTF-8")
+
+empty_as_na <- function(x){
+    if("factor" %in% class(x)) x <- as.character(x) ## since ifelse wont work with factors
+    ifelse(as.character(x)!="", x, NA)
+}
+
+
+library(tidyr)
+library(dplyr)
+w_kat<- w %>%
+  gather(key = "k", value = "wunsch", c(kat1:kat10)) %>%
+  mutate_each(funs(empty_as_na))
+
+library(ggplot2)
+
+w_tab <- as.data.frame(table(w_kat$wunsch))
+
+w_tab %>%
+  filter(Freq > 1) %>%
+ggplot()+
+  geom_col(aes(x = reorder(Var1, Freq),
+               y = Freq), na.rm = TRUE)+
+  coord_flip()
 
 ```
 

@@ -12,9 +12,13 @@ Highlights:
 Datengrundlage
 ==============
 
-Daten als csv bekommen und IPs etc entfernt. Insgesamt über 600
-Antworten, dabei aber viele, die sich “nur durchgeklickt” haben oder nur
-Teile der Umfrage ausgefüllt haben (teilweise um die 70%).
+Insgesamt haben wir 664 Antworten erhalten, das ist ein deutlich
+größerer Rücklauf als bei der Aridande+ - Umfrage von 2019
+(<a href="https://ariadne-infrastructure.eu/key-results-of-the-community-needs-survey/" class="uri">https://ariadne-infrastructure.eu/key-results-of-the-community-needs-survey/</a>)
+und der IANUS-Umfrage von 2013
+(<a href="https://www.ianus-fdz.de/projects/ergebnisse/wiki" class="uri">https://www.ianus-fdz.de/projects/ergebnisse/wiki</a>).
+Damit kann ein erhöhtes Interesse der Community an dem Thema abgelesen
+werden.
 
 Demographische Angaben
 ======================
@@ -25,20 +29,354 @@ Alter und Beschäftigungsverhältnis
 Zuerst einige allgemeine Statistiken zu der Teilnehmergruppe:
 
 ![](../figures/fig_alter_einrichtung-1.png) Wir haben knapp 50
-20-29jährige, der Großteil der befragten ist zwischen 30 udn 60 Jahre
+20-29jährige, der Großteil der Befragten ist zwischen 30 und 60 Jahre
 alt und arbeitet an einer Hochschule, in der Forschung, im Museum oder
 in einer Denkmalbehörde (man beachte die über 80jährige Person, die
 nicht mehr arbeitet…). Seltener kommen Grabungsfirmen und Archive vor.
+Eine ähnliche Verteilung hatten die Umfrageteilnehmer bei Ariadne+ und
+IANUS.
 
-Alter und Gruppe
-----------------
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Alter
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+Prozent
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:right;">
+159
+</td>
+<td style="text-align:right;">
+26.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:right;">
+155
+</td>
+<td style="text-align:right;">
+25.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+40-49
+</td>
+<td style="text-align:right;">
+153
+</td>
+<td style="text-align:right;">
+25.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+60-69
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+9.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:right;">
+48
+</td>
+<td style="text-align:right;">
+8.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+keine Angabe
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+70-79
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+80-89
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Einrichtung
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+Prozent
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Universität/Hochschule
+</td>
+<td style="text-align:right;">
+168
+</td>
+<td style="text-align:right;">
+30.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Außeruniversitäre Forschungseinrichtung
+</td>
+<td style="text-align:right;">
+129
+</td>
+<td style="text-align:right;">
+23.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Museum
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+22.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Denkmalbehörde
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+11.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sonstiges
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grabungsfirma
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+keiner
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Forschungsverbund
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Archiv
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+</tr>
+</tbody>
+</table>
 
-Innerhalb der Altersstufen teilen sich die Menschen auf folgende Gruppen
-auf:
+Mit ca. 51% männlichen und 42% weiblichen sowie 2 diversen
+Teilnehmer\*innen (keine Angabe: 6%) sind auch hier die Teilnehmer
+repräsentativ.
+
+Einrichtungen und Gruppe
+------------------------
+
+Innerhalb der Einrichtungen teilen sich die Teilnehmer\*innen auf
+folgende Gruppen auf:
 
 ![](../figures/fig_einrichtung_gruppe-1.png) Das Gros besteht aus
 wissenschaftlichen Mitarbeiterinnen an der Hochschule und in
 Forschungseinrichtungen.
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Gruppe
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+Prozent
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+wissenschaftliche Mitarbeiter/innen
+</td>
+<td style="text-align:right;">
+326
+</td>
+<td style="text-align:right;">
+37.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+projektleiter
+</td>
+<td style="text-align:right;">
+125
+</td>
+<td style="text-align:right;">
+14.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lehrende
+</td>
+<td style="text-align:right;">
+114
+</td>
+<td style="text-align:right;">
+13.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Leiter/in der Einrichtung
+</td>
+<td style="text-align:right;">
+96
+</td>
+<td style="text-align:right;">
+11.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Promovierende
+</td>
+<td style="text-align:right;">
+73
+</td>
+<td style="text-align:right;">
+8.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+daten\_it\_beauftragt
+</td>
+<td style="text-align:right;">
+69
+</td>
+<td style="text-align:right;">
+7.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+technische Mitarbeiter/innen
+</td>
+<td style="text-align:right;">
+41
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Studierende
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+</tr>
+</tbody>
+</table>
 
 Alter und Erfahrung + Wichtung
 ==============================
@@ -98,7 +436,7 @@ geführt:
 
 Der Chi-Quadrat-Test darf eigentlich für diese Daten nicht angewendet
 werden, da die Erwartungswerte zu gering werden (Anzahl der Teilnehmer
-muss auf zu viele Subgruppen aufgeteilt werden). Anhang der Residuen
+muss auf zu viele Subgruppen aufgeteilt werden). Anhand der Residuen
 lassen sich trotzdem Erkenntnisse erarbeiten:
 <table>
 <thead>
@@ -406,31 +744,277 @@ Zusammenhang.
 ### Test: Alter - Wichtung mit Chi²
 
 Wie oben kann auch hier nur mit den Residualwerten gearbeitet werden.
-
-    #>               age_group[, 8]
-    #> age_group[, 1]           0           1           2           3           4
-    #>          20-29 -0.25943726 -0.63548891 -0.24657867  1.01551156 -0.91420749
-    #>          30-39 -0.57596074  0.71562822 -1.31559957 -1.14357421  0.59543767
-    #>          40-49 -0.49759035 -0.39839187  1.98053478 -0.47826645 -0.30596170
-    #>          50-59  1.46460302  0.36765411 -0.40124627 -0.16968540 -1.07119833
-    #>          60-69 -0.29417420 -0.72057669  0.27745145  1.24860606  1.63430113
-    #>          70-79 -0.09805807 -0.24019223 -0.42742521  3.58892527  1.11132477
-    #>               age_group[, 8]
-    #> age_group[, 1]           5           6           7           8           9
-    #>          20-29  1.06090576 -0.19917412  0.29738600 -3.38657493  0.67666495
-    #>          30-39 -2.56256150 -1.37171824 -0.92235505  0.73669310  2.72490066
-    #>          40-49  0.16873391 -0.39215848  0.29282650  0.81607905 -1.23128762
-    #>          50-59  1.83349695  0.87542636 -0.29005027 -0.02587174 -1.05574893
-    #>          60-69 -0.00858377  2.24653579  1.55781939  0.18768111 -1.67093471
-    #>          70-79  1.93134826 -0.69337525 -0.02843889  0.06256037 -1.07417231
-    #>               age_group[, 8]
-    #> age_group[, 1]          10
-    #>          20-29  2.33460911
-    #>          30-39  0.35915555
-    #>          40-49 -0.17194282
-    #>          50-59  0.09886962
-    #>          60-69 -2.16694124
-    #>          70-79 -1.42437571
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+0
+</th>
+<th style="text-align:right;">
+1
+</th>
+<th style="text-align:right;">
+2
+</th>
+<th style="text-align:right;">
+3
+</th>
+<th style="text-align:right;">
+4
+</th>
+<th style="text-align:right;">
+5
+</th>
+<th style="text-align:right;">
+6
+</th>
+<th style="text-align:right;">
+7
+</th>
+<th style="text-align:right;">
+8
+</th>
+<th style="text-align:right;">
+9
+</th>
+<th style="text-align:right;">
+10
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:right;">
+-0.2594373
+</td>
+<td style="text-align:right;">
+-0.6354889
+</td>
+<td style="text-align:right;">
+-0.2465787
+</td>
+<td style="text-align:right;">
+1.0155116
+</td>
+<td style="text-align:right;">
+-0.9142075
+</td>
+<td style="text-align:right;">
+1.0609058
+</td>
+<td style="text-align:right;">
+-0.1991741
+</td>
+<td style="text-align:right;">
+0.2973860
+</td>
+<td style="text-align:right;">
+-3.3865749
+</td>
+<td style="text-align:right;">
+0.676665
+</td>
+<td style="text-align:right;">
+2.3346091
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:right;">
+-0.5759607
+</td>
+<td style="text-align:right;">
+0.7156282
+</td>
+<td style="text-align:right;">
+-1.3155996
+</td>
+<td style="text-align:right;">
+-1.1435742
+</td>
+<td style="text-align:right;">
+0.5954377
+</td>
+<td style="text-align:right;">
+-2.5625615
+</td>
+<td style="text-align:right;">
+-1.3717182
+</td>
+<td style="text-align:right;">
+-0.9223550
+</td>
+<td style="text-align:right;">
+0.7366931
+</td>
+<td style="text-align:right;">
+2.724901
+</td>
+<td style="text-align:right;">
+0.3591555
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+40-49
+</td>
+<td style="text-align:right;">
+-0.4975903
+</td>
+<td style="text-align:right;">
+-0.3983919
+</td>
+<td style="text-align:right;">
+1.9805348
+</td>
+<td style="text-align:right;">
+-0.4782665
+</td>
+<td style="text-align:right;">
+-0.3059617
+</td>
+<td style="text-align:right;">
+0.1687339
+</td>
+<td style="text-align:right;">
+-0.3921585
+</td>
+<td style="text-align:right;">
+0.2928265
+</td>
+<td style="text-align:right;">
+0.8160790
+</td>
+<td style="text-align:right;">
+-1.231288
+</td>
+<td style="text-align:right;">
+-0.1719428
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:right;">
+1.4646030
+</td>
+<td style="text-align:right;">
+0.3676541
+</td>
+<td style="text-align:right;">
+-0.4012463
+</td>
+<td style="text-align:right;">
+-0.1696854
+</td>
+<td style="text-align:right;">
+-1.0711983
+</td>
+<td style="text-align:right;">
+1.8334969
+</td>
+<td style="text-align:right;">
+0.8754264
+</td>
+<td style="text-align:right;">
+-0.2900503
+</td>
+<td style="text-align:right;">
+-0.0258717
+</td>
+<td style="text-align:right;">
+-1.055749
+</td>
+<td style="text-align:right;">
+0.0988696
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+60-69
+</td>
+<td style="text-align:right;">
+-0.2941742
+</td>
+<td style="text-align:right;">
+-0.7205767
+</td>
+<td style="text-align:right;">
+0.2774515
+</td>
+<td style="text-align:right;">
+1.2486061
+</td>
+<td style="text-align:right;">
+1.6343011
+</td>
+<td style="text-align:right;">
+-0.0085838
+</td>
+<td style="text-align:right;">
+2.2465358
+</td>
+<td style="text-align:right;">
+1.5578194
+</td>
+<td style="text-align:right;">
+0.1876811
+</td>
+<td style="text-align:right;">
+-1.670935
+</td>
+<td style="text-align:right;">
+-2.1669412
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+70-79
+</td>
+<td style="text-align:right;">
+-0.0980581
+</td>
+<td style="text-align:right;">
+-0.2401922
+</td>
+<td style="text-align:right;">
+-0.4274252
+</td>
+<td style="text-align:right;">
+3.5889253
+</td>
+<td style="text-align:right;">
+1.1113248
+</td>
+<td style="text-align:right;">
+1.9313483
+</td>
+<td style="text-align:right;">
+-0.6933752
+</td>
+<td style="text-align:right;">
+-0.0284389
+</td>
+<td style="text-align:right;">
+0.0625604
+</td>
+<td style="text-align:right;">
+-1.074172
+</td>
+<td style="text-align:right;">
+-1.4243757
+</td>
+</tr>
+</tbody>
+</table>
 
 Auffällig ist hier die Altersgruppe der 20-29jährigen, die dem digitalen
 FDM eine höhere Bedeutung zuweist als erwartet. Ältere Semester tun das
@@ -480,9 +1064,11 @@ zeigen keine Musterungen.
 
 ### Einrichtungen
 
-![](../figures/fig_einrichtungen-1.png) Eventuell zeigen sich
-Grabungsfirmen insbesondere in dem höherschätzenden Bereich. Es zeigt
-sich bei allen Einrichtungen eine große Heterogenität.
+![](../figures/fig_einrichtungen-1.png)
+
+Eventuell zeigen sich Grabungsfirmen insbesondere in dem
+höherschätzenden Bereich. Es zeigt sich bei allen Einrichtungen eine
+große Heterogenität.
 
 ### Teststatistiken zu dem Zusammenhang eigenes Wissen und Bedeutung
 
@@ -799,6 +1385,9 @@ erfüllt. Grabungsfirmen und außeruniversitäre Forschungseinrichrungen
 haben häufiger einen Richtlinienkatalog als zu erwarten währen, während
 insbesondere Museen keine haben.
 
+Stellenwert nach Disziplin
+--------------------------
+
 Acknowledgements
 ================
 
@@ -810,7 +1399,7 @@ References
 
 ### Colophon
 
-This report was generated on 2020-07-31 17:33:20 using the following
+This report was generated on 2020-08-19 16:49:06 using the following
 computational environment and dependencies:
 
     #> - Session info ---------------------------------------------------------------
@@ -823,7 +1412,7 @@ computational environment and dependencies:
     #>  collate  German_Germany.1252         
     #>  ctype    German_Germany.1252         
     #>  tz       Europe/Berlin               
-    #>  date     2020-07-31                  
+    #>  date     2020-08-19                  
     #> 
     #> - Packages -------------------------------------------------------------------
     #>  package     * version date       lib source        
@@ -837,7 +1426,7 @@ computational environment and dependencies:
     #>  devtools      2.3.1   2020-07-21 [1] CRAN (R 4.0.2)
     #>  digest        0.6.25  2020-02-23 [1] CRAN (R 4.0.0)
     #>  dplyr       * 1.0.0   2020-05-29 [1] CRAN (R 4.0.0)
-    #>  ellipsis      0.3.0   2019-09-20 [1] CRAN (R 4.0.0)
+    #>  ellipsis      0.3.1   2020-05-15 [1] CRAN (R 4.0.2)
     #>  evaluate      0.14    2019-05-28 [1] CRAN (R 4.0.0)
     #>  fansi         0.4.1   2020-01-08 [1] CRAN (R 4.0.0)
     #>  farver        2.0.3   2020-01-16 [1] CRAN (R 4.0.0)
@@ -863,7 +1452,7 @@ computational environment and dependencies:
     #>  mgcv          1.8-31  2019-11-09 [2] CRAN (R 4.0.0)
     #>  munsell       0.5.0   2018-06-12 [1] CRAN (R 4.0.0)
     #>  nlme          3.1-147 2020-04-13 [2] CRAN (R 4.0.0)
-    #>  pillar        1.4.3   2019-12-20 [1] CRAN (R 4.0.0)
+    #>  pillar        1.4.6   2020-07-10 [1] CRAN (R 4.0.2)
     #>  pkgbuild      1.0.7   2020-04-25 [1] CRAN (R 4.0.0)
     #>  pkgconfig     2.0.3   2019-09-22 [1] CRAN (R 4.0.0)
     #>  pkgload       1.0.2   2018-10-29 [1] CRAN (R 4.0.0)
@@ -889,7 +1478,7 @@ computational environment and dependencies:
     #>  tidyr       * 1.0.3   2020-05-07 [1] CRAN (R 4.0.0)
     #>  tidyselect    1.1.0   2020-05-11 [1] CRAN (R 4.0.0)
     #>  usethis       1.6.1   2020-04-29 [1] CRAN (R 4.0.0)
-    #>  vctrs         0.3.1   2020-06-05 [1] CRAN (R 4.0.2)
+    #>  vctrs         0.3.2   2020-07-15 [1] CRAN (R 4.0.2)
     #>  viridis     * 0.5.1   2018-03-29 [1] CRAN (R 4.0.0)
     #>  viridisLite * 0.3.0   2018-02-01 [1] CRAN (R 4.0.0)
     #>  webshot       0.5.2   2019-11-22 [1] CRAN (R 4.0.2)
@@ -905,4 +1494,4 @@ The current Git commit details are:
 
     #> Local:    gh-page E:/R/N4Oumfrage
     #> Remote:   gh-page @ origin (https://github.com/SCSchmidt/N4Oumfrage)
-    #> Head:     [7cbe4e5] 2020-07-31: Auslagerung d. Software- und Datenauswertung
+    #> Head:     [4dee3f4] 2020-08-06: Ãœberarbeitung der Auswertung Software / Datenformate

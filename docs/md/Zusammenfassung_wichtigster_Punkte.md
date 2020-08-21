@@ -17,24 +17,26 @@ größerer Rücklauf als bei der Aridande+ - Umfrage von 2019
 (<a href="https://ariadne-infrastructure.eu/key-results-of-the-community-needs-survey/" class="uri">https://ariadne-infrastructure.eu/key-results-of-the-community-needs-survey/</a>)
 und der IANUS-Umfrage von 2013
 (<a href="https://www.ianus-fdz.de/projects/ergebnisse/wiki" class="uri">https://www.ianus-fdz.de/projects/ergebnisse/wiki</a>).
-Damit kann ein erhöhtes Interesse der Community an dem Thema abgelesen
-werden.
+
+Mögliche Gründe: erhöhtes Interesse der Community an dem Thema,
+breiteres Spektrum an Fächern (siehe unten) repräsentiert, nicht nur
+Archäologie, NFDI-Prozess hat Aufmerksamkeit erregt?
 
 Demographische Angaben
 ======================
 
+Zuerst einige allgemeine Statistiken zu der Teilnehmergruppe:
+
 Alter und Beschäftigungsverhältnis
 ----------------------------------
-
-Zuerst einige allgemeine Statistiken zu der Teilnehmergruppe:
 
 ![](../figures/fig_alter_einrichtung-1.png) Wir haben knapp 50
 20-29jährige, der Großteil der Befragten ist zwischen 30 und 60 Jahre
 alt und arbeitet an einer Hochschule, in der Forschung, im Museum oder
-in einer Denkmalbehörde (man beachte die über 80jährige Person, die
-nicht mehr arbeitet…). Seltener kommen Grabungsfirmen und Archive vor.
-Eine ähnliche Verteilung hatten die Umfrageteilnehmer bei Ariadne+ und
-IANUS.
+in einer Denkmalbehörde (man beachte die zweo über 80jährige Personen,
+die nicht mehr arbeiten…). Seltener kommen Grabungsfirmen und Archive
+vor. Eine ähnliche Verteilung hatten die Umfrageteilnehmer bei Ariadne+
+und IANUS.
 
 <table>
 <thead>
@@ -53,6 +55,17 @@ Prozent
 <tbody>
 <tr>
 <td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:right;">
+48
+</td>
+<td style="text-align:right;">
+8.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 30-39
 </td>
 <td style="text-align:right;">
@@ -60,17 +73,6 @@ Prozent
 </td>
 <td style="text-align:right;">
 26.6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-50-59
-</td>
-<td style="text-align:right;">
-155
-</td>
-<td style="text-align:right;">
-25.9
 </td>
 </tr>
 <tr>
@@ -86,6 +88,17 @@ Prozent
 </tr>
 <tr>
 <td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:right;">
+155
+</td>
+<td style="text-align:right;">
+25.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 60-69
 </td>
 <td style="text-align:right;">
@@ -93,28 +106,6 @@ Prozent
 </td>
 <td style="text-align:right;">
 9.4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-20-29
-</td>
-<td style="text-align:right;">
-48
-</td>
-<td style="text-align:right;">
-8.0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-keine Angabe
-</td>
-<td style="text-align:right;">
-18
-</td>
-<td style="text-align:right;">
-3.0
 </td>
 </tr>
 <tr>
@@ -139,8 +130,24 @@ keine Angabe
 0.3
 </td>
 </tr>
+<tr>
+<td style="text-align:left;">
+keine Angabe
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+</tr>
 </tbody>
 </table>
+
+Der Großteil der Befragten arbeitete an einer Universität oder
+Hochschule, in einer Forschungseinrichtung einem Museum oder einer
+Denkmalbehörde:
+
 <table>
 <thead>
 <tr>
@@ -259,8 +266,8 @@ Archiv
 </table>
 
 Mit ca. 51% männlichen und 42% weiblichen sowie 2 diversen
-Teilnehmer\*innen (keine Angabe: 6%) sind auch hier die Teilnehmer
-repräsentativ.
+Teilnehmer\*innen (und keine Angabe: 6%) sind auch hier die
+Teilnehmer\*innen repräsentativ.
 
 Einrichtungen und Gruppe
 ------------------------
@@ -269,7 +276,7 @@ Innerhalb der Einrichtungen teilen sich die Teilnehmer\*innen auf
 folgende Gruppen auf:
 
 ![](../figures/fig_einrichtung_gruppe-1.png) Das Gros besteht aus
-wissenschaftlichen Mitarbeiterinnen an der Hochschule und in
+wissenschaftlichen Mitarbeiterinnen an der Hochschule, in Museen und in
 Forschungseinrichtungen.
 
 <table>
@@ -300,7 +307,7 @@ wissenschaftliche Mitarbeiter/innen
 </tr>
 <tr>
 <td style="text-align:left;">
-projektleiter
+Projektleiter
 </td>
 <td style="text-align:right;">
 125
@@ -344,7 +351,7 @@ Promovierende
 </tr>
 <tr>
 <td style="text-align:left;">
-daten\_it\_beauftragt
+Daten/IT-Beauftragte
 </td>
 <td style="text-align:right;">
 69
@@ -378,1015 +385,7 @@ Studierende
 </tbody>
 </table>
 
-Alter und Erfahrung + Wichtung
-==============================
-
-Gibt es einen Zusammenhang zwischen dem Alter der Teilnehmenden Person,
-der Erfahrung die sie in digitalen Forschungsdatenmanagement hat und dem
-Gewicht, dass sie dem sie ihm zuweist?
-
-![](../figures/fig_erfahrung_gruppe-1.png) Alle Altersgruppen haben sehr
-gemischt Erfahrungen und Wissensstände mit digitalem Datenmanagement.
-Bei den Senioren (70-79) lassen sich zwei Gruppen differenzieren (viel
-Ahnung - wenig Ahnung), sie halten digitales Forschungsdatenmanagement
-allgemein für weniger wichtig für ihre tägliche Arbeit.
-
-Jüngere Teilnehmende schätzen ihre eigene Erfahrung deutlich geringer
-ein als diejenigen “die im Beruf stehen” und zwischen 30 und 60 Jahre
-alt sind. Diese Gruppe scheint dem digitalen FDM auch den höchsten
-Stellenwert in ihrer täglichen Arbeit zuzuweisen.
-
-Wer viel von Forschungsdatenmanagement hält, scheint sich häufig schon
-recht gut weitergebildet zu haben (oder anders herum: Einschätzung der
-Wichtigkeit kommt von eigener Erfahrung!). Nur wenige Personen geben an,
-ihre Erfahrung als mittig einzuschätzen, wenn sie FDM für wichtig halten
-und die gelben Punkte (sehr hoher Stellenwert des digitalen FDM für die
-eigene Arbeit) häufen sich im Bereich "viel Erfahrung).
-
-Diese Ergebnisse sollten statistische getestet werden:
-
-### Test: Alter - Erfahrung mit spearmans rho
-
-Für den Test werden die Teilnehmer entfernt, die keine Altersangabe
-gemacht haben.
-
-Es bleiben für den Vergleich 850 Teilnehmer.
-
-    #> 
-    #>  Spearman's rank correlation rho
-    #> 
-    #> data:  age_group2$beginn and age_group2$erfahrung_digfdm
-    #> S = 99630634, p-value = 0.2743
-    #> alternative hypothesis: true rho is not equal to 0
-    #> sample estimates:
-    #>         rho 
-    #> -0.03794608
-
-Nach der Berechnung des Tests lässt sich keine signifikante Korrelation
-zwischen Alter und Erfahrung feststellen, somit besteht kein linearer
-Zusammenhang zwischen Alter und Erfahrung mit digitalem FDM. Dies
-überrascht nicht, da die älteren Kolleg\*innen vmtl weniger Kontakt
-bisher damit hatten.
-
-Aus diesem Grund wird die Vermutung eines linearen Zusammenhangs
-aufgegeben und nur ein Vergleich der verschiedenen Gruppen (kategorial)
-geführt:
-
-### Test: Alter - Erfahrung mit chi²
-
-Der Chi-Quadrat-Test darf eigentlich für diese Daten nicht angewendet
-werden, da die Erwartungswerte zu gering werden (Anzahl der Teilnehmer
-muss auf zu viele Subgruppen aufgeteilt werden). Anhand der Residuen
-lassen sich trotzdem Erkenntnisse erarbeiten:
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-0
-</th>
-<th style="text-align:right;">
-1
-</th>
-<th style="text-align:right;">
-2
-</th>
-<th style="text-align:right;">
-3
-</th>
-<th style="text-align:right;">
-4
-</th>
-<th style="text-align:right;">
-5
-</th>
-<th style="text-align:right;">
-6
-</th>
-<th style="text-align:right;">
-7
-</th>
-<th style="text-align:right;">
-8
-</th>
-<th style="text-align:right;">
-9
-</th>
-<th style="text-align:right;">
-10
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-20-29
-</td>
-<td style="text-align:right;">
-3.7803715
-</td>
-<td style="text-align:right;">
-0.7163280
-</td>
-<td style="text-align:right;">
-0.7161859
-</td>
-<td style="text-align:right;">
--0.5587377
-</td>
-<td style="text-align:right;">
-0.5136689
-</td>
-<td style="text-align:right;">
-1.8344985
-</td>
-<td style="text-align:right;">
--0.8132230
-</td>
-<td style="text-align:right;">
--0.0946490
-</td>
-<td style="text-align:right;">
--1.4080190
-</td>
-<td style="text-align:right;">
--1.5119790
-</td>
-<td style="text-align:right;">
--0.6023567
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-30-39
-</td>
-<td style="text-align:right;">
--1.4357282
-</td>
-<td style="text-align:right;">
--2.0343612
-</td>
-<td style="text-align:right;">
--0.9246371
-</td>
-<td style="text-align:right;">
--0.4177876
-</td>
-<td style="text-align:right;">
--2.1144043
-</td>
-<td style="text-align:right;">
-0.2360961
-</td>
-<td style="text-align:right;">
-0.0875959
-</td>
-<td style="text-align:right;">
-1.8062580
-</td>
-<td style="text-align:right;">
-1.6510160
-</td>
-<td style="text-align:right;">
--1.0991788
-</td>
-<td style="text-align:right;">
-0.0220848
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-40-49
-</td>
-<td style="text-align:right;">
--0.9855187
-</td>
-<td style="text-align:right;">
--0.2163476
-</td>
-<td style="text-align:right;">
-0.9926926
-</td>
-<td style="text-align:right;">
-0.0320451
-</td>
-<td style="text-align:right;">
-0.7735451
-</td>
-<td style="text-align:right;">
--1.8993041
-</td>
-<td style="text-align:right;">
-2.3356071
-</td>
-<td style="text-align:right;">
--1.5684687
-</td>
-<td style="text-align:right;">
--0.3903671
-</td>
-<td style="text-align:right;">
-1.5941161
-</td>
-<td style="text-align:right;">
-0.3548404
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-50-59
-</td>
-<td style="text-align:right;">
-0.9290039
-</td>
-<td style="text-align:right;">
-1.1015447
-</td>
-<td style="text-align:right;">
--1.3119447
-</td>
-<td style="text-align:right;">
--0.6888301
-</td>
-<td style="text-align:right;">
-1.2118019
-</td>
-<td style="text-align:right;">
-0.5362489
-</td>
-<td style="text-align:right;">
--1.6494430
-</td>
-<td style="text-align:right;">
--0.4188121
-</td>
-<td style="text-align:right;">
--0.0400150
-</td>
-<td style="text-align:right;">
-0.6535173
-</td>
-<td style="text-align:right;">
-0.9429166
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-60-69
-</td>
-<td style="text-align:right;">
--0.3268602
-</td>
-<td style="text-align:right;">
-1.9568590
-</td>
-<td style="text-align:right;">
-1.0764170
-</td>
-<td style="text-align:right;">
-1.6359643
-</td>
-<td style="text-align:right;">
-0.5108449
-</td>
-<td style="text-align:right;">
-0.5778127
-</td>
-<td style="text-align:right;">
--0.2529239
-</td>
-<td style="text-align:right;">
-0.0166945
-</td>
-<td style="text-align:right;">
--1.0840727
-</td>
-<td style="text-align:right;">
--0.9621024
-</td>
-<td style="text-align:right;">
--1.4783806
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-70-79
-</td>
-<td style="text-align:right;">
--0.3922323
-</td>
-<td style="text-align:right;">
--0.4160251
-</td>
-<td style="text-align:right;">
-2.0549780
-</td>
-<td style="text-align:right;">
-2.4243808
-</td>
-<td style="text-align:right;">
--0.6650622
-</td>
-<td style="text-align:right;">
--1.1094004
-</td>
-<td style="text-align:right;">
--0.9250780
-</td>
-<td style="text-align:right;">
--0.2838067
-</td>
-<td style="text-align:right;">
--0.5321812
-</td>
-<td style="text-align:right;">
-1.8735678
-</td>
-<td style="text-align:right;">
--0.7783118
-</td>
-</tr>
-</tbody>
-</table>
-
-die größten Abweichungen gibt es bei der Altersgruppe der 20-29jährigen
-im Bereich “Erfahrung = 0”, dort sind sie überrepräsentiert, ebenso wie
-die Altersgruppen 60-69 und 70-70 im Bereich der niedrigen
-Erfahrungswerte 1-3 überrepräsentiert sind.
-
-    #> [1] 0.1557093
-
-Cramers V ergibt einen Wert von 0,16, was auf einen schwachen
-Zusammenhang zwischen Altersgruppe und Erfahrung schließen lässt.
-
-–\> Conclusio: Ältere und junge haben wenig Erfahrung. Das ist nicht
-allzu überraschend.
-
-Als nächstes kann die Gewichtung für die eigene Arbeit untersucht
-werden:
-
-### Test: Alter - Wichtung mit spearmans rho
-
-    #> 
-    #>  Spearman's rank correlation rho
-    #> 
-    #> data:  rank(age_group[, 1]) and age_group[, 8]
-    #> S = 111667326, p-value = 2.176e-06
-    #> alternative hypothesis: true rho is not equal to 0
-    #> sample estimates:
-    #>        rho 
-    #> -0.1633436
-
-Je älter, desto weniger wichtig. Schwacher, aber höchstsignifikanter
-Zusammenhang.
-
-### Test: Alter - Wichtung mit Chi²
-
-Wie oben kann auch hier nur mit den Residualwerten gearbeitet werden.
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-0
-</th>
-<th style="text-align:right;">
-1
-</th>
-<th style="text-align:right;">
-2
-</th>
-<th style="text-align:right;">
-3
-</th>
-<th style="text-align:right;">
-4
-</th>
-<th style="text-align:right;">
-5
-</th>
-<th style="text-align:right;">
-6
-</th>
-<th style="text-align:right;">
-7
-</th>
-<th style="text-align:right;">
-8
-</th>
-<th style="text-align:right;">
-9
-</th>
-<th style="text-align:right;">
-10
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-20-29
-</td>
-<td style="text-align:right;">
--0.2594373
-</td>
-<td style="text-align:right;">
--0.6354889
-</td>
-<td style="text-align:right;">
--0.2465787
-</td>
-<td style="text-align:right;">
-1.0155116
-</td>
-<td style="text-align:right;">
--0.9142075
-</td>
-<td style="text-align:right;">
-1.0609058
-</td>
-<td style="text-align:right;">
--0.1991741
-</td>
-<td style="text-align:right;">
-0.2973860
-</td>
-<td style="text-align:right;">
--3.3865749
-</td>
-<td style="text-align:right;">
-0.676665
-</td>
-<td style="text-align:right;">
-2.3346091
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-30-39
-</td>
-<td style="text-align:right;">
--0.5759607
-</td>
-<td style="text-align:right;">
-0.7156282
-</td>
-<td style="text-align:right;">
--1.3155996
-</td>
-<td style="text-align:right;">
--1.1435742
-</td>
-<td style="text-align:right;">
-0.5954377
-</td>
-<td style="text-align:right;">
--2.5625615
-</td>
-<td style="text-align:right;">
--1.3717182
-</td>
-<td style="text-align:right;">
--0.9223550
-</td>
-<td style="text-align:right;">
-0.7366931
-</td>
-<td style="text-align:right;">
-2.724901
-</td>
-<td style="text-align:right;">
-0.3591555
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-40-49
-</td>
-<td style="text-align:right;">
--0.4975903
-</td>
-<td style="text-align:right;">
--0.3983919
-</td>
-<td style="text-align:right;">
-1.9805348
-</td>
-<td style="text-align:right;">
--0.4782665
-</td>
-<td style="text-align:right;">
--0.3059617
-</td>
-<td style="text-align:right;">
-0.1687339
-</td>
-<td style="text-align:right;">
--0.3921585
-</td>
-<td style="text-align:right;">
-0.2928265
-</td>
-<td style="text-align:right;">
-0.8160790
-</td>
-<td style="text-align:right;">
--1.231288
-</td>
-<td style="text-align:right;">
--0.1719428
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-50-59
-</td>
-<td style="text-align:right;">
-1.4646030
-</td>
-<td style="text-align:right;">
-0.3676541
-</td>
-<td style="text-align:right;">
--0.4012463
-</td>
-<td style="text-align:right;">
--0.1696854
-</td>
-<td style="text-align:right;">
--1.0711983
-</td>
-<td style="text-align:right;">
-1.8334969
-</td>
-<td style="text-align:right;">
-0.8754264
-</td>
-<td style="text-align:right;">
--0.2900503
-</td>
-<td style="text-align:right;">
--0.0258717
-</td>
-<td style="text-align:right;">
--1.055749
-</td>
-<td style="text-align:right;">
-0.0988696
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-60-69
-</td>
-<td style="text-align:right;">
--0.2941742
-</td>
-<td style="text-align:right;">
--0.7205767
-</td>
-<td style="text-align:right;">
-0.2774515
-</td>
-<td style="text-align:right;">
-1.2486061
-</td>
-<td style="text-align:right;">
-1.6343011
-</td>
-<td style="text-align:right;">
--0.0085838
-</td>
-<td style="text-align:right;">
-2.2465358
-</td>
-<td style="text-align:right;">
-1.5578194
-</td>
-<td style="text-align:right;">
-0.1876811
-</td>
-<td style="text-align:right;">
--1.670935
-</td>
-<td style="text-align:right;">
--2.1669412
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-70-79
-</td>
-<td style="text-align:right;">
--0.0980581
-</td>
-<td style="text-align:right;">
--0.2401922
-</td>
-<td style="text-align:right;">
--0.4274252
-</td>
-<td style="text-align:right;">
-3.5889253
-</td>
-<td style="text-align:right;">
-1.1113248
-</td>
-<td style="text-align:right;">
-1.9313483
-</td>
-<td style="text-align:right;">
--0.6933752
-</td>
-<td style="text-align:right;">
--0.0284389
-</td>
-<td style="text-align:right;">
-0.0625604
-</td>
-<td style="text-align:right;">
--1.074172
-</td>
-<td style="text-align:right;">
--1.4243757
-</td>
-</tr>
-</tbody>
-</table>
-
-Auffällig ist hier die Altersgruppe der 20-29jährigen, die dem digitalen
-FDM eine höhere Bedeutung zuweist als erwartet. Ältere Semester tun das
-wenig überraschender weise gegenteilig.
-
-    #> [1] 0.1553697
-
-Anhand Cramers V \~ 0,16 lässt sich wieder ein schwacher Zusammenhang
-zwischen Alter und Gewichtung festhalten.
-
-Korreliert die Einschätzung der Wichtigkeit und die Erfahrung und lassen sich darin Gruppen unterscheiden?
-----------------------------------------------------------------------------------------------------------
-
-Für diese Frage werden die beiden Werte Einschätzung der Wichtigkeit für
-das eigene Arbeiten und die eigene Erfahrung gegeneinander plotten. Da
-in beiden Fällen keine stetigen metrischen Werte vorliegen, sondern nur
-mit diskreten Werten gearbeitet wurde, muss für die Visualisierung ein
-“jitter-Effekt” eingesetzt werden, der die Punkte ein wenig verschiebt,
-damit nicht alle direkt übereinander liegen.
-
-Allgemein kann der Zusammenhang bestätigt werden (eingezeichnet blaue
-Linie ist lineare Regression mit Konfidenzintervall). Verschiedene
-Einfärbungen werden nun getestet:
-
-### Gruppenzugehörigkeit
-
-![](../figures/fig_gruppe-1.png) m. E. lässt sich kein Zusammenhang
-zwischen der Zugehörigkeit zu einer Gruppe und der Wichtung / Erfahrung
-im digitalen FDM finden.
-
-Auffällig ist der/die einsame Studierende oben links in der Ecke,
-der/die die Bedeutung von FDM sehr hoch einschätzt, aber selber
-überhaupt keine Erfahrung hat. Kann dieser Person jemand bitte ganz
-schnell einen Datenbankenkurs anbieten?
-
-Der Bereich “hat selber wenig Erfahrung, schätzt aber die Bedeutung für
-die eigene Arbeit hoch ein” (also Einschätzung Bedeutung FDM 6-10 und
-Einschätzung eigene Erfahrung FDM 0-4) ist eine Zielgruppe für uns: Das
-sind die Personen, die wissen, dass sie sich fortbilden müssen, denen
-aber evtl einfach das Angebot fehlt. Es sind darin alle Gruppen
-vertreten, außer Daten- und IT-Beautragte.
-
-### Blickwinkel der Antwortenden
-
-![](../figures/fig_blickwinkel-1.png) Institutionen und Individuen
-zeigen keine Musterungen.
-
-### Einrichtungen
-
-![](../figures/fig_einrichtungen-1.png)
-
-Eventuell zeigen sich Grabungsfirmen insbesondere in dem
-höherschätzenden Bereich. Es zeigt sich bei allen Einrichtungen eine
-große Heterogenität.
-
-### Teststatistiken zu dem Zusammenhang eigenes Wissen und Bedeutung
-
-    #> 
-    #> Call:
-    #> lm(formula = erfahrung_digfdm ~ stellenwert_digfdm, data = erfahrung_group)
-    #> 
-    #> Residuals:
-    #>     Min      1Q  Median      3Q     Max 
-    #> -7.7089 -1.4109  0.2381  1.5626  7.4831 
-    #> 
-    #> Coefficients:
-    #>                    Estimate Std. Error t value Pr(>|t|)    
-    #> (Intercept)         1.21895    0.24708   4.934 9.72e-07 ***
-    #> stellenwert_digfdm  0.64900    0.03105  20.900  < 2e-16 ***
-    #> ---
-    #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    #> 
-    #> Residual standard error: 1.989 on 849 degrees of freedom
-    #>   (18 observations deleted due to missingness)
-    #> Multiple R-squared:  0.3397, Adjusted R-squared:  0.3389 
-    #> F-statistic: 436.8 on 1 and 849 DF,  p-value: < 2.2e-16
-
-R² \~ 0,34: moderater Zusammenhang zwischen eigener Erfahrung und dem
-Stellenwert der dem digitalen FDM zugeschrieben wird.
-
-### Gibt es eine Trennung zwischen Menschen mit viel und wenig Ahnung?
-
-Hier ist es sinnvoll, sich einfach die Verteilung anzuschauen. Ist sie
-normalverteilt? ![](../figures/fig_verteilung_erfahrung-1.png)
-
-Die Erfahrung mit digitalem Datenmanagement in unserer Umfrage ist
-nicht-normalverteilt, sondern nach rechts verschoben:
-
--   Median = 6
--   Mittelwert = 6.0018484
--   Modus = 8
-
-Hier kann sich zeigen, dass wir vor allem Leute erreicht haben, die sich
-mit dem Thema schon beschäftigt haben. Es gibt einen deutlichen Anstieg
-zwischen der Einschätzung “4” und “5”. Hier lassen sich eventuell zwei
-Gruppen unterscheiden.
-
-Welche Arbeitgeber haben ein Richtlinienkatalog?
-================================================
-
-<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-ja
-</th>
-<th style="text-align:right;">
-nein
-</th>
-<th style="text-align:right;">
-weiß nicht
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Archiv
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Außeruniversitäre Forschungseinrichtung
-</td>
-<td style="text-align:right;">
-66
-</td>
-<td style="text-align:right;">
-36
-</td>
-<td style="text-align:right;">
-24
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Denkmalbehörde
-</td>
-<td style="text-align:right;">
-24
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-18
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Forschungsverbund
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Grabungsfirma
-</td>
-<td style="text-align:right;">
-15
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-keiner
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-10
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Museum
-</td>
-<td style="text-align:right;">
-24
-</td>
-<td style="text-align:right;">
-67
-</td>
-<td style="text-align:right;">
-32
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Sonstiges
-</td>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-12
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Universität/Hochschule
-</td>
-<td style="text-align:right;">
-60
-</td>
-<td style="text-align:right;">
-53
-</td>
-<td style="text-align:right;">
-55
-</td>
-</tr>
-</tbody>
-</table>
-
-Für die Analyse, ob es hier nennenswerte Unterschiede gibt, entfernen
-wir die Angaben “weiß nicht”:
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-ja
-</th>
-<th style="text-align:right;">
-nein
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Archiv
-</td>
-<td style="text-align:right;">
-0.9080252
-</td>
-<td style="text-align:right;">
--0.9263710
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Außeruniversitäre Forschungseinrichtung
-</td>
-<td style="text-align:right;">
-1.9383045
-</td>
-<td style="text-align:right;">
--1.9774661
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Denkmalbehörde
-</td>
-<td style="text-align:right;">
-0.0061276
-</td>
-<td style="text-align:right;">
--0.0062514
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Forschungsverbund
-</td>
-<td style="text-align:right;">
--0.5346797
-</td>
-<td style="text-align:right;">
-0.5454824
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Grabungsfirma
-</td>
-<td style="text-align:right;">
-2.3944789
-</td>
-<td style="text-align:right;">
--2.4428571
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-keiner
-</td>
-<td style="text-align:right;">
--0.7281456
-</td>
-<td style="text-align:right;">
-0.7428571
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Museum
-</td>
-<td style="text-align:right;">
--3.2895468
-</td>
-<td style="text-align:right;">
-3.3560090
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Sonstiges
-</td>
-<td style="text-align:right;">
--0.0523937
-</td>
-<td style="text-align:right;">
-0.0534522
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Universität/Hochschule
-</td>
-<td style="text-align:right;">
-0.3121936
-</td>
-<td style="text-align:right;">
--0.3185012
-</td>
-</tr>
-</tbody>
-</table>
-
-Chi nur eingeschränkt nutzbar, weil die Voraussetzungen nicht 100%
-erfüllt. Grabungsfirmen und außeruniversitäre Forschungseinrichrungen
-haben häufiger einen Richtlinienkatalog als zu erwarten währen, während
-insbesondere Museen keine haben.
-
-Stellenwert nach Disziplin
---------------------------
+\#\#Vertretene Disziplinen
 
 <table>
 <thead>
@@ -1623,11 +622,1520 @@ pp), zusammen etwa 50% aller Antworten. Häufig genannt wurden außerdem
 Musikwissenschaft, Kunstgeschichte, Geschichte,
 Restaurationswissenschaften, unterschiedliche IT-Bereiche,
 Denkmalpflege, Museologie, Numismatik und unterschiedliche
-interdisziplinären Felder wie Archäometrie, Geoinformatik und DH.
+interdisziplinären Felder wie Archäometrie, Geoinformatik und DH. –\>
+deutlich breiter aufgestellt als IANUS 2013
+(<a href="https://www.ianus-fdz.de/attachments/download/774/Teil1-Ergebnisse_2014-02-26_FINAL.pdf" class="uri">https://www.ianus-fdz.de/attachments/download/774/Teil1-Ergebnisse_2014-02-26_FINAL.pdf</a>,
+S. 6)
+
+Analyse zum Thema Erfahrungen im Bereich FMD und Bedeutung von FDM für die tägliche Arbeit
+==========================================================================================
+
+Alter und Erfahrung + Wichtung
+------------------------------
+
+Gibt es einen Zusammenhang zwischen dem Alter der Teilnehmenden Person,
+der Erfahrung die sie in digitalen Forschungsdatenmanagement hat und dem
+Gewicht, dass sie dem sie ihm zuweist?
+
+![](../figures/fig_erfahrung_gruppe-1.png) Alle Altersgruppen haben sehr
+gemischt Erfahrungen und Wissensstände mit digitalem Datenmanagement.
+Bei den Senioren (70-79) lassen sich zwei Gruppen differenzieren (viel
+Ahnung - wenig Ahnung), sie halten digitales Forschungsdatenmanagement
+allgemein für weniger wichtig für ihre tägliche Arbeit.
+
+Jüngere Teilnehmende schätzen ihre eigene Erfahrung deutlich geringer
+ein als diejenigen “die im Beruf stehen” und zwischen 30 und 60 Jahre
+alt sind. Diese Gruppe scheint dem digitalen FDM auch den höchsten
+Stellenwert in ihrer täglichen Arbeit zuzuweisen.
+
+Wer viel von Forschungsdatenmanagement hält, scheint sich häufig schon
+recht gut weitergebildet zu haben (oder anders herum: Einschätzung der
+Wichtigkeit kommt von eigener Erfahrung!). Nur wenige Personen geben an,
+ihre Erfahrung als mittig einzuschätzen, wenn sie FDM für wichtig halten
+und die gelben Punkte (sehr hoher Stellenwert des digitalen FDM für die
+eigene Arbeit) häufen sich im Bereich "viel Erfahrung).
+
+Diese Ergebnisse sollten statistische getestet werden (Details siehe
+[detailliertere
+Auswertung](https://github.com/SCSchmidt/N4Oumfrage/blob/master/docs/md/Auswertung1.md):
+
+Der Chi-Quadrat-Test darf eigentlich für diese Daten nicht angewendet
+werden, da die Erwartungswerte zu gering werden (Anzahl der Teilnehmer
+muss auf zu viele Subgruppen aufgeteilt werden). Anhand der Residuen
+lassen sich trotzdem Erkenntnisse erarbeiten:
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+0
+</th>
+<th style="text-align:right;">
+1
+</th>
+<th style="text-align:right;">
+2
+</th>
+<th style="text-align:right;">
+3
+</th>
+<th style="text-align:right;">
+4
+</th>
+<th style="text-align:right;">
+5
+</th>
+<th style="text-align:right;">
+6
+</th>
+<th style="text-align:right;">
+7
+</th>
+<th style="text-align:right;">
+8
+</th>
+<th style="text-align:right;">
+9
+</th>
+<th style="text-align:right;">
+10
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:right;">
+3.8467257
+</td>
+<td style="text-align:right;">
+0.7493150
+</td>
+<td style="text-align:right;">
+0.6056988
+</td>
+<td style="text-align:right;">
+-0.5585837
+</td>
+<td style="text-align:right;">
+0.4319039
+</td>
+<td style="text-align:right;">
+1.8617680
+</td>
+<td style="text-align:right;">
+-0.8348121
+</td>
+<td style="text-align:right;">
+-0.0700738
+</td>
+<td style="text-align:right;">
+-1.3771583
+</td>
+<td style="text-align:right;">
+-1.4837688
+</td>
+<td style="text-align:right;">
+-0.6176096
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:right;">
+-1.4000080
+</td>
+<td style="text-align:right;">
+-2.0022822
+</td>
+<td style="text-align:right;">
+-1.1092119
+</td>
+<td style="text-align:right;">
+-0.4174018
+</td>
+<td style="text-align:right;">
+-2.2305213
+</td>
+<td style="text-align:right;">
+0.2830387
+</td>
+<td style="text-align:right;">
+0.0296870
+</td>
+<td style="text-align:right;">
+1.8690909
+</td>
+<td style="text-align:right;">
+1.7465459
+</td>
+<td style="text-align:right;">
+-1.0109201
+</td>
+<td style="text-align:right;">
+-0.0176593
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+40-49
+</td>
+<td style="text-align:right;">
+-0.9517655
+</td>
+<td style="text-align:right;">
+-0.1711350
+</td>
+<td style="text-align:right;">
+0.7899794
+</td>
+<td style="text-align:right;">
+0.0323994
+</td>
+<td style="text-align:right;">
+0.6209762
+</td>
+<td style="text-align:right;">
+-1.8662030
+</td>
+<td style="text-align:right;">
+2.2736627
+</td>
+<td style="text-align:right;">
+-1.5270263
+</td>
+<td style="text-align:right;">
+-0.3181113
+</td>
+<td style="text-align:right;">
+1.6992465
+</td>
+<td style="text-align:right;">
+0.3190514
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:right;">
+0.9853587
+</td>
+<td style="text-align:right;">
+1.1626371
+</td>
+<td style="text-align:right;">
+-1.4624538
+</td>
+<td style="text-align:right;">
+-0.6885075
+</td>
+<td style="text-align:right;">
+1.0477909
+</td>
+<td style="text-align:right;">
+0.5787477
+</td>
+<td style="text-align:right;">
+-1.6913316
+</td>
+<td style="text-align:right;">
+-0.3717308
+</td>
+<td style="text-align:right;">
+0.0356545
+</td>
+<td style="text-align:right;">
+0.7496422
+</td>
+<td style="text-align:right;">
+0.9039243
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+60-69
+</td>
+<td style="text-align:right;">
+-0.3040013
+</td>
+<td style="text-align:right;">
+2.0072586
+</td>
+<td style="text-align:right;">
+0.9447543
+</td>
+<td style="text-align:right;">
+1.6362601
+</td>
+<td style="text-align:right;">
+0.4195709
+</td>
+<td style="text-align:right;">
+0.6034092
+</td>
+<td style="text-align:right;">
+-0.2809318
+</td>
+<td style="text-align:right;">
+0.0450691
+</td>
+<td style="text-align:right;">
+-1.0461815
+</td>
+<td style="text-align:right;">
+-0.9215733
+</td>
+<td style="text-align:right;">
+-1.4922342
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+70-79
+</td>
+<td style="text-align:right;">
+-0.3878289
+</td>
+<td style="text-align:right;">
+-0.4113547
+</td>
+<td style="text-align:right;">
+1.9701390
+</td>
+<td style="text-align:right;">
+2.4245798
+</td>
+<td style="text-align:right;">
+-0.6787006
+</td>
+<td style="text-align:right;">
+-1.1054825
+</td>
+<td style="text-align:right;">
+-0.9299811
+</td>
+<td style="text-align:right;">
+-0.2755361
+</td>
+<td style="text-align:right;">
+-0.5205169
+</td>
+<td style="text-align:right;">
+1.9119908
+</td>
+<td style="text-align:right;">
+-0.7816942
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+keine Angabe
+</td>
+<td style="text-align:right;">
+-0.5976845
+</td>
+<td style="text-align:right;">
+-0.6339402
+</td>
+<td style="text-align:right;">
+2.3771125
+</td>
+<td style="text-align:right;">
+-0.0046893
+</td>
+<td style="text-align:right;">
+1.8222637
+</td>
+<td style="text-align:right;">
+-0.5297219
+</td>
+<td style="text-align:right;">
+0.6600250
+</td>
+<td style="text-align:right;">
+-0.6367367
+</td>
+<td style="text-align:right;">
+-0.9902793
+</td>
+<td style="text-align:right;">
+-1.1574111
+</td>
+<td style="text-align:right;">
+0.4555317
+</td>
+</tr>
+</tbody>
+</table>
+
+die größten Abweichungen gibt es bei der Altersgruppe der 20-29jährigen
+im Bereich “Erfahrung = 0”, dort sind sie überrepräsentiert, ebenso wie
+die Altersgruppen 60-69 und 70-70 im Bereich der niedrigen
+Erfahrungswerte 1-3 überrepräsentiert sind.
+
+    #> [1] 0.149905
+
+Cramers V ergibt einen Wert von 0,16, was auf einen schwachen
+Zusammenhang zwischen Altersgruppe und Erfahrung schließen lässt.
+
+–\> Conclusio: Ältere und junge haben wenig Erfahrung.
+
+Als nächstes kann die Gewichtung für die eigene Arbeit untersucht
+werden:
+
+Wie oben kann auch hier nur mit den Residualwerten des Chi-Quadrat-Tests
+gearbeitet werden.
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+0
+</th>
+<th style="text-align:right;">
+1
+</th>
+<th style="text-align:right;">
+2
+</th>
+<th style="text-align:right;">
+3
+</th>
+<th style="text-align:right;">
+4
+</th>
+<th style="text-align:right;">
+5
+</th>
+<th style="text-align:right;">
+6
+</th>
+<th style="text-align:right;">
+7
+</th>
+<th style="text-align:right;">
+8
+</th>
+<th style="text-align:right;">
+9
+</th>
+<th style="text-align:right;">
+10
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+20-29
+</td>
+<td style="text-align:right;">
+-0.2565247
+</td>
+<td style="text-align:right;">
+-0.6283547
+</td>
+<td style="text-align:right;">
+-0.3248740
+</td>
+<td style="text-align:right;">
+0.9177197
+</td>
+<td style="text-align:right;">
+-0.9195091
+</td>
+<td style="text-align:right;">
+1.0746573
+</td>
+<td style="text-align:right;">
+-0.2280521
+</td>
+<td style="text-align:right;">
+0.2830218
+</td>
+<td style="text-align:right;">
+-3.3813106
+</td>
+<td style="text-align:right;">
+0.7485204
+</td>
+<td style="text-align:right;">
+2.3533685
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+30-39
+</td>
+<td style="text-align:right;">
+-0.5694948
+</td>
+<td style="text-align:right;">
+0.7556097
+</td>
+<td style="text-align:right;">
+-1.4602190
+</td>
+<td style="text-align:right;">
+-1.2695255
+</td>
+<td style="text-align:right;">
+0.5773503
+</td>
+<td style="text-align:right;">
+-2.5455388
+</td>
+<td style="text-align:right;">
+-1.4281262
+</td>
+<td style="text-align:right;">
+-0.9502360
+</td>
+<td style="text-align:right;">
+0.7594433
+</td>
+<td style="text-align:right;">
+2.8983045
+</td>
+<td style="text-align:right;">
+0.3916288
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+40-49
+</td>
+<td style="text-align:right;">
+-0.4920042
+</td>
+<td style="text-align:right;">
+-0.3753935
+</td>
+<td style="text-align:right;">
+1.7371098
+</td>
+<td style="text-align:right;">
+-0.6007521
+</td>
+<td style="text-align:right;">
+-0.3196135
+</td>
+<td style="text-align:right;">
+0.1899839
+</td>
+<td style="text-align:right;">
+-0.4474611
+</td>
+<td style="text-align:right;">
+0.2659795
+</td>
+<td style="text-align:right;">
+0.8359744
+</td>
+<td style="text-align:right;">
+-1.1221868
+</td>
+<td style="text-align:right;">
+-0.1448052
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+50-59
+</td>
+<td style="text-align:right;">
+1.4926836
+</td>
+<td style="text-align:right;">
+0.3998794
+</td>
+<td style="text-align:right;">
+-0.5573720
+</td>
+<td style="text-align:right;">
+-0.3030510
+</td>
+<td style="text-align:right;">
+-1.0832851
+</td>
+<td style="text-align:right;">
+1.8597188
+</td>
+<td style="text-align:right;">
+0.8084944
+</td>
+<td style="text-align:right;">
+-0.3159231
+</td>
+<td style="text-align:right;">
+-0.0067432
+</td>
+<td style="text-align:right;">
+-0.9422879
+</td>
+<td style="text-align:right;">
+0.1270505
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+60-69
+</td>
+<td style="text-align:right;">
+-0.2908717
+</td>
+<td style="text-align:right;">
+-0.7124872
+</td>
+<td style="text-align:right;">
+0.1674993
+</td>
+<td style="text-align:right;">
+1.1351152
+</td>
+<td style="text-align:right;">
+1.6218615
+</td>
+<td style="text-align:right;">
+0.0036816
+</td>
+<td style="text-align:right;">
+2.1933052
+</td>
+<td style="text-align:right;">
+1.5384404
+</td>
+<td style="text-align:right;">
+0.1990481
+</td>
+<td style="text-align:right;">
+-1.6171412
+</td>
+<td style="text-align:right;">
+-2.1548251
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+70-79
+</td>
+<td style="text-align:right;">
+-0.0969572
+</td>
+<td style="text-align:right;">
+-0.2374957
+</td>
+<td style="text-align:right;">
+-0.4443139
+</td>
+<td style="text-align:right;">
+3.4659888
+</td>
+<td style="text-align:right;">
+1.1058147
+</td>
+<td style="text-align:right;">
+1.9407488
+</td>
+<td style="text-align:right;">
+-0.6991686
+</td>
+<td style="text-align:right;">
+-0.0335113
+</td>
+<td style="text-align:right;">
+0.0663494
+</td>
+<td style="text-align:right;">
+-1.0621133
+</td>
+<td style="text-align:right;">
+-1.4216721
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+keine Angabe
+</td>
+<td style="text-align:right;">
+-0.1494211
+</td>
+<td style="text-align:right;">
+-0.3660055
+</td>
+<td style="text-align:right;">
+2.2361101
+</td>
+<td style="text-align:right;">
+1.7995271
+</td>
+<td style="text-align:right;">
+0.1913459
+</td>
+<td style="text-align:right;">
+-0.2764370
+</td>
+<td style="text-align:right;">
+0.7786727
+</td>
+<td style="text-align:right;">
+0.3471707
+</td>
+<td style="text-align:right;">
+-0.2500395
+</td>
+<td style="text-align:right;">
+-1.6368265
+</td>
+<td style="text-align:right;">
+-0.3652467
+</td>
+</tr>
+</tbody>
+</table>
+
+Auffällig ist hier die Altersgruppe der 20-29jährigen, die dem digitalen
+FDM eine höhere Bedeutung zuweist als erwartet. Ältere Semester tun das
+gegenteilig.
+
+    #> [1] 0.148013
+
+Anhand Cramers V \~ 0,16 lässt sich wieder ein schwacher Zusammenhang
+zwischen Alter und Gewichtung festhalten.
+
+Korreliert die Einschätzung der Wichtigkeit und die Erfahrung und lassen sich darin Gruppen unterscheiden?
+----------------------------------------------------------------------------------------------------------
+
+Für diese Frage werden die beiden Werte Einschätzung der Wichtigkeit für
+das eigene Arbeiten und die eigene Erfahrung gegeneinander plotten. Da
+in beiden Fällen keine stetigen metrischen Werte vorliegen, sondern nur
+mit diskreten Werten gearbeitet wurde, muss für die Visualisierung ein
+“jitter-Effekt” eingesetzt werden, der die Punkte ein wenig verschiebt,
+damit nicht alle direkt übereinander liegen.
+
+Allgemein kann der Zusammenhang bestätigt werden (eingezeichnet blaue
+Linie ist lineare Regression mit Konfidenzintervall). Verschiedene
+Einfärbungen werden nun getestet:
+
+### Gruppenzugehörigkeit
+
+![](../figures/fig_gruppe-1.png) m. E. lässt sich kein Zusammenhang
+zwischen der Zugehörigkeit zu einer Gruppe und der Wichtung / Erfahrung
+im digitalen FDM finden, nur allgemein der Zusammenhang von Einschätzung
+der eigenen Erfahrung und der Einschätzung der Bedeutung korreliert mit
+R² \~ 0,34: moderater Zusammenhang
+
+Auffällig ist der/die einsame Studierende oben links in der Ecke,
+der/die die Bedeutung von FDM sehr hoch einschätzt, aber selber
+überhaupt keine Erfahrung hat. Kann dieser Person jemand bitte ganz
+schnell einen Datenbankenkurs anbieten?
+
+Der Bereich “hat selber wenig Erfahrung, schätzt aber die Bedeutung für
+die eigene Arbeit hoch ein” (also Einschätzung Bedeutung FDM 6-10 und
+Einschätzung eigene Erfahrung FDM 0-4) ist eine Zielgruppe für uns: Das
+sind die Personen, die wissen, dass sie sich fortbilden müssen, denen
+aber evtl einfach das Angebot fehlt. Es sind darin alle Gruppen
+vertreten, außer Daten- und IT-Beautragte.
+
+In der [detaillierteren
+Auswertung](https://github.com/SCSchmidt/N4Oumfrage/blob/master/docs/md/Auswertung1.md)
+wurden folgende Punkte untersucht:
+
+-   Blickwinnkel der Antworten (keine Unterschiede zwischen
+    Institutionen und Individuen)
+-   Einrichtungen ( Es zeigt sich bei allen Einrichtungen eine große
+    Heterogenität.Eventuell zeigen sich Grabungsfirmen insbesondere in
+    dem höherschätzenden Bereich. )
+
+Stellenwert nach Disziplin
+--------------------------
 
 ![](../figures/stellenwert_fdm_disziplin_grob-1.png)
 
 besonders in der Archäologie breit gestreute Antworten.
+
+### Gibt es eine Trennung zwischen Menschen mit viel und wenig Erfahrung?
+
+Hier ist es sinnvoll, sich einfach die Verteilung anzuschauen. Ist sie
+normalverteilt? ![](../figures/fig_verteilung_erfahrung-1.png)
+
+Die Erfahrung mit digitalem Datenmanagement in unserer Umfrage ist
+nicht-normalverteilt, sondern nach rechts verschoben:
+
+-   Median = 6
+-   Mittelwert = 6.0018484
+-   Modus = 8
+
+Hier kann sich zeigen, dass wir vor allem Leute erreicht haben, die sich
+mit dem Thema schon beschäftigt haben. Es gibt einen deutlichen Anstieg
+zwischen der Einschätzung “4” und “5”. Hier lassen sich eventuell zwei
+Gruppen unterscheiden.
+
+Welche Arbeitgeber haben ein Richtlinienkatalog?
+------------------------------------------------
+
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+ja
+</th>
+<th style="text-align:right;">
+nein
+</th>
+<th style="text-align:right;">
+weiß nicht
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Archiv
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Außeruniversitäre Forschungseinrichtung
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Denkmalbehörde
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Forschungsverbund
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grabungsfirma
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+keiner
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Museum
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sonstiges
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Universität/Hochschule
+</td>
+<td style="text-align:right;">
+60
+</td>
+<td style="text-align:right;">
+53
+</td>
+<td style="text-align:right;">
+55
+</td>
+</tr>
+</tbody>
+</table>
+
+Grabungsfirmen und außeruniversitäre Forschungseinrichrungen haben
+häufiger einen Richtlinienkatalog als zu erwarten währen, während
+insbesondere Museen keine haben.
+
+Analyse der Dienste und Datenformate für Forschungsdaten
+========================================================
+
+Visualisierung der Häufigkeiten der Nennung (bis zu sieben Nennungen pro
+Person):
+
+![](../figures/dienste_häufigkeiten-1.png) Zwei Programme werden extrem
+häufig genannt: Excel und QGIS. Access ist das bekannteste
+Datenbanksystem.
+
+V.a. in außeruniversitären Forschungseinrichtungen (4x genannt) und
+Denkmalbehörden (4x – einmal in sonstiges) wird selbständig Software
+entwickelt.
+
+Datenformate
+------------
+
+![](../figures/häufigkeiten_datenformate-1.png)
+
+PDF, doc, jpg und xls werden mit deutlichem Abstand am häufigsten
+genannt.
+
+Insgesamt 67 unterschiedliche Datenformate, darunter sehr spezialisierte
+Ausgabeformate von bestimmten Geräten (z.B. Laserscannern). Dargestellt
+sind hier diejenigen die häufiger als 2x genannt wurden.
+
+Wie werden Daten gesichert?
+===========================
+
+![](../figures/datastorage-1.png)
+
+Die häufigsten Back-Up-Methoden während der Projektphase sind das Netz
+des Arbeitgebers, die externe Festplatte und lokale Rechner. Externe
+Datenzentren, Versionierungssysteme und Fach-Repositorien liegen weit
+abgeschlagen zusammen mit DVDs und CDs.
+
+Im Vergleich zu der IANUS-Umfrage von 2013
+(<a href="https://www.ianus-fdz.de/projects/ap3-community/wiki/Stakeholderanalyse" class="uri">https://www.ianus-fdz.de/projects/ap3-community/wiki/Stakeholderanalyse</a>)
+ist dabei “der eigene Arbeitsrechner” vom “Zentralnetz des Arbeitgebers”
+als häufigste Nennung abgelöst worden. Hier zeigt sich eine erste
+Sensibilisierung der Einrichtungen gegenüber dem Thema der
+Datenarchivierung. Die externe Festplatte und die lokalen Rechner
+bleiben jedoch von großer Bedeutung.
+
+Das ändert sich auch nicht durch die Nennungen unter “sonstiges”: bei
+Heurist direkt, privater Server, Projekteigener Server, interne
+Serverpartition des Arbeitgebers, Versionierungssystem (serverseitig),
+Tivoli, na, privates NAS, Backblaze, zwei ausfallsichere
+Hochsicherheits-Rechenzentren, Im Digitalen OAIS-Archiv der Staatlichen
+Archive Bayerns, AWS, iclooud, lokaler Speicher (Digitallkamera),
+eigener Speicher Vermessungsgerät, eigene Backup Lösung
+
+Vergleich der beiden Zeitpunkte: Während des Projektes und nach Projektende
+===========================================================================
+
+Zuerst die Ergebnisse der Umfrage für “nach Projektende”
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Sicherungssystem
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+Prozent
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+349
+</td>
+<td style="text-align:right;">
+40.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Zentralnetz des Arbeitgebers
+</td>
+<td style="text-align:right;">
+127
+</td>
+<td style="text-align:right;">
+14.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+externe Festplatte
+</td>
+<td style="text-align:right;">
+101
+</td>
+<td style="text-align:right;">
+11.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+institutionelles Repositorium des Arbeitgebers
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;">
+7.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+nicht-öffentlicher Cloud-Service
+</td>
+<td style="text-align:right;">
+42
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lokaler Dienstrechner
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lokaler Privatrechner
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+analog
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CD/DVD
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+institutionelles Repositorium
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Repositorium der Fachcommunity
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+iDAI Systeme
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+USB
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gar nicht
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+privatwirtschaftlicher Cloud-Service
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Zenodo
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+externes Datenzentrum
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Arachne
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Github
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bodeon
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ENA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IANUS
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+opara
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OSF
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Publikation
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AAArC
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ADABweb
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ArboDat
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DARIAH
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Deutsche digitale Bibliothel
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DigiCult
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+e-library Tübingen
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Edmond Database
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EPD
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+externe Fesplatte
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+heiData
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HeiData
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HeiDOK
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Leibnizrechenzentrum
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Max Planck Digital Library services
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mediafiler
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PANGEA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RADAR
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Repositorium
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sonstiges
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SRA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+zu wenig
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+</tbody>
+</table>
+
+Umfrage “nach Projektende” war eine Freifeldaufgabe und wurde händisch
+in die Kategorien der “während der Projektlaufzeit” - Frage eingeordnet.
+Dabei entstanden einige wenige Kategorien außerhalb der vorherigen
+Auswahlmöglichkeit.
+
+![](../figures/nachmache%20plot%20ianus-1.png) Vergleich IANUS
+(<a href="https://www.ianus-fdz.de/attachments/download/774/Teil1-Ergebnisse_2014-02-26_FINAL.pdf" class="uri">https://www.ianus-fdz.de/attachments/download/774/Teil1-Ergebnisse_2014-02-26_FINAL.pdf</a>),
+S. 10.
+
+Vorläufige Analyse der geäußerten Wünsche
+=========================================
+
+Da dies eine Freitext-Frage war, werden die Wünsche gerade noch händisch
+in Kategorien überführt. Hier ist eine erste Übersicht von 149 von 313
+Angaben: ![](../figures/wunschdarstellung-1.png)
 
 Acknowledgements
 ================
@@ -1640,7 +2148,7 @@ References
 
 ### Colophon
 
-This report was generated on 2020-08-20 19:25:53 using the following
+This report was generated on 2020-08-21 16:42:53 using the following
 computational environment and dependencies:
 
     #> - Session info ---------------------------------------------------------------
@@ -1653,7 +2161,7 @@ computational environment and dependencies:
     #>  collate  German_Germany.1252         
     #>  ctype    German_Germany.1252         
     #>  tz       Europe/Berlin               
-    #>  date     2020-08-20                  
+    #>  date     2020-08-21                  
     #> 
     #> - Packages -------------------------------------------------------------------
     #>  package     * version date       lib source        
@@ -1693,6 +2201,7 @@ computational environment and dependencies:
     #>  mgcv          1.8-31  2019-11-09 [2] CRAN (R 4.0.0)
     #>  munsell       0.5.0   2018-06-12 [1] CRAN (R 4.0.0)
     #>  nlme          3.1-147 2020-04-13 [2] CRAN (R 4.0.0)
+    #>  NLP         * 0.2-0   2018-10-18 [1] CRAN (R 4.0.0)
     #>  pillar        1.4.6   2020-07-10 [1] CRAN (R 4.0.2)
     #>  pkgbuild      1.0.7   2020-04-25 [1] CRAN (R 4.0.0)
     #>  pkgconfig     2.0.3   2019-09-22 [1] CRAN (R 4.0.0)
@@ -1712,12 +2221,15 @@ computational environment and dependencies:
     #>  rvest         0.3.5   2019-11-08 [1] CRAN (R 4.0.0)
     #>  scales        1.1.0   2019-11-18 [1] CRAN (R 4.0.0)
     #>  sessioninfo   1.1.1   2018-11-05 [1] CRAN (R 4.0.0)
+    #>  slam          0.1-47  2019-12-21 [1] CRAN (R 4.0.0)
+    #>  SnowballC   * 0.7.0   2020-04-01 [1] CRAN (R 4.0.0)
     #>  stringi       1.4.6   2020-02-17 [1] CRAN (R 4.0.0)
     #>  stringr     * 1.4.0   2019-02-10 [1] CRAN (R 4.0.0)
     #>  testthat      2.3.2   2020-03-02 [1] CRAN (R 4.0.0)
     #>  tibble        3.0.0   2020-03-30 [1] CRAN (R 4.0.0)
     #>  tidyr       * 1.0.3   2020-05-07 [1] CRAN (R 4.0.0)
     #>  tidyselect    1.1.0   2020-05-11 [1] CRAN (R 4.0.0)
+    #>  tm          * 0.7-7   2019-12-12 [1] CRAN (R 4.0.2)
     #>  usethis       1.6.1   2020-04-29 [1] CRAN (R 4.0.0)
     #>  vctrs         0.3.2   2020-07-15 [1] CRAN (R 4.0.2)
     #>  viridis     * 0.5.1   2018-03-29 [1] CRAN (R 4.0.0)
@@ -1735,4 +2247,4 @@ The current Git commit details are:
 
     #> Local:    gh-page E:/R/N4Oumfrage
     #> Remote:   gh-page @ origin (https://github.com/SCSchmidt/N4Oumfrage)
-    #> Head:     [88ae4ec] 2020-08-19: erste Vergleiche zu IANUS und Ardiadne+
+    #> Head:     [5bb3e91] 2020-08-20: Disziplin auf Stellenwert FMD

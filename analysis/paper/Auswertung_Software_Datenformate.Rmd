@@ -156,8 +156,6 @@ docs <- tm_map(docs, stripWhitespace)
 #remove words
 docs <- tm_map(docs, removeWords, c("ich", "die", "der", "das", "für", "analysen", "daten","nicht", "fragen", "und", "mit", "was", "ist", "des", "frage")) 
 
-
-
 dtm <- TermDocumentMatrix(docs)
 m <- as.matrix(dtm)
 v <- sort(rowSums(m),decreasing=TRUE)
@@ -282,7 +280,7 @@ dataformats <- subset(dataformats, dataformats$datjanein == "Ja")
 ```{r}
 # sonstige genannte 
 
-dat2 <- as.data.frame(d_fr$`dateiformat-sonstige`)
+dat2 <- as.data.frame(d_fr$`dateiformat_sonstige`)
 colnames(dat2) <- "d"
 
 dat2 <- subset(dat2, !is.na(d))
@@ -346,6 +344,51 @@ ggplot()+
 ```
 Insgesamt `r nrow(dat3)` unterschiedliche Datenformate, darunter sehr spezialisierte Ausgabeformate von bestimmten Geräten (z.B. Laserscannern). Dargestellt sind hier diejenigen die häufiger als 2x genannt wurden.
 
+
+### Datensicherung nach Projektende
+Die Datensicherung nach Projektende wurde in einer Freitextfrage abgefragt. Aus diesem Grund wird eine einfache text-mining Analyse ausgeführt, die die am häufigsten genannten Wortstämme ausgibt.  
+
+```{r}
+
+library("tm")
+library("SnowballC")
+
+docs <- Corpus(VectorSource(d_fr$sicherung_nach_projekt))
+docs$meta$language <- "de"
+
+#inspect(docs)
+
+# alles kleinschreiben
+docs <- tm_map(docs, content_transformer(tolower))
+
+#toexcel <- content_transformer(function (x , pattern ) gsub(pattern, "excel", x))
+
+#docs <- tm_map(docs, toexcel, "exel")
+
+# Remove english common stopwords
+docs <- tm_map(docs, removeWords, stopwords("german"))
+
+# Remove your own stop word
+# specify your stopwords as a character vector
+docs <- tm_map(docs, removeWords, c("auf","dem", "etc", "daten", "bzw")) 
+
+# Remove punctuations
+docs <- tm_map(docs, removePunctuation)
+# Eliminate extra white spaces
+docs <- tm_map(docs, stripWhitespace)
+
+# Text stemming
+docs <- tm_map(docs, stemDocument, "german")
+
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d_docs <- data.frame(word = names(v),freq=v)
+head(d_docs, 30)
+
+
+
+```
 
 # Acknowledgements
 
