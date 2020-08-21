@@ -93,7 +93,7 @@ Zuerst einige allgemeine Statistiken zu der Teilnehmergruppe:
 ## Alter und Beschäftigungsverhältnis
 
 
-```{r fig_alter_einrichtung}
+```{r fig_alter_einrichtung, fig.height=4, fig.width=8}
 age_erfahrung <- d_fr[,c(5:21)]
 
 
@@ -253,7 +253,7 @@ Die Angaben zur Disziplinzugehörigkeit waren von unterschiedlicher Genauigkeit.
 
 Gibt es einen Zusammenhang zwischen dem Alter der Teilnehmenden Person, der Erfahrung die sie in digitalen Forschungsdatenmanagement hat  und dem Gewicht, dass sie dem sie ihm zuweist?
 
-```{r fig_erfahrung_gruppe}
+```{r fig_erfahrung_gruppe, fig.height=4, fig.width=10}
 library(viridis)
 ggplot(data = age_group, 
            aes_string(x = names(age_group)[1],
@@ -297,22 +297,6 @@ cramersV(age_group[,1], age_group[,7])
 Cramers V ergibt einen Wert von 0,16, was auf einen schwachen Zusammenhang zwischen Altersgruppe und Erfahrung schließen lässt.
 
 --> Conclusio: Ältere und junge haben wenig Erfahrung.
-
-Als nächstes kann die Gewichtung für die eigene Arbeit untersucht werden:
-
-Wie oben kann auch hier nur mit den Residualwerten des Chi-Quadrat-Tests gearbeitet werden. 
-```{r}
-chi <- chisq.test(age_group[,1], age_group[,8])
-
-chi$residuals%>%
-  kable()
-```
-Auffällig ist hier die Altersgruppe der 20-29jährigen, die dem digitalen FDM eine höhere Bedeutung zuweist als erwartet. Ältere Semester tun das gegenteilig. 
-
-```{r}
-cramersV(age_group[,1], age_group[,8])
-```
-Anhand Cramers V ~ 0,16 lässt sich wieder ein schwacher Zusammenhang zwischen Alter und Gewichtung festhalten.
 
 
 ## Korreliert die Einschätzung der Wichtigkeit und die Erfahrung und lassen sich darin Gruppen unterscheiden?
@@ -375,7 +359,7 @@ In  der [detaillierteren Auswertung](https://github.com/SCSchmidt/N4Oumfrage/blo
 
 
 
-```{r stellenwert_fdm_disziplin_grob}
+```{r stellenwert_fdm_disziplin_grob, fig.width=10}
 library(ggplot2)
 library(viridis)
   ggplot(data = d_fr2, aes(x = disz_grob,
@@ -400,7 +384,7 @@ besonders in der Archäologie breit gestreute Antworten.
 ### Gibt es eine Trennung zwischen Menschen mit viel und wenig Erfahrung?
 
 Hier ist es sinnvoll, sich einfach die Verteilung anzuschauen. Ist sie normalverteilt?
-```{r fig_verteilung_erfahrung}
+```{r fig_verteilung_erfahrung, fig.height=4, fig.width = 8}
 ggplot()+
   geom_bar(data = age_erfahrung, 
            aes_string(x = names(age_erfahrung[16])))+
@@ -497,7 +481,7 @@ d_docs <- data.frame(word = names(v),freq=v)
 
 Visualisierung der Häufigkeiten der Nennung (bis zu sieben Nennungen pro Person): 
 
-```{r dienste_häufigkeiten}
+```{r dienste_häufigkeiten, fig.width=10}
 
 d_docs %>%
   filter(freq > 2) %>%
@@ -589,7 +573,7 @@ d <- data.frame(word = names(v),freq=v)
 #head(d, 30)
 ````
 
-```{r häufigkeiten_datenformate}
+```{r häufigkeiten_datenformate, fig.height=4}
 dat <- as.data.frame(table(dataformats$datenformat))
 
 colnames(dat) <- c("word", "freq")
@@ -615,7 +599,7 @@ Insgesamt `r nrow(dat3)` unterschiedliche Datenformate, darunter sehr spezialisi
 # Wie werden Daten gesichert?
 
 
-```{r datastorage}
+```{r datastorage, fig.height=4}
 
 library(tidyr)
 datastorage <- d_fr %>%
@@ -741,7 +725,7 @@ Vergleich IANUS (https://www.ianus-fdz.de/attachments/download/774/Teil1-Ergebni
 # Vorläufige Analyse der geäußerten Wünsche
 
 Da dies eine Freitext-Frage war, werden die Wünsche gerade noch händisch in Kategorien überführt. Hier ist eine erste Übersicht von 149 von 313 Angaben:
-```{r wunschdarstellung}
+```{r wunschdarstellung, width = 10}
 
 w <- read.csv2("../data/derived_data/wuensche2.csv", sep = ",", encoding = "UTF-8")
 
@@ -760,8 +744,9 @@ w_tab %>%
 ggplot()+
   geom_col(aes(x = reorder(Var1, Freq),
                y = Freq), na.rm = TRUE,
-           col = n4o_farben[1])+
-  coord_flip()
+           fill = n4o_farben[1])+
+  coord_flip()+
+  labs(x = "")
 
 ```
 
