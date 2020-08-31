@@ -1,0 +1,782 @@
+---
+title: "NFDI4Objects Umfrageauswertung"
+author:
+  - Sophie C. Schmidt:
+      email: sophie.schmidt@dainst.org
+      institute: [DAI]
+      correspondence: true
+institute:
+  - DAI: Deutsches Archäologisches Institut
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  md_document:
+    variant: markdown_github
+always_allow_html: true
+
+---
+
+<!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
+
+<!-- With the following code you can access and display values from the yml header above. -->
+
+Keywords: `r rmarkdown::metadata$keywords`
+
+Highlights: `r rmarkdown::metadata$highlights`
+
+<!-- The following code chunk defines some general settings how code chunks should behave. -->
+
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  echo = FALSE,
+  comment = "#>",
+  fig.path = "../figures/",
+  dpi = 300,
+  fig.height = 5,
+  fig.width = 5
+)
+library(kableExtra)
+```
+
+# Datengrundlage
+
+
+```{r}
+d <- read.csv2("../data/raw_data/results-survey615517.csv", sep = ",", encoding = "UTF-8")
+
+# remove "" as input and make NA out of it
+# dplyr solution fom here: https://stackoverflow.com/questions/24172111/change-the-blank-cells-to-na
+
+library(dplyr)
+
+empty_as_na <- function(x){
+    if("factor" %in% class(x)) x <- as.character(x) ## since ifelse wont work with factors
+    ifelse(as.character(x)!="", x, NA)
+}
+
+## transform all columns
+d <- d %>% 
+  mutate_each(funs(empty_as_na))
+
+
+# farbskala für NFDI
+
+n4o_tafarben <- c("#9B163C", "#9506C5", "#4DA1EE", "#36CE97",  "#4CCA33","#FF962E", "#FF6243")
+
+n4o_farben <- c("#072A54", "#9B163C", "#9506C5", "#4DA1EE", "#36CE97",  "#4CCA33","#FF962E", "#FF6243", "#005F8E", "#6A6D71", "#A6AAAC", "#E8EAEB")
+```
+
+Insgesamt haben wir `r nrow(d)` Antworten erhalten, das ist ein deutlich größerer Rücklauf als bei der Aridande+ - Umfrage von 2019 (https://ariadne-infrastructure.eu/key-results-of-the-community-needs-survey/) und der IANUS-Umfrage von 2013 (https://www.ianus-fdz.de/projects/ergebnisse/wiki). 
+
+Mögliche Gründe: erhöhtes Interesse der Community an dem Thema, breiteres Spektrum an Fächern (siehe unten) repräsentiert, nicht nur Archäologie, NFDI-Prozess hat Aufmerksamkeit erregt? 
+
+
+```{r rename column names}
+# datensatz begrenzen auf den frageteil
+d_fr <- d[, c(1:65)]
+
+#colnames(d)
+
+# spaltennamen in etwas kürzere sprechende namen umwandeln
+colnames(d_fr) <- c("ID", "Datum", "zufallsid", "geschlecht", "alter", "blickwinkel", "einrichtung", "einrichtung_sonstiges", "disz", "studiernede", "promovierende", "lehrende", "techn_mitarb", "wiss_mitarb", "daten_it_beauftragt", "projektleiter", "einrichtung_leiter", "gruppe_sonstige", "arbeitgeber_richtlinienkatalog", "erfahrung_fdm", "stellenwert_fdm", "software_projman_janein", "software_projman", "software_fdm_janein", "software_fdm", "software_wiss_analyse", "xls", "doc", "pdf", "ods", "csv", "odt", "png", "jpg", "geotiff", "geojson", "shp", "json", "xml", "dateiformat_sonstige", "software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht_oeff_cloud", "zentralnetz_arbeitgeber", "institut_repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds_dvds", "datensicherung_sonstiges", "sicherung_nach_projekt", "FAIR_bekannt_janein", "verfuegung_wie", "verfuegung_wie_sonstiges", "fremddatennutzung_janein", "fremddaten_online_portal", "fremddaten_prsnl_anfrage",  "fremddaten_sonstiges",  "wunsch_datenspeicherung", "mehrwert_n4o", "prsnl_mehrwert_n4o")
+
+```
+
+
+
+# Demographische Angaben
+
+Zuerst einige allgemeine Statistiken zu der Teilnehmergruppe:
+
+## Alter und Beschäftigungsverhältnis
+
+
+```{r fig_alter_einrichtung, fig.height=4, fig.width=8}
+age_erfahrung <- d_fr[,c(5:21)]
+
+
+
+library(ggplot2)
+library(dplyr)
+
+age_erfahrung %>%
+  filter(!is.na(alter) & !is.na(einrichtung)) %>%
+ggplot()+
+  geom_bar(aes(x = alter,
+               fill = einrichtung),
+           na.rm = TRUE)+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust=0.8),
+        axis.title.x = element_blank()) +
+  ylab("Anzahl")+
+  scale_fill_manual(name = "Arbeitsplatz",
+                    values = n4o_farben[1:9]) +
+  geom_text(x = 7, y = 150, label = paste("n = ", nrow(age_erfahrung %>%
+  filter(!is.na(alter) & !is.na(einrichtung)))))
+                                        
+```
+Wir haben knapp 50 20-29jährige, der Großteil der Befragten ist zwischen 30 und 60 Jahre alt und arbeitet an einer Hochschule, in der Forschung, im Museum oder in einer Denkmalbehörde (man beachte die zweo über 80jährige Personen, die nicht mehr arbeiten...). Seltener kommen Grabungsfirmen und Archive vor. Eine ähnliche Verteilung hatten die Umfrageteilnehmer bei Ariadne+ und IANUS.
+
+```{r}
+d_fr$alter %>%
+  table()%>%
+  as_tibble() %>%
+  rename(Alter = ".") %>%
+  mutate(Prozent = round((n/sum(n)*100),1)) %>%
+  kable()
+```
+
+Der Großteil der Befragten arbeitete an einer Universität oder Hochschule, in einer Forschungseinrichtung einem Museum oder einer Denkmalbehörde:
+
+```{r}
+
+d_fr$einrichtung %>%
+  table()%>%
+  as_tibble() %>%
+  rename(Einrichtung = ".") %>%
+  mutate(Prozent = round((n/sum(n)*100),1)) %>%
+  arrange(desc(n))%>%
+  kable()
+
+```
+
+
+```{r, eval = FALSE}
+d_fr %>%
+  filter(!is.na(geschlecht))%>%
+  nrow()
+
+gsch <- na.omit(d_fr$geschlecht)
+
+table(gsch)[2]/length(gsch)
+```
+
+
+Mit ca. 51% männlichen und 42% weiblichen sowie 2 diversen Teilnehmer*innen (und keine Angabe: 6%) sind auch hier die Teilnehmer\*innen repräsentativ. 
+
+
+
+## Einrichtungen und Gruppe
+
+Innerhalb der Einrichtungen teilen sich die Teilnehmer*innen auf folgende Gruppen auf:
+
+```{r fig_einrichtung_gruppe, fig.width=10}
+
+# 1. Daten umstrukturieren (breits Format von Spalte 6-14 in langes Format umwandeln. NAs raus und "nein" raus.)
+# df4 <- df3 %>% gather(key = "placenr", value = "example", "A", "B","C","D", na.rm = TRUE)
+
+library(tidyr)
+
+age_group <- age_erfahrung %>%
+  gather(key = "gruppe", value = "ja.nein", 6:14, na.rm = TRUE) %>%
+  filter(ja.nein == "Ja" )
+
+ggplot()+
+  geom_bar(data = age_group, 
+           aes(x = einrichtung,
+               fill = gruppe),
+           na.rm = TRUE)+
+  theme_bw()+
+  xlab("")+
+  ylab("Anzahl (Mehrfachnennungen möglich)")+
+  coord_flip()+
+  scale_fill_manual(name="Gruppe",
+                         labels=c("Daten/IT-Beauftragte", "Lehrende", "Leiter/in der Einrichtung", "Projektleiter/in", "Promovierende", "Studierende", "technische Mitarbeit.", "wissenschaftl. Mitarbeit."),
+                     values = n4o_farben[1:8])+
+  theme(legend.position = "right", 
+        legend.key.size = unit(0.25, "cm"),
+        legend.text = element_text(size = 6)) +
+ geom_text(x = 9, 
+           y = 200, 
+           label = paste("n = ", length(na.omit(age_erfahrung$einrichtung)))) 
+
+```
+Das Gros besteht aus wissenschaftlichen Mitarbeiterinnen an der Hochschule, in Museen und in Forschungseinrichtungen.
+
+```{r}
+
+age_group$gruppe %>%
+  table()%>%
+  as_tibble() %>%
+  rename(Gruppe = ".") %>%
+  mutate(Prozent = round((n/sum(n)*100),1)) %>%
+  arrange(desc(n))%>%
+  mutate(Gruppe = recode(Gruppe,
+                         "wiss_mitarb" = "wissenschaftliche Mitarbeiter/innen",
+                         "projektleiter" = "Projektleiter",
+                         "lehrende" = "Lehrende",
+                         "einrichtung_leiter" = "Leiter/in der Einrichtung",
+                         "promovierende" = "Promovierende",
+                         "daten_it_beauftragt" = "Daten/IT-Beauftragte",
+                         "techn_mitarb" = "technische Mitarbeiter/innen",
+                         "studiernede" = "Studierende")) %>%
+  kable()
+  
+  #"Daten/IT-Beauftragte", "Lehrende", , "Projektleiter/in", , "Studierende", "technische Mitarbeit.", "wissenschaftl. Mitarbeit."
+  
+```
+
+##Vertretene Disziplinen
+
+```{r, eval = TRUE, echo = FALSE}
+# Disziplinen zusammenfasen.
+
+write.table(d_fr$disz, "E:/R/N4Oumfrage/analysis/data/derived_data/disziplinen.csv", fileEncoding = "UTF-8")
+
+disz <- read.csv2("E:/R/N4Oumfrage/analysis/data/derived_data/disziplinen3.csv", encoding = "UTF-8", sep = ",")
+
+d_fr2 <- cbind(d_fr, disz)
+d_fr2 <- d_fr2 %>% 
+  mutate_each(funs(empty_as_na))
+```
+
+
+```{r}
+na.omit(d_fr2$disz_grob) %>%  
+  table()%>%
+  as_tibble() %>%
+  rename(Disziplin = ".") %>%
+  mutate(Prozent = round((n/sum(n)*100),1)) %>%
+  arrange(desc(n))%>%
+  kable()
+```
+
+Die Angaben zur Disziplinzugehörigkeit waren von unterschiedlicher Genauigkeit. Zusammengefasst sieht man eine große Vielfalt unterschiedlicher Archäologischer Disziplinen (allgemein, UFG, AdRP, Ägyptologie, vorderasiatische Archäologie, Mittelalter und Neuzeit etc pp), zusammen etwa 50% aller Antworten. Häufig genannt wurden außerdem Musikwissenschaft, Kunstgeschichte, Geschichte, Restaurationswissenschaften, unterschiedliche IT-Bereiche, Denkmalpflege, Museologie, Numismatik und unterschiedliche interdisziplinären Felder wie Archäometrie, Geoinformatik und DH.
+--> deutlich breiter aufgestellt als IANUS 2013 (https://www.ianus-fdz.de/attachments/download/774/Teil1-Ergebnisse_2014-02-26_FINAL.pdf, S. 6)
+
+
+# Analyse zum Thema Erfahrungen im Bereich FMD und Bedeutung von FDM für die tägliche Arbeit
+
+## Alter und Erfahrung + Wichtung
+
+Gibt es einen Zusammenhang zwischen dem Alter der Teilnehmenden Person, der Erfahrung die sie in digitalen Forschungsdatenmanagement hat  und dem Gewicht, dass sie dem sie ihm zuweist?
+
+```{r fig_erfahrung_gruppe, fig.height=4, fig.width=10}
+library(viridis)
+ggplot(data = age_group, 
+           aes_string(x = names(age_group)[1],
+               y = names(age_group)[7]),
+       na.rm = TRUE)+
+  geom_boxplot()+
+  geom_jitter(position=position_jitter(width=.3, height=0), aes_string(colour = names(age_group)[8]))+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust=0.8),
+        axis.title.x = element_blank(),
+        title = element_text("Selbsteinschätzung: Erfahrung mit digitalem Forschungsdatenmanagement")) +
+  ylab("0: keine Erfahrung, 10: viel Erfahrung") + 
+  xlab ("Alter")+
+  scale_color_viridis(option = "D")+
+  scale_colour_viridis(name = " Einschätzung des Stellenwertes \n von FDM für tägliche Arbeit ")
+
+```
+Alle Altersgruppen haben sehr gemischt Erfahrungen und Wissensstände mit digitalem Datenmanagement. Bei den Senioren (70-79) lassen sich zwei Gruppen differenzieren (viel Ahnung - wenig Ahnung), sie halten digitales Forschungsdatenmanagement allgemein für weniger wichtig für ihre tägliche Arbeit.
+
+Jüngere Teilnehmende schätzen ihre eigene Erfahrung deutlich geringer ein als diejenigen "die im Beruf stehen" und zwischen 30 und 60 Jahre alt sind. Diese Gruppe scheint dem digitalen FDM auch den höchsten Stellenwert in ihrer täglichen Arbeit zuzuweisen.
+
+Wer viel von Forschungsdatenmanagement hält, scheint sich häufig schon recht gut weitergebildet zu haben (oder anders herum: Einschätzung der Wichtigkeit kommt von eigener Erfahrung!). Nur wenige Personen geben an, ihre Erfahrung als mittig einzuschätzen, wenn sie FDM für wichtig halten und die gelben Punkte (sehr hoher Stellenwert des digitalen FDM für die eigene Arbeit) häufen sich im Bereich "viel Erfahrung). 
+
+Diese Ergebnisse sollten statistische getestet werden (Details siehe [detailliertere Auswertung](https://github.com/SCSchmidt/N4Oumfrage/blob/master/docs/md/Auswertung1.md):
+
+Der Chi-Quadrat-Test darf eigentlich für diese Daten nicht angewendet werden, da die Erwartungswerte zu gering werden (Anzahl der Teilnehmer muss auf zu viele Subgruppen aufgeteilt werden). Anhand der Residuen lassen sich trotzdem Erkenntnisse erarbeiten:
+```{r}
+chi <- chisq.test(age_group[,1], age_group[,7])
+
+chi$residuals%>%
+  kable()
+```
+die größten Abweichungen gibt es bei der Altersgruppe der 20-29jährigen im Bereich "Erfahrung = 0", dort sind sie überrepräsentiert, ebenso wie die Altersgruppen 60-69 und 70-70 im Bereich der niedrigen Erfahrungswerte 1-3 überrepräsentiert sind.
+
+
+```{r}
+library(lsr)
+
+cramersV(age_group[,1], age_group[,7])
+```
+Cramers V ergibt einen Wert von 0,16, was auf einen schwachen Zusammenhang zwischen Altersgruppe und Erfahrung schließen lässt.
+
+--> Conclusio: Ältere und junge haben wenig Erfahrung.
+
+
+## Korreliert die Einschätzung der Wichtigkeit und die Erfahrung und lassen sich darin Gruppen unterscheiden?
+
+Für diese Frage werden die beiden Werte Einschätzung der Wichtigkeit für das eigene Arbeiten und die eigene Erfahrung gegeneinander plotten. Da in beiden Fällen keine stetigen metrischen Werte vorliegen, sondern nur mit diskreten Werten gearbeitet wurde, muss für die Visualisierung ein "jitter-Effekt" eingesetzt werden, der die Punkte ein wenig verschiebt, damit nicht alle direkt übereinander liegen.  
+
+Allgemein kann der Zusammenhang bestätigt werden (eingezeichnet blaue Linie ist lineare Regression mit Konfidenzintervall). Verschiedene Einfärbungen werden nun getestet:
+
+### Gruppenzugehörigkeit
+
+```{r fig_gruppe, fig.width=10}
+
+erfahrung_group <- age_erfahrung %>%
+  gather(key = "gruppe", value = "ja.nein", 6:14, na.rm = TRUE) %>%
+  filter(ja.nein == "Ja" ) 
+
+library(stringr)
+erfahrung_group$gruppe <- str_replace_all(erfahrung_group$gruppe,"Zu.welchen.Gruppen.fühlen.Sie.sich.zugehörig...","")
+
+
+ggplot()+
+  geom_jitter(data = erfahrung_group, aes_string(x = names(erfahrung_group)[7],
+                                   y = names(erfahrung_group)[8],
+                                   col = names(erfahrung_group)[9]))+
+  ylab("Einschätzung Bedeutung FDM")+
+  xlab("Einschätzung eigene Erfahrung FDM")+
+  theme_bw() +
+  scale_x_continuous(breaks=c(0,2,4,6,8,10),
+                   labels = c(0,2,4,6,8,10))+
+  scale_y_continuous(breaks=c(0,2,4,6,8,10),
+                   labels = c(0,2,4,6,8,10))+
+  scale_colour_manual(name="Gruppe",
+                        values = c(n4o_farben[1:9]),
+                      breaks = c("daten_it_beauftragt", "lehrende","einrichtung_leiter", "projektleiter", "promovierende", "studiernede", "techn_mitarb","wiss_mitarb"),
+                      labels=c("Daten/IT-Beauftragte", "Lehrende", "Leiter/in der Einrichtung", "Projektleiter/in", "Promovierende", "Studierende", "technische Mitarbeiter/innen", "wissenschaftliche Mitarbeiter/innen")) +
+  geom_text(aes(x = 5, y = 0, label = "gestreute Daten um Überlappungen zu vermeiden!"))+
+  geom_segment(aes(x = -1, y = 6, xend = 4, yend = 6), colour= n4o_farben[10], linetype = "dashed")+
+  geom_segment(aes(x = 4, y = 6, xend = 4, yend = 11), colour = n4o_farben[10], linetype = "dashed")+
+  geom_smooth(data = erfahrung_group, aes_string(x = names(erfahrung_group)[7],
+                                   y = names(erfahrung_group)[8]),
+              method = "glm",
+              formula = y~x) + # y abhängig von x 
+   scale_alpha_continuous(guide=FALSE)+
+  scale_linetype_discrete(guide = FALSE)
+```
+m. E. lässt sich kein Zusammenhang zwischen der Zugehörigkeit zu einer Gruppe und der Wichtung / Erfahrung im digitalen FDM finden, nur allgemein der Zusammenhang von Einschätzung der eigenen Erfahrung und der Einschätzung der Bedeutung korreliert mit R² ~ 0,34: moderater Zusammenhang
+
+
+Auffällig ist der/die einsame Studierende oben links in der Ecke, der/die die Bedeutung von FDM sehr hoch einschätzt, aber selber überhaupt keine Erfahrung hat. Kann dieser Person jemand bitte ganz schnell einen Datenbankenkurs anbieten? 
+
+Der Bereich "hat selber wenig Erfahrung, schätzt aber die Bedeutung für die eigene Arbeit hoch ein" (also Einschätzung Bedeutung FDM 6-10 und Einschätzung eigene Erfahrung FDM 0-4) ist eine Zielgruppe für uns: Das sind die Personen, die wissen, dass sie sich fortbilden müssen, denen aber evtl einfach das Angebot fehlt. Es sind darin alle Gruppen vertreten, außer Daten- und IT-Beautragte.
+
+In  der [detaillierteren Auswertung](https://github.com/SCSchmidt/N4Oumfrage/blob/master/docs/md/Auswertung1.md) wurden folgende Punkte untersucht:
+
+ - Blickwinnkel der Antworten (keine Unterschiede zwischen Institutionen und Individuen)
+ - Einrichtungen ( Es zeigt sich bei allen Einrichtungen eine große Heterogenität.Eventuell zeigen sich Grabungsfirmen insbesondere in dem höherschätzenden Bereich. )
+
+
+## Stellenwert nach Disziplin
+
+
+
+```{r stellenwert_fdm_disziplin_grob, fig.width=10}
+library(ggplot2)
+library(viridis)
+  ggplot(data = d_fr2, aes(x = disz_grob,
+               y = stellenwert_fdm))+
+  geom_boxplot()+
+      geom_jitter(position=position_jitter(width=.3, height=0), aes(colour = stellenwert_fdm))+
+  theme_bw()+
+  theme(axis.title.x = element_blank(),
+        title = element_text("Selbsteinschätzung: Stellenwert des digitalen Forschungsdatenmanagement")) +
+  ylab("0: geringer Stellenwert, 10: hoher Stellenwert") + 
+  xlab ("zusammengefasste Disziplinen")+
+  scale_color_viridis(option = "D")+
+  scale_colour_viridis(name = " Einschätzung des Stellenwertes \n von FDM für tägliche Arbeit ")+
+    coord_flip()
+  
+```
+
+besonders in der Archäologie breit gestreute Antworten. 
+
+
+
+### Gibt es eine Trennung zwischen Menschen mit viel und wenig Erfahrung?
+
+Hier ist es sinnvoll, sich einfach die Verteilung anzuschauen. Ist sie normalverteilt?
+```{r fig_verteilung_erfahrung, fig.height=4, fig.width = 8}
+ggplot()+
+  geom_bar(data = age_erfahrung, 
+           aes_string(x = names(age_erfahrung[16])))+
+  theme_bw()+
+  scale_x_continuous(breaks=c(0:10),
+                   labels = c(0:10))+
+  xlab("Erfahrung im Umgang mit digitalem FDM, 0: keine, 10: viel.")
+ 
+
+getmode <- function(v) { # die Funktion heißt getmode und wird auf einen Vektor v angewendet
+   uniqv <- unique(v) # die einzelnen Werte des Vektors (ohne Dopplungen) werden in einem Vektor uniqv gesammelt 
+   uniqv[which.max(tabulate(match(v, uniqv)))] # welcher maximale Wert entsteht, wenn ich zähle, wie häufig die Werte von uniqv in v vorkommen (das ist der Modus)
+}
+
+erfahrung <- age_erfahrung[,16]
+
+erfahrung <- erfahrung[!is.na(erfahrung)]
+  
+```
+
+Die Erfahrung mit digitalem Datenmanagement in unserer Umfrage ist nicht-normalverteilt, sondern nach rechts verschoben:
+
+ - Median = `r median(age_erfahrung[,16], na.rm=TRUE)`
+ - Mittelwert = `r mean(age_erfahrung[,16], na.rm=TRUE)`
+ - Modus =  `r getmode(erfahrung)`
+
+Hier kann sich zeigen, dass wir vor allem Leute erreicht haben, die sich mit dem Thema schon beschäftigt haben. Es gibt einen deutlichen Anstieg zwischen der Einschätzung "4" und "5". Hier lassen sich eventuell zwei Gruppen unterscheiden.
+
+
+## Welche Arbeitgeber haben ein Richtlinienkatalog?
+
+```{r tab_einrichtungen_richtlinien}
+
+library(kableExtra)
+
+dt <- table(d$In.welcher.Art.von.Einrichtung.sind.Sie.beruflich.tätig., d$Verfügt.Ihr.Arbeitgeber...Ihre.Einrichtung.über.einen.Richtlinienkatalog...eine.Strategie.zum.Umgang.mit.Forschungsdaten.)
+
+dt %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+```
+Grabungsfirmen und außeruniversitäre Forschungseinrichrungen haben häufiger einen Richtlinienkatalog als zu erwarten währen, während insbesondere Museen keine haben.
+
+
+# Analyse der Dienste und Datenformate für Forschungsdaten
+
+```{r}
+fdm_dienste <- d$Mit.welchen.Diensten..z.B..der.Netzbasierte.archäologische.Datenprozessierungsdienst.des.RGZM..und.Software.Applikationen..z.B..MS.Excel..QGIS..SPSS..R..etc...analysieren.Sie.Ihre.Forschungsdaten.im.Rahmen.Ihrer.wissenschaftlichen.Arbeit..Bitte.nennen.Sie.bis.zu.sieben.Beispiele..
+
+fdm_dienste <- fdm_dienste[!is.na(fdm_dienste)]
+
+fdm_dienste_df <- as.data.frame(fdm_dienste)
+
+
+library(tidyr)
+
+fdm_dienste_df <- fdm_dienste_df %>%
+  separate(fdm_dienste, c("A", "B", "C", "D", "E", "F", "G", "H"), ", ") %>%
+  gather( key = "egal", value = "fdm-dienst", c("A", "B", "C", "D", "E", "F", "G", "H"), na.rm = TRUE)
+
+fdm_d <- fdm_dienste_df$`fdm-dienst`
+
+library("tm")
+library("SnowballC")
+
+
+docs <- Corpus(VectorSource(fdm_d))
+
+#inspect(docs)
+
+# alles kleinschreiben
+docs <- tm_map(docs, content_transformer(tolower))
+
+toexcel <- content_transformer(function (x , pattern ) gsub(pattern, "excel", x))
+
+docs <- tm_map(docs, toexcel, "exel")
+
+
+# Remove punctuations
+docs <- tm_map(docs, removePunctuation)
+# Eliminate extra white spaces
+docs <- tm_map(docs, stripWhitespace)
+
+#remove words
+docs <- tm_map(docs, removeWords, c("ich", "die", "der", "das", "für", "analysen", "daten","nicht", "fragen", "und", "mit", "was", "ist", "des", "frage")) 
+
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d_docs <- data.frame(word = names(v),freq=v)
+#head(d_docs, 30)
+```
+
+Visualisierung der Häufigkeiten der Nennung (bis zu sieben Nennungen pro Person): 
+
+```{r dienste_häufigkeiten, fig.width=10}
+
+d_docs %>%
+  filter(freq > 2) %>%
+ggplot()+
+  geom_col(aes(x = reorder(word, freq),
+                              y = freq,
+               fill = factor(ifelse(word == "eigene" | word == "keine","Highlighted","Normal"))),
+             show.legend = FALSE)+
+  xlab("Programme")+
+  ylab("Häufigkeit der Nennung (ab 2x)")+
+  geom_label(aes(x = 5, 
+                 y = 150,
+                 label = "text mining - Auswertung der Frage \n 'Mit welchen Diensten analysieren Sie Ihre Daten \n im Rahmen Ihrer wissenschaftlichen Arbeit?' "))+
+  coord_flip()
+```
+Zwei Programme werden extrem häufig genannt: Excel und QGIS. Access ist das bekannteste Datenbanksystem.
+
+V.a. in außeruniversitären Forschungseinrichtungen (4x genannt) und Denkmalbehörden (4x -- einmal in sonstiges) wird selbständig Software entwickelt.
+
+
+## Datenformate
+
+
+```{r}
+# in auswahl genannte 
+library(tidyr)
+
+dataformats <- d_fr %>%
+  gather(key = "datenformat", value = "datjanein", c(27:39), na.rm = TRUE)
+
+dataformats <- subset(dataformats, dataformats$datjanein == "Ja")
+
+```
+```{r}
+# in auswahl genannte 
+library(tidyr)
+
+dataformats <- d_fr %>%
+  gather(key = "datenformat", value = "datjanein", c(27:39), na.rm = TRUE)
+
+dataformats <- subset(dataformats, dataformats$datjanein == "Ja")
+
+```
+
+
+```{r}
+# sonstige genannte 
+
+dat2 <- as.data.frame(d_fr$`dateiformat_sonstige`)
+colnames(dat2) <- "d"
+
+dat2 <- subset(dat2, !is.na(d))
+
+dat2_docs <- Corpus(VectorSource(dat2))
+
+#inspect(dat2_docs)
+
+toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+dat2_docs <- tm_map(dat2_docs, toSpace, "/")
+dat2_docs <- tm_map(dat2_docs, toSpace, "@")
+dat2_docs <- tm_map(dat2_docs, toSpace, "\\|")
+
+
+
+# Convert the text to lower case
+dat2_docs <- tm_map(dat2_docs, content_transformer(tolower))
+
+# Remove english common stopwords
+dat2_docs <- tm_map(dat2_docs, removeWords, stopwords("german"))
+
+
+# Remove your own stop word
+# specify your stopwords as a character vector
+dat2_docs <- tm_map(dat2_docs, removeWords, c("3D", "etc", "formate","...")) 
+# Remove punctuations
+dat2_docs <- tm_map(dat2_docs, removePunctuation)
+# Eliminate extra white spaces
+dat2_docs <- tm_map(dat2_docs, stripWhitespace)
+# Text stemming
+# docs <- tm_map(docs, stemDocument)
+
+# Document matrix is a table containing the frequency of the words. 
+# Column names are words and row names are documents. 
+# The function TermDocumentMatrix() from text mining package can be used as follow :
+dtm <- TermDocumentMatrix(dat2_docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d <- data.frame(word = names(v),freq=v)
+#head(d, 30)
+````
+
+```{r häufigkeiten_datenformate, fig.height=4}
+dat <- as.data.frame(table(dataformats$datenformat))
+
+colnames(dat) <- c("word", "freq")
+
+dat3 <- rbind(dat, d)
+
+dat3 %>%
+  filter(freq > 2) %>%
+ggplot()+
+  geom_col(aes(x = reorder(word, freq),
+               y = freq))+
+  theme_bw()+
+  xlab("")+
+  ylab("Anzahl (Mehrfachnennungen möglich)")+
+  coord_flip()
+
+```
+
+PDF, doc, jpg und xls werden mit deutlichem Abstand am häufigsten genannt.
+
+Insgesamt `r nrow(dat3)` unterschiedliche Datenformate, darunter sehr spezialisierte Ausgabeformate von bestimmten Geräten (z.B. Laserscannern). Dargestellt sind hier diejenigen die häufiger als 2x genannt wurden.
+
+# Wie werden Daten gesichert?
+
+
+```{r datastorage, fig.height=4}
+
+library(tidyr)
+datastorage <- d_fr %>%
+  gather( key = "datastorage", value = "jn", c("software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht_oeff_cloud", "zentralnetz_arbeitgeber", "institut_repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds_dvds"), na.rm = TRUE)%>%
+  filter(jn == "Ja")
+
+ds <- as.data.frame(table(datastorage$datastorage))
+
+ggplot(data = ds)+
+  geom_col(aes (x = reorder(Var1, Freq), 
+                y=  Freq))+
+  coord_flip() +
+  theme_bw() + 
+  xlab("Art der Datenspeicherung") +
+  scale_x_discrete(breaks = levels(ds$Var1),
+       labels = c("CD/DVD", "externe Festplatte", "externes Datenzentrum", "institutionelle Repositorium \n des Arbeitgebers", "lokaler Dienstrechner", "lokaler Privatrechner", "nicht-öffentlicher \n Cloud-Service", "privatwirtschaftlicher \n Cloud-Service", "Repositorium der \n Fachcommunity", "USB", "Versionierungssystem", "Zentralnetz des Arbeitgebers"))+
+  ylab("Häufigkeit Nennung (Mehrfachnennung möglich)")
+
+```
+
+Die häufigsten Back-Up-Methoden während der Projektphase sind das Netz des Arbeitgebers, die externe Festplatte und lokale Rechner. Externe Datenzentren, Versionierungssysteme und Fach-Repositorien liegen weit abgeschlagen zusammen mit DVDs und CDs. 
+
+Im Vergleich zu der IANUS-Umfrage von 2013 (https://www.ianus-fdz.de/projects/ap3-community/wiki/Stakeholderanalyse) ist dabei "der eigene Arbeitsrechner" vom "Zentralnetz des Arbeitgebers" als häufigste Nennung abgelöst worden. Hier zeigt sich eine erste Sensibilisierung der Einrichtungen gegenüber dem Thema der Datenarchivierung. Die externe Festplatte und die lokalen Rechner bleiben jedoch von großer Bedeutung. 
+
+```{r}
+#sonstige
+
+ds_sonst <- d_fr$datensicherung_sonstiges
+ds_sonst <- ds_sonst[!is.na(ds_sonst)]
+
+```
+Das ändert sich auch nicht durch die Nennungen unter "sonstiges": `r ds_sonst`
+
+
+```{r}
+write.csv2(d_fr$sicherung_nach_projekt, "E:/R/N4Oumfrage/analysis/data/derived_data/nach_projektende.csv", fileEncoding = "UTF-8")
+# händische Katalogisierung
+```
+
+# Vergleich der beiden Zeitpunkte: Während des Projektes und nach Projektende
+```{r}
+library(dplyr)
+
+
+sicherung <- read.table("E:/R/N4Oumfrage/analysis/data/derived_data/nach_projektende2.csv", 
+                        sep = ",", 
+                        header = TRUE, 
+                        encoding = "UTF-8")
+
+sicherung2<- sicherung %>%
+  separate(sicherung_kat, c("A","B","C","D", "E", "F"), "," )  %>%
+  gather(key = "placenr", value = "kat_sich", "A", "B","C","D", "E", "F", na.rm = TRUE)
+
+
+empty_as_na <- function(x){
+    if("factor" %in% class(x)) x <- as.character(x) ## since ifelse wont work with factors
+    ifelse(as.character(x)!="", x, NA)
+}
+
+sicherung_kat <- sicherung2$kat_sich %>%
+  table() %>%
+  as_tibble()%>%
+  rename(Sicherungssystem = ".") 
+
+```
+
+Zuerst die Ergebnisse der Umfrage für "nach Projektende"
+```{r}
+## transform all columns
+
+sicherung_kat %>% 
+  mutate_each(funs(empty_as_na))%>%
+  mutate(Prozent = round((n/sum(n)*100),1)) %>%
+  arrange(desc(n))%>%
+  kable()
+
+```
+
+
+Umfrage "nach Projektende" war eine Freifeldaufgabe und wurde händisch in die Kategorien der "während der Projektlaufzeit" - Frage eingeordnet. Dabei entstanden einige wenige Kategorien außerhalb der vorherigen Auswahlmöglichkeit.
+
+
+```{r}
+rownames(ds) <- c("CD/DVD", "externe Festplatte", "externes Datenzentrum", "institutionelles Repositorium des Arbeitgebers", "lokaler Dienstrechner", "lokaler Privatrechner", "nicht-öffentlicher Cloud-Service", "privatwirtschaftlicher Cloud-Service", "Repositorium der Fachcommunity", "USB", "Versionierungssystem", "Zentralnetz des Arbeitgebers")
+
+colnames(ds) <- c("Sicherungssystem", "n")
+
+ds$Sicherungssystem <- rownames(ds)
+ds$zeitpunkt <- "während der Projektlaufzeit"
+colnames(ds) <- c("Sicherungssystem", "n", "zeitpunkt")
+
+sicherung_kat <- as.data.frame(sicherung_kat)
+
+rownames(sicherung_kat) <- sicherung_kat$Sicherungssystem
+
+sicherung_kat$zeitpunkt <- "nach Projektende"
+
+vergleich_sicherung <- rbind(sicherung_kat, ds)
+```
+
+
+
+```{r nachmache plot ianus, fig.width=10}
+
+vergleich_sicherung$Sicherungssystem <- reorder(as.factor(vergleich_sicherung$Sicherungssystem), vergleich_sicherung$n)
+
+vergleich_sicherung %>%
+  filter(n > 2)%>%
+  filter(Sicherungssystem != "")%>%
+ggplot()+
+  geom_col(aes(x = Sicherungssystem,
+               y = n,
+               fill = zeitpunkt),
+           position = "dodge")+
+  scale_fill_manual(values = c(n4o_farben[1], n4o_farben[11]))+
+  coord_flip()+
+    ylab("Häufigkeit Nennung (Mehrfachnennung möglich)")+
+  theme_bw()
+```
+Vergleich IANUS (https://www.ianus-fdz.de/attachments/download/774/Teil1-Ergebnisse_2014-02-26_FINAL.pdf), S. 10.
+
+
+# Vorläufige Analyse der geäußerten Wünsche
+
+Da dies eine Freitext-Frage war, werden die Wünsche gerade noch händisch in Kategorien überführt. Hier ist eine erste Übersicht von 149 von 313 Angaben:
+```{r wunschdarstellung, width = 10}
+
+w <- read.csv2("../data/derived_data/wuensche2.csv", sep = ",", encoding = "UTF-8")
+
+library(tidyr)
+library(dplyr)
+w_kat<- w %>%
+  gather(key = "k", value = "wunsch", c(kat1:kat10)) %>%
+  mutate_each(funs(empty_as_na))
+
+library(ggplot2)
+
+w_tab <- as.data.frame(table(w_kat$wunsch))
+
+w_tab %>%
+  filter(Freq > 1) %>%
+ggplot()+
+  geom_col(aes(x = reorder(Var1, Freq),
+               y = Freq), na.rm = TRUE,
+           fill = n4o_farben[1])+
+  coord_flip()+
+  labs(x = "")
+
+```
+
+
+# Acknowledgements
+
+<!-- The following line inserts a page break  -->
+
+\newpage
+
+# References 
+
+<!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document (this will not work for PDF files):  -->
+
+<div id="refs"></div>
+
+\newpage
+
+### Colophon
+
+This report was generated on `r Sys.time()` using the following computational environment and dependencies: 
+
+```{r colophon, cache = FALSE}
+# which R packages and versions?
+if ("devtools" %in% installed.packages()) devtools::session_info()
+```
+
+The current Git commit details are:
+
+```{r}
+# what commit is this file at? 
+if ("git2r" %in% installed.packages() & git2r::in_repository(path = ".")) git2r::repository(here::here())  
+```
