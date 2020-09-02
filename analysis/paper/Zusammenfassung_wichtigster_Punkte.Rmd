@@ -223,9 +223,9 @@ age_group$gruppe %>%
 ```{r, eval = TRUE, echo = FALSE}
 # Disziplinen zusammenfasen.
 
-write.table(d_fr$disz, "E:/R/N4Oumfrage/analysis/data/derived_data/disziplinen.csv", fileEncoding = "UTF-8")
+#write.table(d_fr$disz, "E:/R/N4Oumfrage/analysis/data/derived_data/disziplinen.csv", fileEncoding = "UTF-8")
 
-disz <- read.csv2("E:/R/N4Oumfrage/analysis/data/derived_data/disziplinen3.csv", encoding = "UTF-8", sep = ",")
+disz <- read.csv2("../analysis/data/derived_data/disziplinen3.csv", encoding = "UTF-8", sep = ",")
 
 d_fr2 <- cbind(d_fr, disz)
 d_fr2 <- d_fr2 %>% 
