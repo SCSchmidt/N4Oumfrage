@@ -293,8 +293,6 @@ stellenwert_n%>%
 
 
 
-
-
 ### Correlation of measures of importance and experience
 
 To see a possible correlation between the measures of experience and assessment of importance of digital research data management for their own work, the two measures are plotted against each other and a linear regression calculated. As both measures are not normally distributed this only serves as illustration, Kendall's Tau is calculated below to show correlation. Colour of the dots indicates to which group the person belongs to.
@@ -350,7 +348,7 @@ tau <- cor.test(d_fr$erfahrung_fdm, d_fr$stellenwert_fdm, method = "kendall", al
 
 The two assessment variables correlate moderately (Kendall's Tau `r tau$estimate` and p `r tau$p.value`), showing that most people assigning high values to the importance of RDM already have some knowledge about it. 
 
-For NFDI4Objects those individuals that have little experience with RDM (experience levels of 0-4), but a high regard for it (importance levels of 6-10) are of special importance: They are the target audience in need of training activities in RDM. They already know they need further training and probably only lack the possibilities. In this target audience all groups are represented but the group of Data and It representatives (clearly showing their expertise in comparison to all other groups).
+For NFDI4Objects those individuals that have little experience with RDM (experience levels of 0-4), but a high regard for it (importance levels of 6-10) are of special importance: They are the target audience in need of training activities in RDM. They already know they need further training and probably only lack the possibilities. In this target audience all groups are represented but the group of Data and IT representatives (clearly showing their expertise in comparison to all other groups).
 
 ### Importance of RDM for different scientific disciplines
 
