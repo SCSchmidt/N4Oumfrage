@@ -1,5 +1,5 @@
 ---
-title: "NFDI4Objects Umfrageauswertung"
+title: "Report on the NFDI4Objects survey"
 author:
   - Sophie C. Schmidt:
       email: sophie.schmidt@dainst.org
@@ -37,12 +37,14 @@ library(pander)
 
 ```
 
+The NFDI4Objects consortium initiative surveyed their community's experience and needs for digital research data management to better model their consortiums action upon these needs. 
+
+In this report the most important results of the survey, which was taken between ... and... are gathered and interpreted. Where possible, the results are compared to three important surveys on research data management in archaeology conducted by Ariadne+ in 2013 [@geser_ariadneplus_2014] and 2019 [@geser_ariadneplus_2019] and by IANUS in 2013 [@heinrich_digitale_2014].
+
+
 # Key results of the NFDI4Objects stake holder survey
 
-In this paper the most important results of the survey the NFDI4Objects consortium initaitve initiated between ... and... are gathered and interpreted. The results are compared to two important surveys on research data management in archaeology, conducted by Ariadne+ in 2019 (@geser_ariadneplus_2019) and 2013 (@geser_ariadneplus_2014) and IANUS in 2013 [@heinrich_digitale_2015].
-
-
-In this summary of key results the main focus will lie on the [community, who partook in the survey](#community), [the importance they assign to research data management as well as the knowledge they have](#rdm-experience), [how research data is managed at the moment](#RDM_now) and what [wishes and dreams the community offered for the future of research data management and NFDI4Objects](#wishes). [Tables](#tables) for detailed numbers are given at the end.
+In this summary of key results the main focus will lie on the [community, who partook in the survey](#community), [the importance they assign to research data management as well as the experience they have](#rdm-experience), [how research data is managed at the moment](#RDM_now) and what [wishes and dreams the community offered for the future of research data management and NFDI4Objects](#wishes). [Tables](#tables) for detailed numbers are given at the end.
 
 ## Community{#community}
 
@@ -71,9 +73,9 @@ n4o_tafarben <- c("#9B163C", "#9506C5", "#4DA1EE", "#36CE97",  "#4CCA33","#FF962
 n4o_farben <- c("#072A54", "#9B163C", "#9506C5", "#4DA1EE", "#36CE97",  "#4CCA33","#FF962E", "#FF6243", "#005F8E", "#6A6D71", "#A6AAAC", "#E8EAEB")
 ```
 
-The NFDI4Objects survey was taken by `r nrow(d)` participants. Even though not all questions were answered by all participants, this is a significantly larger response rate than the surveys carried out by IANUS in 2013 (240 participants, survey carried out in German) and Ariadne+ survey in 2019 (484 of 701 questionnaires were sufficiently completed, survey carried out in English) and comparable to the results of the Ariadne+ surveys in 2013 (692 questionnaires were usable for the analysis, survey was carried out in English). 
+The NFDI4Objects survey was taken by `r nrow(d)` participants. Even though not all questions were answered by all participants, this is a significantly larger response rate than the surveys carried out by IANUS in 2013 (240 participants, survey carried out in German) [@heinrich_digitale_2014] and Ariadne+ survey in 2019 (484 of 701 questionnaires were sufficiently completed, survey carried out in English)  [@geser_ariadneplus_2019] and comparable to the results of the Ariadne+ surveys in 2013 (692 questionnaires were usable for the analysis, survey was carried out in English) [@geser_ariadneplus_2014]. 
 
-As the NFDI4Objects survey was conducted in German and distributed only to the German speaking community, We can note a higher interest in research data management in the German-speaking archaeology-related community in 2020 than in 2013. This may be a result of the NFDI4Objects survey adressing more than just "core" archaeological disciplines (a greater variety of subjects are represented, see below). Another reason may also be that the process initiated by the Deutsche Forschungsgemeinschaft to create a "Nationale Forschungsdateninfrastruktur" has awakened the interest of people, whose main research focus may not lie with research data management. Also, the topic had been more thoroughly introduced in the archaeology community by the IANUS project in the years following its survey (until 2017). 
+The NFDI4Objects survey was conducted in German and distributed only to the German speaking community. We therefore note a higher interest in research data management in the German-speaking archaeology-related community in 2020 than in 2013 [@heinrich_digitale_2014]. This may be a result of the NFDI4Objects survey adressing more than just "core" archaeological disciplines (a greater variety of subjects are represented, see below). Another reason may also be that the process initiated by the Deutsche Forschungsgemeinschaft to create a "Nationale Forschungsdateninfrastruktur" has awakened the interest of people, whose main research focus may not lie with research data management. Also, the topic had been more thoroughly introduced in the archaeology community by the IANUS project in the years following its survey (until 2017). 
 
 
 ```{r rename column names}
@@ -87,7 +89,6 @@ colnames(d_fr) <- c("ID", "Datum", "zufallsid", "geschlecht", "alter", "blickwin
 
 ```
 
-
 ### Demography of survey participants  
 
 #### Age and employment
@@ -98,7 +99,7 @@ age_erfahrung <- d_fr[,c(5:21)]
 # Kategorisierung_Einrichtungen
 age_erfahrung$einrichtung[age_erfahrung$einrichtung == "Forschungsverbund"] <- "Außeruniversitäre Forschungseinrichtung"
 age_erfahrung$einrichtung[age_erfahrung$einrichtung == "keiner"] <- "Sonstiges"
-age_erfahrung$alter[age_erfahrung$alter == "keine Angabe"] <- "not answered"
+age_erfahrung$alter[age_erfahrung$alter == "keine Angabe"] <- "no \n answer"
 
 library(ggplot2)
 library(dplyr)
@@ -110,20 +111,21 @@ ggplot()+
                fill = einrichtung),
            na.rm = TRUE)+
   theme_bw()+
-  theme(axis.text.x = element_text(angle = 45, hjust=0.8),
+  theme(#axis.text.x = element_text(angle = 45, hjust=0.8),
         axis.title.x = element_blank()) +
   ylab("Count")+
   scale_fill_manual(name = "Employment",
                     values = n4o_farben[c(1:3,6:9)],
                     breaks = c("Universität/Hochschule", "Sonstiges", "Museum", "Grabungsfirma", "Denkmalbehörde", "Außeruniversitäre Forschungseinrichtung", "Archiv"),
                     labels = c("University/College", "Other", "Museum", "Commercial Archaeology", "Heritage Management", "Resarch institution", "Archive")) +
-  geom_text(x = 7, y = 150, label = paste("n = ", nrow(age_erfahrung %>%
+  geom_text(x = 8, y = 150, label = paste("n = ", nrow(age_erfahrung %>%
   filter(!is.na(alter) & !is.na(einrichtung)))))
                                         
 ```
-Of 559 respondents to this question, only forty-eight are aged between 20 and 29. Most are between 30 and 60 years of age (altogether 467, for details see tables). Therefore we can conclude that the NFDI4Objects survey may have failed to reach students and graduate students in a representative fashion. A possible reason for this might be, that students do not learn enough about the term "resarch data management" during their studies to feel adequately informed to complete such a survey. Another reason might lie in the distribution of the survey, which was not tailored to focus on students, but distributed mainly along professional organisations of which they are rarely a member. -- stimmt das so?? 
 
-Most of the respondents are in employment at an university, in a resarch institution, a museum or a Heritage Management department (details see [tables](#tables)). Commercial archaeology ("Grabungsfirmen") and archives are less often represented. A similar distribution of employment in survey participants had been reached by Ariadne+ [@geser_ariadneplus_2019] and IANUS [@heinrich_digitale_2015, p. 5].
+Of 559 respondents to this question, only forty-eight are aged between 20 and 29. Most are between 30 and 60 years of age (altogether 467, for details see [tables](#age-table)). Therefore we can conclude that the NFDI4Objects survey may have failed to reach students and graduate students in a representative fashion. A possible reason for this might be, that students do not learn enough about the term "resarch data management" during their studies to feel adequately informed to complete such a survey. Another reason might lie in the distribution of the survey, which was not tailored to focus on students, but distributed mainly along professional organisations of which they are rarely a member. -- stimmt das so?? 
+
+Most of the respondents are in employment at an university, in a resarch institution, a museum or a Heritage Management department (details see [tables](#tables)). Commercial archaeology ("Grabungsfirmen") and archives are less often represented. A similar distribution of employment in survey participants had been reached by Ariadne+ [@geser_ariadneplus_2019] and IANUS [@heinrich_digitale_2014, p. 5].
 
 
 ```{r, eval = FALSE}
@@ -173,24 +175,20 @@ ggplot()+
   theme(legend.position = "right", 
         legend.key.size = unit(1, "cm"),
         legend.text = element_text(size = 10)) 
-
-
-  
 ```
 
-Most are Scientific employees at Universities, Museums and Research Institutions.
+Most respondents are Scientific employees at Universities, Museums and Research Institutions (for details see [tables](#responsibility-table)).
 
-In comparison to the IANUS study (@heinrich_digitale_2015, 7), the NFDI4Objects survey was able to reach more people in all functions, but students and PhD students. Their numbers remained at the same level, whereas the number of scientific staff that answered the NFDI survey almost tripled. This re-inforces the observation that the student groups are underrepresented in this study. 
+In comparison to the IANUS study (@heinrich_digitale_2014, 7), the NFDI4Objects survey was able to reach more people in all functions, but students and PhD students. Their numbers remained at the same level, whereas the number of scientific staff that answered the NFDI survey almost tripled. This re-inforces the observation that the student groups / youngest groups are underrepresented in this study. 
 
 #### Fields of subjects 
-
 
 ```{r, eval = TRUE, echo = FALSE}
 # Disziplinen zusammenfassen.
 
 #write.table(d_fr$disz, "E:/R/N4Oumfrage/analysis/data/derived_data/disziplinen.csv", fileEncoding = "UTF-8")
 
-disz <- read.csv2("E:/R/N4Oumfrage/analysis/data/derived_data/disziplinen3.csv", encoding = "UTF-8", sep = ",")
+disz <- read.csv2("../data/derived_data/disziplinen3.csv", encoding = "UTF-8", sep = ",")
 
 d_fr2 <- cbind(d_fr, disz)
 d_fr2 <- d_fr2 %>% 
@@ -198,18 +196,18 @@ d_fr2 <- d_fr2 %>%
 ```
 
 
-```{r}
-na.omit(d_fr2$disz_grob) %>%  
-  table()%>%
-  as_tibble() %>%
-  rename(Subject = ".") %>%
-  mutate(percentage = round((n/sum(n)*100),1)) %>%
-  mutate(Subject = recode(Subject,
-                         "Archäologie" = "Archaeology",
+```{r fig_subjects, fig.width=10}
+library(ggplot2)
+ggplot()+
+  geom_bar(data = d_fr2, 
+           aes(x = disz_grob),
+           fill = n4o_farben[1])+
+  scale_x_discrete(name = "Categories of disciplines",
+                   labels = c("Archäologie" = "Archaeology",
                          "keine Angabe" = "no answer",
                          "MINT" = "MINT subjects",
                          "Musikwissenschaft" = "Musicology",
-                         "Kunst" =  "Art",
+                         "Kunst" =  "Art-related subjects",
                          "Geschichte" = "History",
                          "Archäo-Wissenschaften" = "Archaeological Sciences",
                          "Denkmalpflege und Bauforschung" = "Heritage Management / Building Research",
@@ -221,24 +219,21 @@ na.omit(d_fr2$disz_grob) %>%
                          "Numismatik" = "Numismatics",
                          "Altertumswissenschaften" = "Ancient Studies",
                          "Anthropologie" = "Anthropology",
-                         "Digitales" = "Digital Humanities",
-                         "Bibliothekswissenschaft" = "Library Studies",
-                         "Provenienzforschung" = "Provenance Research")) %>%
-  arrange(desc(n))%>%
-  pander(caption = "Association to Scientific Fields of respondents")
+                         "Digitales" = "Digital Humanities"))+
+  coord_flip()+
+  theme_bw()
 ```
 
-The information given regarding the scientific discipline participants are associated with was very heterogenous. For this summary of key results they were grouped and classified. The variety of archaeologcal subjects (Prehistoric, Near Eastern, Egyptology, Middle Ages, Roman Provinces, Early Modern etc) was summed up and represents almost 50% of all answers. In contrast to the IANUS (@heinrich_digitale_2015, 6) and the ARIADNE+ surveys [@geser_ariadneplus_2014, 73; @geser_ariadneplus_2019] the disciplinary variance is much higher in the NFDI4Objects survey: Musicology, Art history, History, Restoration Science, different IT-related subjects (geoinformatics, bioinformatics), Digital Humanities and Museology were part of the survey, whereas the aforementioned studies focused very much on archaeological subjects.
 
 
-## Analysis of answers regarding the level of experience in RDM and the subjective importance of RDM{#rdm-experience}
+The information given regarding the scientific discipline participants are associated with was very heterogenous (for details see [tables](#subject-table)). For this summary of key results they were grouped and classified. The variety of archaeologcal subjects (Prehistoric, Near Eastern, Egyptology, Middle Ages, Roman Provinces, Early Modern etc) was summed up and represents almost 50% of all answers. In contrast to the IANUS (@heinrich_digitale_2014, 6) and the ARIADNE+ surveys [@geser_ariadneplus_2014, 73; @geser_ariadneplus_2019] the disciplinary variance is much higher in the NFDI4Objects survey: Musicology, Art history, History, Restoration Science, different IT-related subjects (geoinformatics, bioinformatics), Digital Humanities and Museology were part of the survey, whereas the aforementioned studies focused very much on archaeological subjects.
+
+
+## Analysis of answers regarding the level of experience in research data management and the subjective importance of research data management{#rdm-experience}
 
 ### Age, experience and importance
 
-With this grafic we visualise the age of the answering person and their self-assessment regarding their own level of experience with digital Research Data Management as well as the importance of digital RDM for their daily work. Both scales range from 0 (no experience and no importance) to 10 (very important and a lot of experience). The Boxplots show the level of experience whereas the jittered dots represent the assessment of importance of Research Data Management for the daily work.
-
-
-```{r fig_erfahrung_gruppe, fig.height=4, fig.width=10}
+```{r fig_erfahrung_gruppe, fig.height=6, fig.width=10}
 library(viridis)
 ggplot(data = age_group, 
            aes_string(x = names(age_group)[1],
@@ -247,9 +242,9 @@ ggplot(data = age_group,
   geom_boxplot()+
   geom_jitter(position=position_jitter(width=.3, height=0), aes_string(colour = names(age_group)[8]))+
   theme_bw()+
-  theme(axis.text.x = element_text(angle = 45, hjust=0.8),
-        axis.title.x = element_blank(),
-        title = element_text("Self-assesment: level of experience with digital RDM")) +
+  theme(axis.title.x = element_blank(),
+        title = element_text("Self-assesment: level of experience with digital RDM"),
+        legend.position = "bottom") +
   ylab("0: no experience, 10: a lot of experience") + 
   xlab ("Age")+
   scale_color_viridis(option = "D")+
@@ -257,6 +252,7 @@ ggplot(data = age_group,
 
 ```
 
+With this grafic we visualise the age of the answering person and their self-assessment regarding their own level of experience with digital research data management as well as the importance of digital research data management for their daily work. Both scales range from 0 (no experience and no importance) to 10 (very important and a lot of experience). The Boxplots show the level of experience whereas the jittered dots represent the assessment of importance of research data management for the daily work.
 
 ```{r, eval = TRUE}
 
@@ -275,29 +271,99 @@ mean_job_wicht <- mean(d_fr$stellenwert_fdm[d_fr$alter != "20-29" & d_fr$alter !
 
 ```
 
-All age groups show mixed measures of experience and knowledge about digital research data management. The youngest group of respondents clearly has lower levels of experience (median of `r med_stud_erf`) than those aged between 30 and 60 years (median = `r med_job_erf`). The age group of 20-29 nonetheless gives the highest value regarding the importance of research data management in their work (median = `r med_stud_wich`), though people aged between 30 and 60 show only a little less enthusiasm for the topic (median = `r med_job_wicht`). We therefore can show here, that younger people are aware of the importance of RDM, but may lack the skills necessary for the successfull implementation in their work.
+All age groups show mixed measures of experience and knowledge about digital research data management. The youngest group of respondents clearly has lower levels of experience (median of `r med_stud_erf`) than those aged between 30 and 60 years (median = `r med_job_erf`). The age group of 20-29 nonetheless gives the highest value regarding the importance of research data management in their work (median = `r med_stud_wich`), though people aged between 30 and 60 show only a little less enthusiasm for the topic (median = `r med_job_wicht`). We therefore can show here, that younger people are aware of the importance of research data management, but may lack the skills necessary for the successfull implementation in their work.
 
-There is a tendency towards younger (20-29) and elderly people (69-79) having less experience with digital RDM than those inbetween. As the chi-Squared test cannot be applied (expected values fall beneath five in more than 20% of cases), this tendency cannot be shown to be statistically relevant.
+There is a tendency towards younger (20-29) and elderly people (69-79) having less experience with digital research data management than those inbetween. As the chi-Squared test cannot be applied (expected values fall beneath five in more than 20% of cases), this tendency cannot be shown to be statistically significant.
 
-In comparison to the IANUS-survey, in which the respondents could answer along the scale of "very high" (108x - 45%), "high" (73x - 30%), "rather high"(41x - 17%), "rather low" (13x - 6%), "low" (3x - 1%), "very low" (3x - 1%) [@heinrich_digitale_2015, 8], one can say similar results were received.  
+In comparison to the IANUS-survey, in which the respondents could answer the question of importance of research data management for their daily work along the scale of "very high" (108x - 45%), "high" (73x - 30%), "rather high"(41x - 17%), "rather low" (13x - 6%), "low" (3x - 1%), "very low" (3x - 1%) [@heinrich_digitale_2014, 8], one can say similar results were received and confirmed by the larger sample size (for detailed numbers see [table](#fdm_stellenwert-table)). 
 
 ```{r}
 stellenwert_n <- as.data.frame(table(d_fr$stellenwert_fdm))
 colnames(stellenwert_n) <- c("Assessment of importance of RDM", "Count")
+```
 
-stellenwert_n%>%
-  arrange(desc(`Assessment of importance of RDM`))%>%
-    mutate(Percentage = round((Count/sum(Count)*100),1)) %>%
-  pander(caption = "Assessment of importance of RDM")
+
+```{r calculation of siimilarity to IANUS stellenwert_fdm, eval=FALSE}
+ianus_ergebnis <- c(3,3,13,41,73,108)
+
+normalize_to_IANUS <- as.numeric(as.character(stellenwert_n$`Assessment of importance of RDM`))*6/10
+
+vgl_vektor_nfdi <- c(stellenwert_n$Count[1]+stellenwert_n$Count[2],
+               stellenwert_n$Count[3]+stellenwert_n$Count[4],
+               stellenwert_n$Count[5],
+               stellenwert_n$Count[6]+stellenwert_n$Count[7],
+               stellenwert_n$Count[8] + stellenwert_n$Count[9]+stellenwert_n$Count[10])
+
+perc_vektor_nfdi <- vgl_vektor_nfdi*100/sum(vgl_vektor_nfdi)
+vgl_vektor_ianus <- c(ianus_ergebnis[1],
+                      ianus_ergebnis[2],
+                      ianus_ergebnis[3],
+                      ianus_ergebnis[4], 
+                      ianus_ergebnis[5] + ianus_ergebnis[6])
+
+perc_vektor_ianus <- vgl_vektor_ianus*100/sum(vgl_vektor_ianus)
+
+vgl_ianus <- data.frame(c(1:5), vgl_vektor_ianus, perc_vektor_ianus, vgl_vektor_nfdi, perc_vektor_nfdi)
+
+```
+
+```{r}
+ggplot()+
+  geom_col(data = stellenwert_n, 
+           aes(x = `Assessment of importance of RDM`,
+               y = Count),
+           fill = n4o_farben[1])+
+  geom_text(aes(x = 2,
+                y = 130,
+                label = paste("n =", sum(stellenwert_n$Count))))
+```
+
+```{r}
+experience_n <- as.data.frame(table(d_fr$erfahrung_fdm))
+colnames(experience_n) <- c("Assessment of experience in RDM", "Count")
+```
+
+In regards to the distribution of experiece it might be assumed that either there are groups in the data or the level of experience should be somewhat normally distributed, with few people knowing very little and only few people having gained a lot of experience. 
+
+```{r}
+ggplot()+
+  geom_col(data = experience_n, 
+           aes(x = `Assessment of experience in RDM`,
+               y = Count),
+           fill = n4o_farben[2])+
+  geom_text(aes(x = 2,
+                y = 130,
+                label = paste("n =", sum(experience_n$Count))))
 ```
 
 
 
+```{r}
+ks_erfahrung_fdm <- ks.test(na.omit(d_fr2$erfahrung_fdm), 
+        "pnorm", #test agains normal distribution
+        mean=mean(na.omit(d_fr2$erfahrung_fdm)), # which has a mean
+        sd=sd(na.omit(d_fr2$erfahrung_fdm))) # and a sd same as my distribution
+```
+
+Therfore we test the assumption of normal distribution with the help of the Kolmogorov-Smirnov-test, which showed a highly significant result of the data not being normally distributed (p = `r ks_erfahrung_fdm$p.value`). 
+
+Visualising the distribution and analysing it with Jenks natural breaks algorithm (@alberti_2017) for two categories offers the best natural groups of people self-asessing their knowledge level between 0-5 (216 individuals) and 6-10 (325 individuals). The first group can be considered novice to the topic of research data management, whereas in the second group several levels of expertise are represented.
+
+```{r, eval = FALSE}
+library(classInt)
+source("plot_jenks.R")
+jenks_erfahrung <- plotJenks(d_fr2$erfahrung_fdm, n = 2)
+```
+
+The IANUS survey asked a similar question in 2013 with the following results: Very much experience: 31x - 13%; a lot of experience: 90x - 37%; rather a lot experience: 76x - 31%; rather little experience: 33 - 14%, little experience: 7x - 3%, very little experience: 5x - 2% [@heinrich_digitale_2014, 9]. Their group of "novices" (having very little to rather little experience) is in comparison to the NFDI4Objects survey smaller. In 2013 about 20% of respondents can be categorised in such a way, in this study almost 40% of people assess their own skills to belong to the "lower half" (5 or smaller, for details see the [table](#experience-table)).
+
+This again shows that this study managed to reach a broader audience.
+
 ### Correlation of measures of importance and experience
 
-To see a possible correlation between the measures of experience and assessment of importance of digital research data management for their own work, the two measures are plotted against each other and a linear regression calculated. As both measures are not normally distributed this only serves as illustration, Kendall's Tau is calculated below to show correlation. Colour of the dots indicates to which group the person belongs to.
+To see a possible correlation between the measures of experience and assessment of importance of digital research data management for their own work, the two measures are plotted against each other and a linear regression calculated. As both measures are not normally distributed this only serves as illustration. Kendall's Tau is calculated below to show correlation. Colour of the dots indicates to which responsibility group the person belongs to.
 
-```{r fig_gruppe, fig.width=10}
+```{r fig_gruppe_data}
 
 erfahrung_group <- age_erfahrung %>%
   gather(key = "gruppe", value = "ja.nein", 6:14, na.rm = TRUE) %>%
@@ -305,7 +371,10 @@ erfahrung_group <- age_erfahrung %>%
 
 library(stringr)
 erfahrung_group$gruppe <- str_replace_all(erfahrung_group$gruppe,"Zu.welchen.Gruppen.fühlen.Sie.sich.zugehörig...","")
+```
 
+
+```{r fig_gruppe, fig.width=10, fig.height=6}
 
 ggplot()+
   geom_jitter(data = erfahrung_group, aes_string(x = names(erfahrung_group)[7],
@@ -318,7 +387,7 @@ ggplot()+
                    labels = c(0,2,4,6,8,10))+
   scale_y_continuous(breaks=c(0,2,4,6,8,10),
                    labels = c(0,2,4,6,8,10))+
-  scale_colour_manual(name="Group",
+  scale_colour_manual(name="Responsibilities",
                         values = c(n4o_farben[1:9]),
                       breaks = c("daten_it_beauftragt", "lehrende","einrichtung_leiter", "projektleiter", "promovierende", "studiernede", "techn_mitarb","wiss_mitarb"),
                       labels=c("wiss_mitarb" = "Scientific employee",
@@ -330,38 +399,45 @@ ggplot()+
                          "techn_mitarb" = "Technological employee",
                          "studiernede" = "Student")) +
   geom_text(aes(x = 5, y = 0, label = "Jittered data to reduce overlap of points!"))+
-  geom_segment(aes(x = -1, y = 6, xend = 4, yend = 6), colour= n4o_farben[10], linetype = "dashed")+
-  geom_segment(aes(x = 4, y = 6, xend = 4, yend = 11), colour = n4o_farben[10], linetype = "dashed")+
+  geom_segment(aes(x = -1, y = 6, xend = 5, yend = 6), colour= n4o_farben[10], linetype = "dashed")+
+  geom_segment(aes(x = 5, y = 6, xend = 5, yend = 11), colour = n4o_farben[10], linetype = "dashed")+
   geom_smooth(data = erfahrung_group, aes_string(x = names(erfahrung_group)[7],
                                    y = names(erfahrung_group)[8]),
               method = "glm",
               formula = y~x) + # y abhängig von x 
    scale_alpha_continuous(guide=FALSE)+
-  scale_linetype_discrete(guide = FALSE)
+  scale_linetype_discrete(guide = FALSE)+
+  theme(legend.position="bottom")+
+  geom_text(aes(x = -1,
+                y = 10,
+                label = paste("n =", sum(experience_n$Count))))
+
 ```
+
 
 ```{r}
 tau <- cor.test(d_fr$erfahrung_fdm, d_fr$stellenwert_fdm, method = "kendall", alternative = "two.sided")
 ```
 
+The two assessment variables correlate moderately (Kendall's Tau `r tau$estimate` and p `r tau$p.value`), showing that most people assigning high values to the importance of research data management already have some knowledge about it. 
 
 
-The two assessment variables correlate moderately (Kendall's Tau `r tau$estimate` and p `r tau$p.value`), showing that most people assigning high values to the importance of RDM already have some knowledge about it. 
+For NFDI4Objects those individuals that have little experience with research data management (experience levels of 0-5), but a high regard for it (importance levels of 6-10) are of special importance: They are the target audience in need of training activities in research data management. They already know they need further training and probably only lack the possibilities. In this target audience all groups are represented but the group of Data and IT representatives (clearly showing their expertise in comparison to all other groups).
 
-For NFDI4Objects those individuals that have little experience with RDM (experience levels of 0-4), but a high regard for it (importance levels of 6-10) are of special importance: They are the target audience in need of training activities in RDM. They already know they need further training and probably only lack the possibilities. In this target audience all groups are represented but the group of Data and IT representatives (clearly showing their expertise in comparison to all other groups).
+### Importance of research data management for different scientific disciplines
 
-### Importance of RDM for different scientific disciplines
+Looking at different disciplines and their assessment of the importance of digital research data management in their work may give an indication, which disciplines are already familiar with digital research data management strategies. 
 
-Looking at different disciplines and their assessment of the importance of digital RDM in their work may give an indication, which disciplines are already using digital research data management strategies. Further down the self-assessment of experience will give an indication about the need of training and workshops.
-
-```{r stellenwert_fdm_disziplin_grob, fig.width=10}
+```{r stellenwert_label_placement}
 cts <- merge(aggregate(stellenwert_fdm ~ disz_grob, d_fr2, length), 
                aggregate(stellenwert_fdm ~ disz_grob, d_fr2, median), 
                by=c("disz_grob"))
 # Rename the col names to fit with the original dataset..
 names(cts) <- c("disz_grob", "count", "median")
+```
 
 
+```{r stellenwert_fdm_disziplin_grob,  fig.width=10, fig.height=6}
 
 library(ggplot2)
 library(viridis)
@@ -404,12 +480,13 @@ library(viridis)
   
 ```
 
-It can be deduced from this plot that there is some variance in the answers submitted. Though all disciplines show medians between 6 and 9, the spread and variation of answers differs. Especially in archaeology, which is the largest group, answers range from 0 to 10. Other disciplines may be less completely represented in the study, thereby biasing the results in favour of high importance of RDM.
+It can be deduced from this plot that there is some variance in the answers submitted. Though all disciplines show medians between 6 and 9, the spread and variation of answers differs. Especially in archaeology, which is the largest group, answers range from 0 to 10. Other disciplines may be less completely represented in the study, thereby biasing the results in favour of high importance of research data management.
 
+We conclude nonetheless, that the importance of digital research data management for the daily work of individuals is - all in all - high.
 
-#### Experience in RDM for different scientific disciplines
+#### Experience in research data management for different scientific disciplines
 
-```{r erfahrung_fdm_disziplin_grob, fig.width=10}
+```{r erfahrung_fdm_disziplin_grob, fig.width=10, fig.height=6}
 
 cts2 <- merge(aggregate(erfahrung_fdm ~ disz_grob, d_fr2, length), 
                aggregate(erfahrung_fdm ~ disz_grob, d_fr2, median), 
@@ -458,46 +535,12 @@ library(viridis)
     coord_flip()
   
 ```
-The self-assessment in digital research data management varies also between the disciplines. It's obvious that the values are all in all lower than the levels of importance of RDM for the daily work. Here NFDI4Objects will be able to develop RDM training curricula especially for those disciplines that have the lowest levels of knowledge and experience (Library Studies, several Art-related subjects, Restoration Science, Anthropology to name a few).
+
+The self-assessment of experience in digital research data management also varies between the disciplines. It's obvious that the values are all in all lower than the levels of importance of research data management for the daily work.  
 
 
-#### How is the level of experience distributed? 
 
-In regards to the experience in RDM it might be assumed, that either there are groups in the data, or the level of experience should be somewhat normally distributed, with few people knowing very little and only few people having gained a lot of experience. 
-
-
-```{r}
-ks_erfahrung_fdm <- ks.test(na.omit(d_fr2$erfahrung_fdm), 
-        "pnorm", #test agains normal distribution
-        mean=mean(na.omit(d_fr2$erfahrung_fdm)), # which has a mean
-        sd=sd(na.omit(d_fr2$erfahrung_fdm))) # and a sd same as my distribution
-```
-
-Therfore we test the assumption of normal distribution with the help of the Kolmogorov-Smirnov-test, which showed a highly significant result of the data not being normally distributed (p = `r ks_erfahrung_fdm$p.value`). 
-
-```{r fig_verteilung_erfahrung, fig.height=4, fig.width = 8}
-ggplot()+
-  geom_bar(data = age_erfahrung, 
-           aes_string(x = names(age_erfahrung[16])),
-           fill = n4o_farben[1])+
-  theme_bw()+
-  scale_x_continuous(breaks=c(0:10),
-                   labels = c(0:10))+
-  xlab("Experience with RDM, 0: none, 10: a lot.")
- 
-```
-
-Visualising the distribution and analysing it with Jenks natural breaks algorithm (@alberti_2017) for two categories offers the best natural groups of people self-asessing their knowledge level between 0-5 (216 individuals) and 6-10 (325 individuals). These differing levels of expertise will find different roles in the NFDI4Objects consortium. The first group being the target group for trainings and workshops and the second group will be engaged via expert groups and advisory roles.
-
-
-```{r, eval = FALSE}
-library(classInt)
-source("plot_jenks.R")
-jenks_erfahrung <- plotJenks(d_fr2$erfahrung_fdm, n = 2)
-```
-
-### Concerning experience: What kind of employer already uses RDM guidelines?
-
+### Concerning experience: What kind of employer already offers research data management guidelines?
 
 
 ```{r tab_einrichtungen_richtlinien}
@@ -526,10 +569,13 @@ dt_df[,c(4,1,2,3)] %>%
   pander(caption = "Respondents answers about RDM guidelines of their employing institution")
 
 ```
-For this question participants were asked whether their employer already had guidelines for research data management. As the possibility to answer "I don't know" was given, we believe the answers are informed ones. Commercial Archaeology almost always has rules for research data management, as do archives. As these are "closest" to the production and archiving of data this is not surprising. Heritage Management, as it sets the rules for the data management of Commercial Archaeology should have guidelines for research data management more often than given here. All in all more employers of one kind seem to have guidelines than not, with the exception of museums and "other".
+
+For this question participants were asked whether their employer already had guidelines for research data management. As the possibility to answer "I do not know" was given, we believe the answers are informed ones. Commercial Archaeology almost always has rules for research data management, as do archives. As these are "closest" to the production and archiving of data this is not surprising. Heritage Management, as it sets the rules for the data management of Commercial Archaeology should have guidelines for research data management more often than given here. All in all more employers of one kind seem to have guidelines than not. Notable exceptions are museums and "other".
 
 
 # Analysis of used services and data format for research data{#RDM_now}
+
+## Analysing software used for data analysis
 
 ```{r}
 fdm_dienste <- d$Mit.welchen.Diensten..z.B..der.Netzbasierte.archäologische.Datenprozessierungsdienst.des.RGZM..und.Software.Applikationen..z.B..MS.Excel..QGIS..SPSS..R..etc...analysieren.Sie.Ihre.Forschungsdaten.im.Rahmen.Ihrer.wissenschaftlichen.Arbeit..Bitte.nennen.Sie.bis.zu.sieben.Beispiele..
@@ -595,16 +641,19 @@ ggplot()+
   geom_label(aes(x = 5, 
                  y = 150,
                  label = "text mining - analysis of the question \n 'With which services do you analyse your data for scientific work?' "))+
-  coord_flip()
+  coord_flip()+
+  theme_bw()
 ```
-It is easy to see that the software most often used are Excel and QGIS, whereas Access is the best known data base system. This means that even though most people rely on Microsoft, they are willing to use open source and free software if they see use for it. 
+
+It is easy to see that the programs most often used are Excel and QGIS, whereas Access is the best known data base system. This means that even though most people rely on Microsoft, they are willing to use open source and free software if they see use for it. 
 
 Highlighted are the words "keine" ("none") and "eigene" ("own"). First shows the number of people declaring they do not use any software for data analysis, whereas the second means some instutions invest time and money to develop their own software solutions. Further analysis could show, that these are mostly Scientific Research Institutions (4x) and Heritage Management Departments (4x). 
 
 
 ## Data formats
 
-The question, which data formats are used by the repondents was analysed with a text mining approach, counting frequencies of  mentions. 
+The question, which data formats are in use by the repondents was analysed with a text mining approach, counting frequencies of  mentions. 
+
 ```{r}
 # in auswahl genannte 
 library(tidyr)
@@ -683,14 +732,14 @@ ggplot()+
 
 ```
 
-The four most often used data formats are PDF, doc, jpg und xls. These are quite generic and used in a lot of different settings. The high frequency of mentions of GeoTIFF, shape files and geojson show the need for quite specialised data formats for GIS analyses. All in all `r nrow(dat3)` different data formats were named, some of them highly specialised for certain hardware, such as laser scanners or similar.
+The four most often used data formats are pdf, doc, jpg und xls. These are quite generic and used in a lot of different settings. The high frequency of mentions of geotiff, shape files and geojson show the need for quite specialised data formats for GIS analyses. All in all `r nrow(dat3)` different data formats were named, some of them highly specialised for certain hardware, such as laser scanners or similar.
 
 
 ## Data storage
 
-For this question, users had the option of choosing between the given answers and check several at the same time.
+For the question regarding how data is stored during a project, users had the option of choosing several predefined answers.
 
-```{r datastorage, fig.height=4}
+```{r datastorage, fig.height=4, fig.width=10}
 
 library(tidyr)
 datastorage <- d_fr %>%
@@ -707,12 +756,13 @@ ggplot(data = ds)+
   theme_bw() + 
   xlab("Kind of data storage") +
   scale_x_discrete(breaks = levels(ds$Var1),
-       labels = c("CD/DVD", "External hard drive", "External data center", "Institutional repositorium \n of employer", "Localer work PC", "Local privat PC", "Non-public \n Cloud-Service", "Private sector \n Cloud-Service", "Repositorium of \n specialist community", "USB", "Versioning system", "Central network of the employer"))+
-  ylab("Frequency of mentions (multiple answers possible)")
+       labels = c("CD/DVD", "External hard drive", "External data center", "Institutional repositorium \n of employer", "Localer work PC", "Local privat PC", "Non-public Cloud-Service", "Private sector Cloud-Service", "Repositorium of specialist community", "USB", "Versioning system", "Central network of the employer"))+
+  ylab("Frequency of mentions (multiple answers possible)")+
+   theme(axis.text.y = element_text(size = 10)) 
 
 ```
 
-The most often named back up method during the project phase is the central network of the empoyer, the external hard drive and local PCs. In comparison to the IANUS survey of 2013 [@heinrich_digitale_2015, 10] the answer "local work PC" has been overtaken by "central network of employer", thereby showing the sensibilisation of employers and institutions regarding the topic of data archiving. Local hard ware, such as external hard drives, USB sticks and local PCs remain very important. 
+The most often named storage method during the project phase is the central network of the empoyer, the external hard drive and local PCs. In comparison to the IANUS survey of 2013 [@heinrich_digitale_2014, 10] the answer "local work PC" has been overtaken by "central network of employer", thereby showing the sensitization of employers and institutions regarding the topic of data archiving. Local hard ware, such as external hard drives, USB sticks and local PCs remain very important (for details see [tables](#storage-table)). 
 
 
 ```{r}
@@ -722,8 +772,7 @@ ds_sonst <- d_fr$datensicherung_sonstiges
 ds_sonst <- ds_sonst[!is.na(ds_sonst)]
 
 ```
-Named as"other" were mostly privat server solutions.
-
+Named as "other" were mostly privat server solutions.
 
 ```{r}
 #write.csv2(d_fr$sicherung_nach_projekt, "E:/R/N4Oumfrage/analysis/data/derived_data/nach_projektende.csv", fileEncoding = "UTF-8")
@@ -732,12 +781,12 @@ Named as"other" were mostly privat server solutions.
 
 ## Comparison of data storage methods during the project and after the project
 
-Respondents were asked to name the data storage facilities after a project ends in a free text field. It was in a second step categorized into the groups mentioned in the question beforehand.
+Respondents were asked to name the data storage facilities after a project ends in a free text field. It was in a second step categorized into the groups mentioned in the question beforehand if possible and where not, new categories were created (for details, see [tables](#storage_after_project)).
 
 ```{r}
 library(dplyr)
 
-sicherung <- read.table("E:/R/N4Oumfrage/analysis/data/derived_data/nach_projektende2.csv", 
+sicherung <- read.table("../data/derived_data/nach_projektende2.csv", 
                         sep = ",", 
                         header = TRUE, 
                         encoding = "UTF-8")
@@ -756,36 +805,6 @@ sicherung_kat <- sicherung2$kat_sich %>%
   table() %>%
   as_tibble()%>%
   rename(Sicherungssystem = ".") 
-
-```
-
-
-
-```{r}
-## transform all columns
-
-sicherung_kat %>% 
-  mutate_each(funs(empty_as_na))%>%
-  na.omit()%>%
-  mutate(Percentage = round((n/sum(n)*100),1)) %>%
-  rename("System" = Sicherungssystem) %>%
-  mutate(System = recode(System,
-                `Zentralnetz des Arbeitgebers` = "Central network of the employer",
-                `externe Festplatte` = "External hard drive",
-                `institutionelles Repositorium des Arbeitgebers` =  "Institutional repositorium of employer",
-                `nicht-öffentlicher Cloud-Service` = "Non-public Cloud-Service",
-                `lokaler Dienstrechner` = "Local work PC",
-                `lokaler Privatrechner` = "Local privat PC",
-                `analog` = "analogue",
-                `institutionelles Repositorium` = "Institutional repositorium of employer",
-                `Repositorium der Fachcommunity` = "Repositorium of specialist community",
-                `iDAI Systeme` = "iDAI systems",
-                `privatwirtschaftlicher Cloud-Service` = "Private sector Cloud-Service",
-                `gar nicht` = "not at all",
-                `externes Datenzentrum` = "External data center",
-                `e-library TÃ¼bingen` = "e-library Tübingen"))%>%
-  arrange(desc(n))%>%
-  pander(caption = "Systems for data storage after project ends")
 
 ```
 
@@ -810,7 +829,7 @@ vergleich_sicherung <- rbind(sicherung_kat, ds)
 
 
 
-```{r nachmache plot ianus, fig.width=10}
+```{r nachmache plot ianus, fig.width=10, fig.height=8}
 
 vergleich_sicherung$Sicherungssystem <- reorder(as.factor(vergleich_sicherung$Sicherungssystem), vergleich_sicherung$n)
 
@@ -846,14 +865,15 @@ ggplot()+
   theme_bw()
 ```
 
-First of all it is easy to see that people are answering with more data storage system if asked about their saving mechanisms during the project than if asked about after the after the project ends. This may be due to the way the question was asked (free text in comparison to check boxes), it may also be due to people not considering long term storage of project data as much their responsibility as the work on a project. 
+First of all it is easy to see that people are answering with more data storage systems if asked about their saving mechanisms during the project than if asked about after the after the project ends. This may be due to the way the question was asked (free text in comparison to check boxes), it may also be due to people not considering long term storage of project data as much their responsibility as e.g. the responsibility of just the PI or their employer. 
 
-In comparison to the IANUS survey [@heinrich_digital_2015, 10], we see less answers in percentage concerning storage after the projct ends. The local work or private PC is even less often used for storage after project ends than in the IANUS survey of 2013. Only few people use professional archives (repositorium of specialist community, external data centers or the institional reposity of the employer), similarly to 2013. Local networks or servers by the employer are used most often, which shows their rising importance.
+In comparison to the IANUS survey [@heinrich_digitale_2014, 10], we see less answers in percentage concerning storage after the projct ends. The local work or private PC is even less often used for storage after project ends than in the IANUS survey of 2013. Only few people use professional archives (repositorium of specialist community, external data centers or the institional reposity of the employer), similarly to 2013. Local networks or servers by the employer are used most often, which shows their rising importance.
 
 # Analysis of wishes mentioned{#wishes}
 
-Da dies eine Freitext-Frage war, werden die Wünsche gerade noch händisch in Kategorien überführt. Hier ist eine erste Übersicht von 149 von 313 Angaben:
-```{r wunschdarstellung, width = 10}
+The analysis of the wishes mentioned by the participants of the survey began with a classification approach, in which the free text answers were classified according to re-occuring topics.
+
+```{r wunschdarstellung, fig.width = 10, fig.height=8}
 
 w <- read.csv2("../data/derived_data/wuensche2.csv", sep = ",", encoding = "UTF-8")
 
@@ -868,20 +888,72 @@ library(ggplot2)
 w_tab <- as.data.frame(table(w_kat$wunsch))
 
 w_tab %>%
-  filter(Freq > 1) %>%
+  filter(Freq > 5) %>%
 ggplot()+
   geom_col(aes(x = reorder(Var1, Freq),
                y = Freq), na.rm = TRUE,
            fill = n4o_farben[1])+
+  scale_x_discrete(labels = c(`Hilfestellungen` = "Support",
+                `einfach` = "Easy to use solutions",
+                `Langzeitarchivierung` =  "Long term archiving",
+                `Zugänglichkeit` = "Accessibility",
+                `Suche / Auffindbarkeit` = "Search options/fast retrieval",
+                `Richtlinien` = "Guidelines",
+                `Datenportal` = "Data portal",
+                `Rechtemanagement` = "Access and rights management",
+                `Personal` = "Staff",
+                `Vernetzung` = "Networking",
+                `Nachhaltigkeit` = "Sustainability",
+                `kostenlos` = "Free",
+                `Finanzierung` = "Financing",
+                Lehre = "Teaching",
+                `Effektivierungsstrategien für große Datenmengen` = "Effective strategies for big data",
+                `Datenschutz` = "Data security",
+                `Bewusstsein schaffen` = "Creating awareness",
+                `Auffindbarkeit` = "Retrieval",
+                `Archivierung` = "Archiving",
+                `Speicherplatz` = "Storage space",
+                `Sicherheit` = "Security",
+                `Metadaten` = "Meta data",
+                `Datenpflege` = "Data maintenance",
+                `zentrale Plattform` = "Central platform",
+                `zentrale Anlaufstellen` = "Central points of contact"))+
   coord_flip()+
-  labs(x = "")
+  labs(x = "",
+       y = "Frequency mentioned (> 5x)")+
+  theme_bw()
 
 ```
+
+People want standards and they need support and guidelines to create these standards in their own work. Many explained that the offered solutions will have to be easy to use or they will not be used. A lot of people care for long term archiving and accessibility of these archived data (searchable, open data). Many thought some kind of data portal with access and rights management will be the way to go. Financing for on the one hand staff to create their own data with meta data and standards in accordance to guidelines and financing for on the other hand long term archiving were re-occuring topics, that will need to be adressed. Linking of data and Networking between platforms and people is a recurring wish, as is creating awareness for all the mentioned topics. A complete overview over the mentioned topics can be consulted in [tables](#wish-list).
+
+
+
+# Conclusions
+
+ Due to the representative number of answers, some conclusions can be drawn for the consortium:  
+
+ 1. NFDI4Object will need to gain some more insight on the thoughts of students and phD-students. TA6 with its high number of participants belonging to the group of university professors will be able to amend this need. 
+
+ 2. Though younger people could be shown to have lower levels of experience in digital research data management, these are not only students: In all status groups people are in need of trainings. Workshops need to be developed not just for students but also for PIs, heads of department, lecturers, scientific and technical employees. 
+
+ 3. Within the group surveyed, two different experience groups could be shown: Those assessing their knowledge level between the values of 0 to 5 (216 individuals) and those between 6 and 10 (325 individuals). These differing levels of expertise will find different roles in the NFDI4Objects consortium. The first group being the target group for trainings and workshops and the second group will be engaged via expert groups and advisory roles.
+
+ 4. NFDI4Objects will be able to develop research data management training curricula especially for those disciplines that have the lowest levels of knowledge and experience (Library Studies, several Art-related subjects, Restoration Science, Anthropology to name a few).
+
+ 5. Analysing what kind of institutions already offer research data management guidelines, enables NFDI4Objects to support especially those groups not yet having experience with developing such guidelines. Here, TA2 with its focus on collections will be very helpful for museums.
+
+ 6. The high variability of data types within the answers to this survey exemplifies how diverse the fields around the exploration of the material remains of the human past are. NFDI4Objects will need to encompass `r nrow(dat3)` different data types.
+ 
+ 7. The importance of the data storage facilities of employers has risen over the years. NFDI4Objects will be able to encourage these institutions to not just store the data, but enable a linking and opening of the repositories.
+ 
+ 8. The "wish list" of participants of the survey is being taken into consideration for the development of systems and services by NFDI4Objects.
+ 
 
 
 # Tables{#tables}
 
-
+### Table: Age of respondents{#age-table}
 ```{r table_age, label = "Table: Age of respondents"}
 y <- d_fr$alter %>%
   table()%>%
@@ -889,7 +961,6 @@ y <- d_fr$alter %>%
   rename(Alter = ".") %>%
   mutate(Prozent = round((n/sum(n)*100),1))
 ```
-
 ```{r}
 library(pander)
   pander(y, caption = "Age of respondents")
@@ -897,7 +968,7 @@ library(pander)
 ```
 
 
-Table: Employment
+### Table: Employment of respondents{#employment-table}
 
 ```{r, table_employment}
 age_erfahrung$einrichtung %>%
@@ -919,6 +990,7 @@ age_erfahrung$einrichtung %>%
 
 ```
 
+### Table: Responsibilities of respondents{#responsibility-table}
 
 ```{r, tab_aufgaben}
 
@@ -941,7 +1013,129 @@ age_group$gruppe %>%
   
 ```
 
+### Table: Subjects of respondents{#subjects-table}
 
+```{r}
+na.omit(d_fr2$disz_grob) %>%  
+  table()%>%
+  as_tibble() %>%
+  rename(Subject = ".") %>%
+  mutate(Percentage = round((n/sum(n)*100),1)) %>%
+  mutate(Subject = recode(Subject,
+                         "Archäologie" = "Archaeology",
+                         "keine Angabe" = "no answer",
+                         "MINT" = "MINT subjects",
+                         "Musikwissenschaft" = "Musicology",
+                         "Kunst" =  "Art-related subjects",
+                         "Geschichte" = "History",
+                         "Archäo-Wissenschaften" = "Archaeological Sciences",
+                         "Denkmalpflege und Bauforschung" = "Heritage Management / Building Research",
+                         "Restaurationswissenschaften" = "Restoration Science",
+                         "IT" = "IT",
+                         "Geistes-und Kulturwissenschaften" = "Humanities",
+                         "sonstige" = "Other",
+                         "Museologie" = "Museology",
+                         "Numismatik" = "Numismatics",
+                         "Altertumswissenschaften" = "Ancient Studies",
+                         "Anthropologie" = "Anthropology",
+                         "Digitales" = "Digital Humanities")) %>%
+  arrange(desc(n))%>%
+  pander(caption = "Association to Scientific Fields of respondents")
+```
+
+### Table: Importance of research data management{#stellenwert-table}
+
+```{r}
+stellenwert_n%>%
+  arrange(desc(`Assessment of importance of RDM`))%>%
+    mutate(Percentage = round((Count/sum(Count)*100),1)) %>%
+  pander(caption = "Assessment of importance of RDM")
+```
+
+### Tabel: Experience in research data management{#experience-table}
+
+```{r}
+experience_n%>%
+  arrange(desc(`Assessment of experience in RDM`))%>%
+    mutate(Percentage = round((Count/sum(Count)*100),1)) %>%
+  pander(caption = "Assessment of importance of RDM")
+```
+
+### Table: Data storage during project{#storage-table}
+
+```{r}
+ds2 <- as.data.frame(table(datastorage$datastorage))
+
+colnames(ds2) <- c("Method", "n")
+
+ds2 %>%
+  mutate(Method = recode(Method, 
+                       cds_dvds ="CD/DVD", 
+                       ext_festplatte = "External hard drive", 
+                       externes_datenzentrum = "External data center", 
+                       instistut_repo_arbeigeber = "Institutional repositorium of employer", 
+                       lokal_dienstrechner = "Localer work PC",
+                       lokal_privatrechner = "Local privat PC", 
+                       nicht_oeff_cloud = "Non-public Cloud-Service", 
+                       pitvatwirtsch_cloud = "Private sector Cloud-Service", 
+                       repo_fachcomm = "Repositorium of \n specialist community", 
+                       usb = "USB",
+                       versionierung = "Versioning system",
+                       zentralnetz_arbeitgeber = "Central network of the employer")) %>%
+  arrange(desc(n))%>%
+  pander()
+
+```
+
+
+
+### Table: Data storage after end of project{#storage_after_project}
+
+```{r}
+## transform all columns
+
+sicherung_kat %>% 
+  mutate_each(funs(empty_as_na))%>%
+  na.omit()%>%
+  mutate(Percentage = round((n/sum(n)*100),1)) %>%
+  rename("System" = Sicherungssystem) %>%
+  mutate(System = recode(System,
+                `Zentralnetz des Arbeitgebers` = "Central network of the employer",
+                `externe Festplatte` = "External hard drive",
+                `institutionelles Repositorium des Arbeitgebers` =  "Institutional repositorium of employer",
+                `nicht-öffentlicher Cloud-Service` = "Non-public Cloud-Service",
+                `lokaler Dienstrechner` = "Local work PC",
+                `lokaler Privatrechner` = "Local privat PC",
+                `analog` = "analogue",
+                `institutionelles Repositorium` = "Institutional repositorium of employer",
+                `Repositorium der Fachcommunity` = "Repositorium of specialist community",
+                `iDAI Systeme` = "iDAI systems",
+                `privatwirtschaftlicher Cloud-Service` = "Private sector Cloud-Service",
+                `gar nicht` = "not at all",
+                `externes Datenzentrum` = "External data center",
+                `e-library TÃ¼bingen` = "e-library Tübingen"))%>%
+  arrange(desc(n))%>%
+  select(-3) %>%
+  pander(caption = "Systems for data storage after project ends")
+
+```
+
+### Table: Mentioned wishes of participants{#wish-list}
+```{r}
+
+w_tab %>%
+  rename("Wish" = Var1) %>%
+  filter(Freq > 1) %>%
+  arrange(desc(Freq)) %>%
+  pander()
+
+# some encoding issues with German umlaute.
+```
+
+
+# Acknowledgments
+
+The NFDI4Objects consortium initiative wishes to thank all participants in the survey for their thoughtful input and time.
 
 \newpage
 
