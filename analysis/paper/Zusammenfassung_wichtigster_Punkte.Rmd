@@ -189,7 +189,10 @@ ggplot()+
            label = paste("n = ", length(na.omit(age_erfahrung$einrichtung)))) +
   theme(legend.position = "right", 
         legend.key.size = unit(1, "cm"),
-        legend.text = element_text(size = 10)) 
+        text = element_text(size = 12),
+         axis.text.x = element_text(size = 12),
+         axis.text.y = element_text(size = 12),
+        legend.text = element_text(size = 12)) 
 ```
 
 Most respondents are scientific employees at universities, museums and research institutions (for details see  [tables](#responsibility-table)).
@@ -211,7 +214,7 @@ d_fr2 <- d_fr2 %>%
 ```
 
 
-```{r fig_subjects, fig.width=10}
+```{r fig_subjects, fig.width=10, fig.height=8}
 library(ggplot2)
 ggplot()+
   geom_bar(data = d_fr2, 
@@ -219,14 +222,14 @@ ggplot()+
            fill = n4o_farben[1])+
   scale_x_discrete(name = "Categories of disciplines",
                    labels = c("Archäologie" = "Archaeology",
-                         "keine Angabe" = "no answer",
+                         "keine Angabe" = "No answer",
                          "MINT" = "MINT subjects",
                          "Musikwissenschaft" = "Musicology",
                          "Kunst" =  "Art-related subjects",
                          "Geschichte" = "History",
                          "Archäo-Wissenschaften" = "Archaeological Sciences",
-                         "Denkmalpflege und Bauforschung" = "Heritage Management / Building Research",
-                         "Restaurationswissenschaften" = "Restoration Science",
+                         "Denkmalpflege und Bauforschung" = "Heritage Management / \n Building Research",
+                         "Restaurationswissenschaften" = "Conservation Science",
                          "IT" = "IT",
                          "Geistes-und Kulturwissenschaften" = "Humanities",
                          "sonstige" = "Other",
@@ -236,7 +239,11 @@ ggplot()+
                          "Anthropologie" = "Anthropology",
                          "Digitales" = "Digital Humanities"))+
   coord_flip()+
-  theme_bw()
+    theme_bw()+
+   theme(text = element_text(size = 12),
+         axis.text.x = element_text(size = 12),
+         axis.text.y = element_text(size = 12))
+
 ```
 
 
@@ -259,7 +266,8 @@ ggplot(data = age_group,
   theme_bw()+
   theme(axis.title.x = element_blank(),
         title = element_text("Self-assesment: level of experience with digital RDM"),
-        legend.position = "bottom") +
+        legend.position = "bottom",
+        text = element_text(size=14)) +
   ylab("0: no experience, 10: a lot of experience") + 
   xlab ("Age")+
   scale_color_viridis(option = "D")+
@@ -323,15 +331,20 @@ vgl_ianus <- data.frame(c(1:5), vgl_vektor_ianus, perc_vektor_ianus, vgl_vektor_
 
 ```
 
-```{r}
+```{r, fig_stellenwert}
 ggplot()+
   geom_col(data = stellenwert_n, 
            aes(x = `Assessment of importance of RDM`,
                y = Count),
            fill = n4o_farben[1])+
+  theme_bw()+
   geom_text(aes(x = 2,
                 y = 130,
-                label = paste("n =", sum(stellenwert_n$Count))))
+                label = paste("n =", sum(stellenwert_n$Count))))+
+     theme(text = element_text(size = 12),
+         axis.text.x = element_text(size = 12),
+         axis.text.y = element_text(size = 12))
+  
 ```
 
 ```{r}
@@ -341,7 +354,7 @@ colnames(experience_n) <- c("Assessment of experience in RDM", "Count")
 
 In regards to the distribution of experience, it might be assumed that either groups would emerge in the data or the level of experience would be somewhat normally distributed, with few individuals knowing very little and only a few individuals having gained a lot of experience. 
 
-```{r}
+```{r fig_experience}
 ggplot()+
   geom_col(data = experience_n, 
            aes(x = `Assessment of experience in RDM`,
@@ -349,7 +362,12 @@ ggplot()+
            fill = n4o_farben[2])+
   geom_text(aes(x = 2,
                 y = 130,
-                label = paste("n =", sum(experience_n$Count))))
+                label = paste("n =", sum(experience_n$Count))))+
+  theme_bw()+
+     theme(text = element_text(size = 12),
+         axis.text.x = element_text(size = 12),
+         axis.text.y = element_text(size = 12))
+
 ```
 
 
@@ -390,7 +408,7 @@ erfahrung_group$gruppe <- str_replace_all(erfahrung_group$gruppe,"Zu.welchen.Gru
 ```
 
 
-```{r fig_gruppe, fig.width=10, fig.height=6}
+```{r fig_gruppe, fig.width=10, fig.height=8}
 
 ggplot()+
   geom_jitter(data = erfahrung_group, aes_string(x = names(erfahrung_group)[7],
@@ -415,6 +433,9 @@ ggplot()+
                          "techn_mitarb" = "Technological employee",
                          "studiernede" = "Student")) +
   geom_text(aes(x = 5, y = 0, label = "Jittered data to reduce overlap of points!"))+
+     theme(text = element_text(size = 14),
+           axis.text.x = element_text(size = 14),
+           axis.text.y = element_text(size = 14))+
   geom_segment(aes(x = -1, y = 6, xend = 5, yend = 6), colour= n4o_farben[10], linetype = "dashed")+
   geom_segment(aes(x = 5, y = 6, xend = 5, yend = 11), colour = n4o_farben[10], linetype = "dashed")+
   geom_smooth(data = erfahrung_group, aes_string(x = names(erfahrung_group)[7],
@@ -423,7 +444,9 @@ ggplot()+
               formula = y~x) + # y abhängig von x 
    scale_alpha_continuous(guide=FALSE)+
   scale_linetype_discrete(guide = FALSE)+
-  theme(legend.position="bottom")+
+  theme(legend.position="bottom",
+        legend.text = element_text(size = 12),
+        legend.key.size = unit(0.5,"cm"))+
   geom_text(aes(x = -1,
                 y = 10,
                 label = paste("n =", sum(experience_n$Count))))
@@ -472,7 +495,7 @@ library(viridis)
                          "Kunst" =  "Art",
                          "Geschichte" = "History",
                          "Archäo-Wissenschaften" = "Archaeological Sciences",
-                         "Denkmalpflege und Bauforschung" = "Heritage Management / Building Research",
+                         "Denkmalpflege und Bauforschung" = "Heritage Management / \n Building Research",
                          "Restaurationswissenschaften" = "Conservation Science",
                          "IT" = "IT",
                          "Geistes-und Kulturwissenschaften" = "Humanities",
@@ -486,7 +509,10 @@ library(viridis)
                          "Provenienzforschung" = "Provenance Research"))+
   theme(axis.title.x = element_blank(),
         title = element_text("assessment: importance of RDM for daily work"),
-       legend.position="bottom") +
+       legend.position="bottom",
+         text = element_text(size = 12),
+         axis.text.x = element_text(size = 12),
+         axis.text.y = element_text(size = 12))+
   ylab("0: no experience, 10: a lot of experience") + 
   xlab ("Categorised disciplines")+
   scale_color_viridis(option = "D")+
@@ -529,7 +555,7 @@ library(viridis)
                          "Kunst" =  "Art",
                          "Geschichte" = "History",
                          "Archäo-Wissenschaften" = "Archaeological Sciences",
-                         "Denkmalpflege und Bauforschung" = "Heritage Management / Building Research",
+                         "Denkmalpflege und Bauforschung" = "Heritage Management / \n Building Research",
                          "Restaurationswissenschaften" = "Conservation Science",
                          "IT" = "IT",
                          "Geistes-und Kulturwissenschaften" = "Humanities",
@@ -543,7 +569,10 @@ library(viridis)
                          "Provenienzforschung" = "Provenance Research"))+
   theme(axis.title.x = element_blank(),
         title = element_text("Self-assessment: experience in RDM"),
-       legend.position="bottom") +
+        legend.position="bottom",
+        text = element_text(size = 12),
+        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 12))+
   ylab("0: no experience, 10: a lot of experience") + 
   xlab ("Categorised disciplines")+
   scale_color_viridis(option = "D")+
@@ -641,7 +670,7 @@ d_docs <- data.frame(word = names(v),freq=v)
 
 For this question, users were asked to indicate up to seven different software or online services they use for data processing tasks. A text mining analysis, counting which programmes were named how often, gives insights about the frequency of use.
 
-```{r dienste_häufigkeiten, fig.width=10, fig.height=10}
+```{r dienste_häufigkeiten, fig.width=10, fig.height=8}
 
 d_docs %>%
   filter(freq > 2) %>%
@@ -651,13 +680,16 @@ ggplot()+
                fill = factor(ifelse(word == "eigene" | word == "keine","Highlighted","Normal"))),
              show.legend = FALSE)+
   scale_fill_manual(values = n4o_farben[c(2,1)])+
+    theme_bw()+
+   theme(text = element_text(size = 12),
+         axis.text.x = element_text(size = 12),
+         axis.text.y = element_text(size = 12))+
   xlab("Software")+
   ylab("Frequency (filtered for n >/= 2x)")+
   geom_label(aes(x = 5, 
                  y = 150,
                  label = "text mining - analysis of the question \n 'With which services do you analyse your data for scientific work?' "))+
-  coord_flip()+
-  theme_bw()
+  coord_flip()
 ```
 
 It is apparent that software most often used are Excel and QGIS, whereas Access is the best-known database system. This means that even though most people rely on Microsoft, they are willing to use open source and free software if it appears useful.
@@ -772,9 +804,10 @@ ggplot(data = ds)+
   theme_bw() + 
   xlab("Kind of data storage") +
   scale_x_discrete(breaks = levels(ds$Var1),
-       labels = c("CD/DVD", "External hard drive", "External data centre", "Institutional repositorium \n of employer", "Localer work PC", "Local privat PC", "Non-public Cloud-Service", "Private sector Cloud-Service", "Repositorium of specialist community", "USB", "Versioning system", "Central network of the employer"))+
+       labels = c("CD/DVD", "External hard drive", "External data centre", "Institutional repositorium \n of employer", "Localer work PC", "Local privat PC", "Non-public \n Cloud-Service", "Private sector \n Cloud-Service", "Repositorium of \n specialist community", "USB", "Versioning system", "Central network of the employer"))+
   ylab("Frequency of mentions (multiple answers possible)")+
-   theme(axis.text.y = element_text(size = 10)) 
+   theme(axis.text.y = element_text(size = 12),
+         axis.text.x = element_text(size = 12)) 
 
 ```
 
@@ -845,7 +878,7 @@ vergleich_sicherung <- rbind(sicherung_kat, ds)
 
 
 
-```{r nachmache plot ianus, fig.height=8}
+```{r nachmache plot ianus, fig.width = 10, fig.height= 10 }
 
 vergleich_sicherung$Sicherungssystem <- reorder(as.factor(vergleich_sicherung$Sicherungssystem), vergleich_sicherung$n)
 
@@ -857,28 +890,34 @@ ggplot()+
                y = n,
                fill = zeitpunkt),
            position = "dodge")+
-  scale_x_discrete(labels = c(`Zentralnetz des Arbeitgebers` = "Central network of the employer",
+  scale_x_discrete(labels = c(`Zentralnetz des Arbeitgebers` = "Central network \n of the employer",
                 `externe Festplatte` = "External hard drive",
-                `institutionelles Repositorium des Arbeitgebers` =  "Institutional repositorium of employer",
-                `nicht-öffentlicher Cloud-Service` = "Non-public Cloud-Service",
+                `institutionelles Repositorium des Arbeitgebers` =  "Institutional \n repositorium of employer",
+                `nicht-öffentlicher Cloud-Service` = "Non-public \n Cloud-Service",
                 `lokaler Dienstrechner` = "Local work PC",
                 `lokaler Privatrechner` = "Local privat PC",
                 `analog` = "analogue",
-                `institutionelles Repositorium` = "Institutional repositorium of employer",
-                `Repositorium der Fachcommunity` = "Repositorium of specialist community",
+                `institutionelles Repositorium` = "Institutional repositorium",
+                `Repositorium der Fachcommunity` = "Repositorium of \n specialist community",
                 `iDAI Systeme` = "iDAI systems",
-                `privatwirtschaftlicher Cloud-Service` = "Private sector Cloud-Service",
+                `privatwirtschaftlicher Cloud-Service` = "Private sector \n Cloud-Service",
                 `gar nicht` = "not at all",
                 `externes Datenzentrum` = "External data centre",
                 Versionierungssystem = "Versioning system"))+
+  theme_bw()+
   scale_fill_manual(name = "Date",
     values = c(n4o_farben[11], n4o_farben[1]),
                     labels = c("after the project",
                                "during the project"))+
   coord_flip()+
-    ylab("Frequency of mentions (multiple answers possible)")+
-  xlab("System")+
-  theme_bw()
+   theme(text = element_text(size = 14),
+         axis.text.x = element_text(size = 12),
+         axis.text.y = element_text(size = 12),
+         legend.text = element_text(size = 12),
+         legend.title = element_text(size = 14))+
+  ylab("Frequency of mentions (multiple answers possible)")+
+  xlab("System")
+
 ```
 
 First of all, it is apparent that respondents mention more data storage systems if asked about their saving mechanisms during the project than if asked after the project ends. This may be due to the way the question was asked (free text in comparison to check boxes); it may also be due to respondents not considering long-term storage of project data as much their responsibility as e.g. the responsibility of just the PI or their employer.
@@ -889,7 +928,7 @@ In comparison to the IANUS survey [@heinrich_digitale_2014, 10], we see a lower 
 
 The analysis of the wishes mentioned by survey participants began with a classification approach, in which the free text answers were classified according to re-occurring topics.
 
-```{r wunschdarstellung, fig.height=8}
+```{r wunschdarstellung, fig.width=10, fig.height=10}
 
 w <- read.csv2("../data/derived_data/wuensche2.csv", sep = ",", encoding = "UTF-8")
 
@@ -937,7 +976,11 @@ ggplot()+
   coord_flip()+
   labs(x = "",
        y = "Frequency mentioned (> 5x)")+
-  theme_bw()
+    theme_bw()+
+   theme(text = element_text(size = 12),
+         axis.text.x = element_text(size = 12),
+         axis.text.y = element_text(size = 12))
+
 
 ```
 
