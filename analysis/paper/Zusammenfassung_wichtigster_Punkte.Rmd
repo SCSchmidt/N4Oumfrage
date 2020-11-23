@@ -63,7 +63,7 @@ In this summary of key results the main focus will lie on the [community, that p
 
 ## Community{#community}
 
-```{r}
+```{r, eval = FALSE}
 d <- read.csv2("../data/raw_data/results-survey615517.csv", sep = ",", encoding = "UTF-8")
 
 # remove "" as input and make NA out of it
@@ -93,7 +93,7 @@ The NFDI4Objects survey was taken by 664 participants. Even though not all quest
 The NFDI4Objects survey was conducted in German and distributed only to the German-speaking community. We therefore note a higher interest in research data management in the German-speaking archaeology-related community in 2020 than in 2013  [@heinrich_digitale_2014]. Because of the highly dynamic evolution towards digital science since the early 2010s, with which a change in scientific practices as well as evolving roles are associated, the situation is different nowadays [@deutsche_forschungsgemeinschaft_2018, 12]. This digital transformation process is reflected in the NFDI4Objects survey which addresses more than just “core” archaeological disciplines (a greater variety of subjects is represented, see below). Moreover, the process initiated by the Deutsche Forschungsgemeinschaft (DFG) to create a “Nationale Forschungsdateninfrastruktur” (NFDI; National Research Data Infrastructure) has awakened the interest of scholars whose main research focus hitherto did not lie within the area of research data management. In addition, the topic was also introduced into the archaeology community by the IANUS project in the years following the IANUS survey (up to 2017).
 
 
-```{r rename column names}
+```{r rename column names, eval = FALSE}
 # datensatz begrenzen auf den frageteil
 d_fr <- d[, c(1:65)]
 
@@ -102,6 +102,13 @@ d_fr <- d[, c(1:65)]
 # spaltennamen in etwas kürzere sprechende namen umwandeln
 colnames(d_fr) <- c("ID", "Datum", "zufallsid", "geschlecht", "alter", "blickwinkel", "einrichtung", "einrichtung_sonstiges", "disz", "studiernede", "promovierende", "lehrende", "techn_mitarb", "wiss_mitarb", "daten_it_beauftragt", "projektleiter", "einrichtung_leiter", "gruppe_sonstige", "arbeitgeber_richtlinienkatalog", "erfahrung_fdm", "stellenwert_fdm", "software_projman_janein", "software_projman", "software_fdm_janein", "software_fdm", "software_wiss_analyse", "xls", "doc", "pdf", "ods", "csv", "odt", "png", "jpg", "geotiff", "geojson", "shp", "json", "xml", "dateiformat_sonstige", "software_fd_analyse", "externes_datenzentrum", "privatwirtsch_cloud", "versionierung", "nicht_oeff_cloud", "zentralnetz_arbeitgeber", "institut_repo_arbeigeber", "repo_fachcomm", "lokal_dienstrechner", "lokal_privatrechner", "ext_festplatte", "usb", "cds_dvds", "datensicherung_sonstiges", "sicherung_nach_projekt", "FAIR_bekannt_janein", "verfuegung_wie", "verfuegung_wie_sonstiges", "fremddatennutzung_janein", "fremddaten_online_portal", "fremddaten_prsnl_anfrage",  "fremddaten_sonstiges",  "wunsch_datenspeicherung", "mehrwert_n4o", "prsnl_mehrwert_n4o")
 
+
+save(d_fr, file = "../data/derived_data/d_fr.RData")
+
+```
+
+```{r}
+load("../data/derived_data/d_fr.RData")
 ```
 
 ### Demography of survey participants  
@@ -724,7 +731,7 @@ dat2 <- subset(dat2, !is.na(d))
 
 dat2_docs <- Corpus(VectorSource(dat2))
 
-#inspect(dat2_docs)
+inspect(dat2_docs)
 
 toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
 dat2_docs <- tm_map(dat2_docs, toSpace, "/")
@@ -742,13 +749,26 @@ dat2_docs <- tm_map(dat2_docs, removeWords, stopwords("german"))
 
 # Remove your own stop word
 # specify your stopwords as a character vector
-dat2_docs <- tm_map(dat2_docs, removeWords, c("3D", "etc", "formate","...")) 
+#dat2_docs <- tm_map(dat2_docs, removeWords, c("3D", "etc", "formate","...")) 
+# FEHLER HIER. nach removeWords sehr viel mehr weg als geplant. Vmtl jede Zelle, in der die Werte vorkamen.
+# darn. Nächste mal, erst removePunctuation?
+
+#geopackage to gpkg
+#markdown to md
+#photoshop to psd
+#ppt, pptx 
+# check was das prob mit ttlrdfgeojsonld ist
+# diverse, weitere, etc, ... ?
+
+#- format
+# datenbanken irgendwie zusammenfassen?
+
 # Remove punctuations
 dat2_docs <- tm_map(dat2_docs, removePunctuation)
 # Eliminate extra white spaces
 dat2_docs <- tm_map(dat2_docs, stripWhitespace)
-# Text stemming
-# docs <- tm_map(docs, stemDocument)
+
+dat2_docs <- tm_map(dat2_docs, content_transformer(tolower))
 
 # Document matrix is a table containing the frequency of the words. 
 # Column names are words and row names are documents. 
@@ -777,6 +797,8 @@ ggplot()+
   xlab("")+
   ylab("Frequency (several mentions possible, shown here n >/= 2)")+
   coord_flip()
+
+ggsave("../figures/dataformats2.png", dpi = 300)
 
 ```
 
