@@ -105,7 +105,6 @@ save(d_fr, file = "../data/derived_data/d_fr.RData")
 
 ```{r}
 load("../data/derived_data/d_fr.RData")
-
 # farbskala für NFDI
 
 n4o_tafarben <- c("#9B163C", "#9506C5", "#4DA1EE", "#36CE97",  "#4CCA33","#FF962E", "#FF6243")
@@ -631,7 +630,7 @@ For this question, participants were asked whether their employer already had gu
 ## Analysing software used for data analysis
 
 ```{r}
-fdm_dienste <- d$Mit.welchen.Diensten..z.B..der.Netzbasierte.archäologische.Datenprozessierungsdienst.des.RGZM..und.Software.Applikationen..z.B..MS.Excel..QGIS..SPSS..R..etc...analysieren.Sie.Ihre.Forschungsdaten.im.Rahmen.Ihrer.wissenschaftlichen.Arbeit..Bitte.nennen.Sie.bis.zu.sieben.Beispiele..
+fdm_dienste <- d_fr$software_fd_analyse
 
 fdm_dienste <- fdm_dienste[!is.na(fdm_dienste)]
 
@@ -745,15 +744,9 @@ dat2_docs <- tm_map(dat2_docs, toSpace, "\\|")
 # Convert the text to lower case
 dat2_docs <- tm_map(dat2_docs, content_transformer(tolower))
 
-# Remove english common stopwords
+# Remove german common stopwords
 dat2_docs <- tm_map(dat2_docs, removeWords, stopwords("german"))
 
-
-# Remove your own stop word
-# specify your stopwords as a character vector
-#dat2_docs <- tm_map(dat2_docs, removeWords, c("3D", "etc", "formate","...")) 
-# FEHLER HIER. nach removeWords sehr viel mehr weg als geplant. Vmtl jede Zelle, in der die Werte vorkamen.
-# darn. Nächste mal, erst removePunctuation?
 
 #geopackage to gpkg
 #markdown to md
@@ -769,8 +762,6 @@ dat2_docs <- tm_map(dat2_docs, removeWords, stopwords("german"))
 dat2_docs <- tm_map(dat2_docs, removePunctuation)
 # Eliminate extra white spaces
 dat2_docs <- tm_map(dat2_docs, stripWhitespace)
-
-dat2_docs <- tm_map(dat2_docs, content_transformer(tolower))
 
 # Document matrix is a table containing the frequency of the words. 
 # Column names are words and row names are documents. 
