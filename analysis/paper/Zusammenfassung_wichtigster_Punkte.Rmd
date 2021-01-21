@@ -747,16 +747,21 @@ dat2_docs <- tm_map(dat2_docs, content_transformer(tolower))
 # Remove german common stopwords
 dat2_docs <- tm_map(dat2_docs, removeWords, stopwords("german"))
 
+dat2_docs <- tm_map(dat2_docs, removeWords, c("diverse", "weitere", "etc", "proprietäre", "interne", "analysenformate", "formate"))
+
 
 #geopackage to gpkg
 #markdown to md
 #photoshop to psd
 #ppt, pptx 
+#"weietre"           "weitere" 
+#usw
+# interne
+#rmd # rscript
 # check was das prob mit ttlrdfgeojsonld ist
 # diverse, weitere, etc, ... ?
-
 #- format
-# datenbanken irgendwie zusammenfassen?
+# datenbanken irgendwie zusammenfassen?: "datenbankeinträge" "datenbanken"   
 
 # Remove punctuations
 dat2_docs <- tm_map(dat2_docs, removePunctuation)
@@ -770,7 +775,7 @@ dtm <- TermDocumentMatrix(dat2_docs)
 m <- as.matrix(dtm)
 v <- sort(rowSums(m),decreasing=TRUE)
 d <- data.frame(word = names(v),freq=v)
-#head(d, 30)
+head(d, 30)
 ```
 
 ```{r häufigkeiten_datenformate, fig.height=4}
