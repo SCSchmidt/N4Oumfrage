@@ -65,6 +65,10 @@ In this summary of key results the main focus will lie on the [community, that p
 
 ```{r, eval = FALSE}
 d <- read.csv2("../data/raw_data/results-survey615517.csv", sep = ",", encoding = "UTF-8")
+# load data, which is transfored, saved loaded again, doesn't need to be eval
+```
+
+```{r, eval = TRUE}
 
 # remove "" as input and make NA out of it
 # dplyr solution fom here: https://stackoverflow.com/questions/24172111/change-the-blank-cells-to-na
@@ -75,13 +79,13 @@ empty_as_na <- function(x){
     if("factor" %in% class(x)) x <- as.character(x) ## since ifelse wont work with factors
     ifelse(as.character(x)!="", x, NA)
 }
+# function converts all "" empty spaces into NA. Needed further down, not just for primary data cleaning
+```
 
+```{r, eval = FALSE}
 ## transform all columns
 d <- d %>% 
   mutate_each(funs(empty_as_na))
-
-
-
 ```
 
 The NFDI4Objects survey was taken by 664 participants. Even though not all questions were answered by all participants, this is a significantly larger group of respondents than in the surveys carried out by IANUS in 2013 (240 participants, survey carried out in German) [@heinrich_digitale_2014] and ARIADNEplus survey in 2019 (484 of 701 questionnaires were sufficiently completed, survey carried out in English)  [@geser_ariadneplus_2019]and comparable to the results of the ARIADNE surveys in 2013 2013 (692 questionnaires were usable for the analysis, survey was carried out in English) [@geser_ariadneplus_2014]. 
@@ -103,9 +107,12 @@ save(d_fr, file = "../data/derived_data/d_fr.RData")
 
 ```
 
-```{r}
+```{r load_data}
+# load prepared data
+
 load("../data/derived_data/d_fr.RData")
-# farbskala für NFDI
+
+# colour sceme for nfdi4objects
 
 n4o_tafarben <- c("#9B163C", "#9506C5", "#4DA1EE", "#36CE97",  "#4CCA33","#FF962E", "#FF6243")
 
