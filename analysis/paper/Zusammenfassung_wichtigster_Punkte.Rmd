@@ -739,7 +739,7 @@ dat2 <- subset(dat2, !is.na(d))
 
 dat2_docs <- Corpus(VectorSource(dat2))
 
-inspect(dat2_docs)
+#inspect(dat2_docs)
 
 toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
 dat2_docs <- tm_map(dat2_docs, toSpace, "/")
@@ -754,24 +754,32 @@ dat2_docs <- tm_map(dat2_docs, content_transformer(tolower))
 # Remove german common stopwords
 dat2_docs <- tm_map(dat2_docs, removeWords, stopwords("german"))
 
-dat2_docs <- tm_map(dat2_docs, removeWords, c("diverse", "weitere", "etc", "proprietäre", "interne", "analysenformate", "formate"))
+dat2_docs <- tm_map(dat2_docs, removeWords, c("diverse", "weitere", "etc", "proprietäre", "interne", "analysenformate", "formate", "datenbanken", "datenbankeinträge"))
 
 
-#geopackage to gpkg
-#markdown to md
-#photoshop to psd
-#ppt, pptx 
-#"weietre"           "weitere" 
-#usw
-# interne
-#rmd # rscript
-# check was das prob mit ttlrdfgeojsonld ist
-# diverse, weitere, etc, ... ?
-#- format
-# datenbanken irgendwie zusammenfassen?: "datenbankeinträge" "datenbanken"   
+# standardize certain data types I noticed. 
+#https://stackoverflow.com/questions/38605890/r-tm-substitute-words-in-corpus-using-gsub 
+
+dat2_docs <- tm_map(dat2_docs, content_transformer(gsub), pattern = "\\b(geopackage)\\b", replacement = "gpkg") 
+
+dat2_docs <- tm_map(dat2_docs, content_transformer(gsub), pattern = "\\b(ppt|powerpoint)\\b", replacement = "pptx") 
+
+dat2_docs <- tm_map(dat2_docs, content_transformer(gsub), pattern = "\\b(photoshop)\\b", replacement = "psd") 
+
+dat2_docs <- tm_map(dat2_docs, content_transformer(gsub), pattern = "\\b(markdown)\\b", replacement = "md") 
+
+dat2_docs <- tm_map(dat2_docs, content_transformer(gsub), pattern = "\\b(tif)\\b", replacement = "tiff") 
+
+dat2_docs <- tm_map(dat2_docs, content_transformer(gsub), pattern = "ttl,rdf,geojson-ld", replacement = "ttl, rdf, geojson-ld") 
+
+dat2_docs <- tm_map(dat2_docs, content_transformer(gsub), pattern = "\ntiff", replacement = "tiff") 
+
 
 # Remove punctuations
 dat2_docs <- tm_map(dat2_docs, removePunctuation)
+
+dat2_docs <- tm_map(dat2_docs, content_transformer(gsub), pattern = "\\b(rmd|rskript|rscript|r)\\b", replacement = "R-script") 
+
 # Eliminate extra white spaces
 dat2_docs <- tm_map(dat2_docs, stripWhitespace)
 
@@ -782,7 +790,7 @@ dtm <- TermDocumentMatrix(dat2_docs)
 m <- as.matrix(dtm)
 v <- sort(rowSums(m),decreasing=TRUE)
 d <- data.frame(word = names(v),freq=v)
-head(d, 30)
+#head(d, 30)
 ```
 
 ```{r häufigkeiten_datenformate, fig.height=4}
